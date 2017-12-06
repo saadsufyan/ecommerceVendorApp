@@ -1,0 +1,36 @@
+page-storeinformation {
+
+}
+
+.dark {
+    color: black !important;
+    border-color: black !important;
+    font-weight: 600 !important;
+}
+.dropdown.number {
+    width: 20%;
+}
+.dropdown {
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: solid 1px #fff;
+    padding: 0 0 10px 0 !important;
+    color: white;
+}
+
+.number-box {
+    margin: 4px 0 !important;
+    float: right;
+    width: 77%;
+}
+
+.alert-ios [aria-checked=true] .alert-checkbox-icon {
+    border-color: black;
+    background-color: black;
+}
+
+.alert-md [aria-checked=true] .alert-checkbox-icon {
+    border-color: black;
+    background-color: black;
+}

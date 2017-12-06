@@ -1,0 +1,128 @@
+<!--
+  Generated template for the OrderdetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar class="black-header">
+    <button ion-button menuToggle>
+	    <ion-icon name="menu" style="color: white"></ion-icon>
+    </button>      
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Order Details</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
+    </ion-buttons>    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<!-- Order Details box -->
+<div class="col-xs-12 promotion-box-outer">
+	<div class="col-xs-12 promotion-box">
+		<table class="table table-details ltr">
+			<tr>
+				<td>Name:</td>
+				<td>Khalid</td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td>+911 65878 7</td>
+			</tr>
+			<tr>
+				<td>Order Amount</td>
+				<td>200 SAR</td>
+			</tr>
+			<tr>
+				<td>Shipment Charges:</td>
+				<td>200 SAR</td>
+			</tr>			
+			<tr>
+				<td>Order Type:</td>
+				<td>Product</td>
+			</tr>
+			<tr>
+				<td>Order Details</td>
+				<td>
+						<button class="btn-nazik btn-nazik-view" (click)="presentAlert()">View Order</button>	<br><br>
+						<button class="btn-nazik btn-nazik-view" (click)="presentAlert()">View Order</button>
+					<!-- <span data-toggle="modal" data-target=".view-details" (click)="presentAlert()">View Orders</span> <br> -->
+				</td>
+			</tr>
+			<tr>
+				<td>Order Status:</td>
+				<td>Pending</td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td>ACB Street, Jeddah, SA.</td>
+			</tr>
+		</table>		
+	</div>
+</div>
+<!-- Order Details box  -->
+
+
+
+<div class="btn-box" style="text-align: center;">
+	<button class="btn-nazik black sm">Confirm</button>	 &nbsp;
+	<button class="btn-nazik sm">Reject</button>	
+</div>
+
+
+
+
+<!--  Modal -->
+<!-- <div class="modal fade view-details" tabindex="-1" role="dialog" aria-hidden="true" id="hotspot">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Order Detail</h4>
+      </div>
+      <div class="modal-body" style="padding: 20px 40px;">      
+	      	<table class="table table-details ltr">
+				<tr>
+					<td>Name:</td>
+					<td>Red Dress</td>
+				</tr>
+				<tr>
+					<td>Arabic Name:</td>
+					<td>Red Dress</td>
+				</tr>
+				<tr>
+					<td>Price:</td>
+					<td>200 SAR</td>
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td>01</td>
+				</tr>				
+				<tr>
+					<td>Promotions:</td>
+					<td>Dresses</td>
+				</tr>
+				<tr>
+					<td>Specifications:</td>
+					<td>20-11-2017</td>
+				</tr>
+				<tr>
+					<td>Deliver On:</td>
+					<td>04-05-2017</td>
+				</tr>
+			</table>
+      </div>
+
+      <div class="modal-footer" style="text-align: center; padding: 20px;">      
+      	<button class="btn btn-nazik black">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!--  Modal -->
+
+</ion-content>

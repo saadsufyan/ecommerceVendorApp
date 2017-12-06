@@ -1,0 +1,57 @@
+page-messages {
+
+}
+
+.msg-pic img {
+    width: 50px;
+    height: 50px;
+}
+.msg-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    overflow: hidden;
+    border: solid 2px #abb2b9;
+}
+
+.table-messages tr td:nth-child(2) {
+    font-weight: 500;
+    text-align: left;
+    padding: 24px 10px !important;
+    width: 150px !important;
+}
+.table-messages {
+    background: white;
+    margin: 0 !important;
+    margin-bottom: 6px !important;
+}
+.table-messages tr td {
+    border: none !important;
+    font-size: 14px;
+}
+
+.img-arrow{
+    padding: 35px 0px 0px 0px;
+}
+
+
+.segment-ios .segment-button:last-of-type {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0;
+    margin-left: 0;
+    border-left-width: 0;
+}
+
+.segment-ios .segment-button:first-of-type {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0px;
+    margin-right: 0;
+}
+
+.msg-icon{
+    padding: 20px 0px 0px 5px;
+}

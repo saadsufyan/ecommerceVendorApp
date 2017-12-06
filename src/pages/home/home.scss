@@ -1,3 +1,64 @@
 page-home {
 
 }
+
+.header-name{
+    text-align:center;
+    //padding-right:30px;
+    //padding-right: 65px;
+    color: white;
+    // background: url(../assets/imgs/headerlogo.png);
+
+}
+
+
+.toolbar-title-md {
+
+    color: white;
+    font-weight: 300 !important;
+    padding: 0px 50px 0 0;
+    // background: url(../assets/imgs/headerlogo.png);
+}
+
+@font-face{
+    font-family: bebas;
+    src: url(../fonts/BEBAS.ttf);
+}
+.bebas{
+    font-family: bebas !important;
+}
+
+.box-home {
+    text-align: center;
+    // height: 33.33%;
+    height: 30.8vh !important;
+    border: solid 1px #000;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 50px 0;
+    align-items: center;
+}
+img.img-icon-home {
+    width: 60px;
+}
+.box-home:nth-child(1), .box-home:nth-child(4), .box-home:nth-child(5){
+    background: url(../assets/imgs/box_1.png);
+    background-size: cover !important;
+}
+.box-home:nth-child(2), .box-home:nth-child(3), .box-home:nth-child(6){
+    background: url(../assets/imgs/box_2.png);
+    background-size: cover !important;
+}
+
+.title-home {
+    position: absolute;
+        margin-top: 50px;
+}
+.heading {
+    font-size: 5vw;
+    line-height: 1.4;
+}
+
+.toolbar{
+    padding: 0px;
+}

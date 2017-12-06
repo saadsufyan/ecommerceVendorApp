@@ -1,0 +1,129 @@
+<!--
+  Generated template for the OrdersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar class="black-header">
+    <button ion-button menuToggle>
+	    <ion-icon name="menu" style="color: white"></ion-icon>
+    </button>        
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Orders</ion-title>
+     <ion-buttons right>
+       <button ion-button icon-only (click)="showFilter()"><ion-icon class= "back-icon" ios="ios-funnel-outline" md="ios-funnel-outline"  ></ion-icon></button> 
+		<!-- <img src="../assets/imgs/filter_icon@2x-2.png"> -->
+	</ion-buttons>     
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<!-- Filters -->
+<div class="col-xs-12 filters" *ngIf="filter">
+	<div class="col-xs-9">
+		<div class="form-group">	      	
+	      	<label class="dark">Choose any Type</label>
+	      	<br>
+	        <select class="dropdown dark">
+	        	<option>Pending</option>
+	        	<option>Electronics</option>
+	    	</select>
+	    </div>	    
+	</div>
+	<div class="col-xs-2"></div>
+	<div class="col-xs-9">
+		<div class="form-group">	      	
+	  		<label class="dark"> &nbsp; Select Date Range</label>
+        <img src="assets/imgs/date.png" class="pull-left">
+           <!-- <br><label class="dark"> Start Date</label>  -->
+         <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required="">
+          <!-- <label class="dark">End date</label>  -->
+         <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required=""> 
+	  	</div>  	  	
+	</div>
+	<div class="col-xs-2">
+		<button class="btn  btn-search-filter"><img src="assets/imgs/search.png"></button>
+	</div>
+
+</div>
+<!-- Filters -->
+
+
+<!-- Order box -->
+<div class="col-xs-12 promotion-box-outer">
+	<div class="col-xs-12 promotion-box">
+		<table class="table table-promotion ltr">
+			<tr>
+				<td>Name:</td>
+				<td>Khalid</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Order Date:</td>
+				<td>04-05-2017</td>
+				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
+			</tr>
+			<tr>
+				<td>Order Status</td>
+				<td>Pending</td>
+				<td></td>
+			</tr>
+		</table>		
+	</div>
+</div>
+<!-- Order box  -->
+
+<!-- Order box -->
+<div class="col-xs-12 promotion-box-outer">
+	<div class="col-xs-12 promotion-box">
+		<table class="table table-promotion ltr">
+			<tr>
+				<td>Name:</td>
+				<td>Khalid</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Order Date:</td>
+				<td>04-05-2017</td>
+				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
+			</tr>
+			<tr>
+				<td>Order Status</td>
+				<td>Pending</td>
+				<td></td>
+			</tr>
+		</table>		
+	</div>
+</div>
+<!-- Order box  -->
+
+<!-- Order box -->
+<div class="col-xs-12 promotion-box-outer">
+	<div class="col-xs-12 promotion-box">
+		<table class="table table-promotion ltr">
+			<tr>
+				<td>Name:</td>
+				<td>Khalid</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Order Date:</td>
+				<td>04-05-2017</td>
+				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
+			</tr>
+			<tr>
+				<td>Order Status</td>
+				<td>Pending</td>
+				<td></td>
+			</tr>
+		</table>		
+	</div>
+</div>
+<!-- Order box  -->
+
+
+</ion-content>

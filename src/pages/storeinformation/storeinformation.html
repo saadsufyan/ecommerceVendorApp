@@ -1,0 +1,102 @@
+<!--
+  Generated template for the StoreinformationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar class="black-header">
+     <button ion-button menuToggle>
+      <ion-icon name="menu" style="color: white"></ion-icon>
+    </button>     
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Store Information</ion-title>
+     <ion-buttons right>
+      <button ion-button icon-only><ion-icon class= "back-icon" ios="ios-log-out" md="ios-log-out"  ></ion-icon></button>
+    </ion-buttons> 
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+	<div class="container form-box">
+		<div class="col-xs-12">
+			    <form class="form-signup" dir="ltr">
+			      <div class="form-group">
+			      	<label class="dark">Store Name (In English)</label>
+			        <input type="email" class="text-box form-control dark" placeholder="Zara" required="">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Store Name (In Arabic)</label>
+			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="">
+			      </div>
+			      <div class="form-group">
+			      	<label class="dark">Store Description (In English)</label>
+			        <input type="email" class="text-box form-control dark" placeholder="Zara" required="">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Store Description (In Arabic)</label>
+			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Store Type</label>
+			      	<br>
+			        <select class="dropdown dark">
+			        	<option>Product</option>
+			        	<option>Service</option>
+			        </select>
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Phone Number</label>
+			      	<br>
+			        <select class="dropdown number dark ltr">
+			        	<option>+911</option>
+			        	<option>Service</option>
+			        </select>
+			        <input type="number" class="text-box number-box dark" placeholder="Phone Number" required="">
+			      </div>
+			      <div class="form-group">
+			      	<label class="dark">In Shipment Charges (SAR)</label>
+			        <input type="email" class="text-box form-control dark" placeholder="500" required="">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Out Shipment Charges (SAR)</label>
+			        <input type="text" class="text-box form-control dark" placeholder="800" required="">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Select Country</label>
+			      	<br>
+			        <select class="dropdown dark">
+			        	<option>Saudi Arabia</option>
+			        	<option>Japan</option>
+			        </select>
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark" style="text-decoration: underline;" (click)="presentPrompt()">Select City</label>
+			      </div>
+			      <div class="form-group" (click)="openMap()">	      	
+			      	<label class="dark" style="text-decoration: underline;">Click here for map </label>&nbsp; <img src="assets/imgs/map.png">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Store Logo</label>
+			        <input type="file" name="pic" accept="image/*">
+			      </div>
+			      <div class="form-group">	      	
+			      	<label class="dark">Select Off Day</label>
+			      	<br>
+			        <select class="dropdown dark">
+			        	<option>Friday</option>
+			        	<option>Saturday</option>
+			        </select>
+			      </div>
+
+
+			      <br>
+		          <div class="col-xs-12" style="text-align: center;">
+		          	<button ion-button class="btn-nazik">Save</button>	
+		          </div>
+		          <br><br><br>
+			    </form>
+	    </div>
+	</div>  
+</ion-content>

@@ -1,18 +1,64 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+<ion-header >
+  <ion-navbar class="black-header"> 
+    <button ion-button menuToggle start>
+	   <ion-icon name="menu" style="color: white"></ion-icon> 
+	</button>   
+	 
+	<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+<div class="bg">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+	<!-- content -->
+	<div class="main-boxes">
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+		<div class="col-xs-6 box-home ltr" (click)="goToStoreInfo()">
+			<img src="assets/imgs/icon_1.png" class="img-icon-home">
+			<div class="title-home">
+				<h1 class="bebas heading white">STORE <br>INFORMATION</h1>
+			</div>
+		</div>
+
+		<div class="col-xs-6 box-home" (click)="goToProducts()">
+			<img src="assets/imgs/icon_4.png" class="img-icon-home">
+			<div class="title-home">
+				<h1 class="bebas heading white">PRODUCTS</h1>
+			</div>
+		</div>
+
+		<div class="col-xs-6 box-home ltr" (click)="goToPromotions()">	
+			<img src="assets/imgs/icon_6.png" class="img-icon-home">
+			<div class="title-home">
+				<h1 class="bebas heading white">PROMOTIONS</h1>
+			</div>
+		</div>
+
+		<div class="col-xs-6 box-home" (click)="goToOrders()">
+			<img src="assets/imgs/icon_3.png" class="img-icon-home">
+			<div class="title-home">
+				<h1 class="bebas heading white">ORDERS</h1>
+			</div>
+		</div>
+
+		<div class="col-xs-6 box-home ltr" (click)="goToMessages()">	
+			<img src="assets/imgs/icon_2.png" class="img-icon-home">
+			<div class="title-home">
+				<h1 class="bebas heading white">CUSTOMER <br> MESSAGES</h1>
+			</div>
+		</div>
+
+		<div class="col-xs-6 box-home" (click)="goToSettings()">
+			<img src="assets/imgs/icon_5.png" class="img-icon-home">
+			<div class="title-home">
+				<h1 class="bebas heading white">SETTINGS</h1>
+			</div>
+		</div>
+
+	</div>
+	<!-- content -->
+
+</div>
+
 </ion-content>

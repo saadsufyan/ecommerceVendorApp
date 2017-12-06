@@ -1,0 +1,56 @@
+page-tab1 {
+
+}
+
+.btn-box.fixed {
+    position: fixed;
+    bottom: 0;
+    background: black;
+    padding: 6px 0;
+}
+
+.btn-box {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    position: absolute;
+    bottom: 10%;
+}
+
+.red {
+    color: #db1f2f !important;
+}
+
+.tabs-ios .tabbar {
+
+    // background: url(../assets/imgs/bg.jpg);
+    background: black;
+}
+
+.tabs-ios .tab-button:hover:not(.disable-hover), .tabs-ios .tab-button[aria-selected=true] {
+    color: #db1f2f !important;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 0px -20px !important;
+    line-height: normal;
+}
+
+
+.tabs-md .tabbar {
+    border-color: none;
+    // background: url(../assets/imgs/bg.jpg);
+    background: black;
+}
+
+.tabs-md .tab-button[aria-selected=true] {
+    color: red;
+    padding: 0;
+}
+
+.tabs-md .tab-button {
+    min-height: 5.6rem;
+    font-weight: normal;
+    color: white;
+    padding: 0;
+}

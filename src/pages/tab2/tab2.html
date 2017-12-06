@@ -1,0 +1,79 @@
+<!--
+  Generated template for the SpecificationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar class="black-header">
+     <button ion-button menuToggle>
+      <ion-icon name="menu" style="color:white"></ion-icon>
+    </button> 		
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Specifications</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
+    </ion-buttons>    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<div class="col-xs-12 promotion-box-outer">
+	<div class="col-xs-12 promotion-box">
+		<table class="table table-promotion ltr">
+			<tr>
+				<td>Specifications Name (In English)</td>
+				<td>Color</td>
+			</tr>
+			<tr>
+				<td>Specifications Name (In Arabic)</td>
+				<td>Color</td>
+			</tr>
+		</table>
+		<table class="table table-promotion ltr">
+			<tr>
+				<td>Specifications Value (In English)</td>
+				<td>Red</td>
+			</tr>
+			<tr>
+				<td>Specifications Value (In Arabic)</td>
+				<td>Red</td>
+			</tr>
+		</table>
+		<div class="col-xs-12 text-center">
+			<br>
+			<button class="btn btn-nazik black sm">Add Value</button>
+			<br><br>
+		</div>
+	</div>
+</div>
+<!-- Specifications box  -->
+
+<div class="col-xs-12" style="text-align: center;">
+	<br>
+	<button class="btn btn-nazik black">Add Specifications</button>	
+</div>
+
+<div class="btn-box" style="text-align: center;">
+	<button class="btn-nazik" (click)="goToStocks()">Proceed to Stock</button>	
+</div>
+
+</ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar>
+    <div class="col-xs-12 btn-box fixed">
+      <div class="col-xs-4">
+        <h5 class="white">Basic</h5>
+      </div>
+      <div class="col-xs-4">
+        <h5 class="red">Specifications</h5>
+      </div>
+      <div class="col-xs-4">
+        <h5 class="white">Stock</h5>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer> -->

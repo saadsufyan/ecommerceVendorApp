@@ -86,3 +86,28 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+$segment-button-md-text-color-activated: black;
+$segment-button-md-border-color-activated: black;
+
+$segment-button-ios-background-color-activated: #181D26;
+$segment-button-ios-text-color:white;
+
+
+$toggle-ios-handle-background-color: #f53d3d;
+$toggle-ios-background-color-on: black;
+// $segment-button-ios-background-color-activated: #f53d3d;
+
+// $toggle-md-active-color: black;
+$toggle-md-track-background-color-on: black;
+$toggle-md-handle-background-color-on: #f53d3d;
+
+
+$checkbox-ios-background-color-on: black;
+$checkbox-ios-icon-checkmark-color: black;
+
+$button-ios-background-color-activated: #f53d3d;
+
+$loading-md-spinner-color: black;
+$loading-ios-spinner-bubbles-color : black;

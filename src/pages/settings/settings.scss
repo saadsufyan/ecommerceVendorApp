@@ -1,0 +1,95 @@
+page-settings {
+
+}
+.border {
+    border-bottom: solid 1px gray;
+}
+
+.settings-box {
+    padding: 14px 0 10px 10px !important;
+}
+.toggle-box-ltr {
+    padding: 10px 0 0 0;
+    text-align: right;
+}
+.pull-right-ltr {
+    float: right !important;
+}
+
+.fa-arrow {
+    margin: -5px 0 0 0;
+    color: #717886;
+}
+.show-ltr {
+    display: block !important;
+}
+
+.toggle-ios {
+    // padding: 0px 0px 0px 260px;
+        margin: -38px 0 0 0;
+}
+
+.toggle-md {
+    // padding: 14px 0px 14px 260px;
+        margin: -38px 0 0 0;
+}
+
+.alert-ios .alert-title {
+
+    color: white;
+}
+
+.alert-ios .alert-head {
+
+    background: url(../assets/imgs/bg.jpg);
+}
+
+.alert-ios .alert-button:last-child {
+
+    background: #DD2C32;
+}
+
+.alert-ios .alert-button {
+
+    color: white;
+
+}
+
+.alert-md .alert-head {
+    padding: 10px 24px 20px;
+    background: url(../assets/imgs/bg.jpg);
+}
+
+.alert-md .alert-input:focus {
+    margin-bottom: 4px;
+    border-bottom: 2px solid #222;
+}
+
+.alert-md .alert-button {
+
+    color: #f4f4f4;
+    background-color: #e13838;
+    padding: 5px 40px 5px 40px;
+}
+
+.alert-md .alert-button-group {
+
+    justify-content: center;
+    padding: 10px 10px 10px 24px;
+}
+
+.alert-md .alert-title {
+    font-size: 22px;
+    color: white;
+    text-align: center;
+}
+
+.btn-box-settings {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    padding: 120px 0 0 0;
+    float: left;
+    position: unset;
+    bottom: 0;
+}

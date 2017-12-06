@@ -1,0 +1,177 @@
+<!--
+  Generated template for the MessagesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar class="black-header">
+     <button ion-button menuToggle>
+      <ion-icon name="menu" style="color:white"></ion-icon>
+    </button>     
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Messages</ion-title>
+    <!-- <ion-buttons right>
+      <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
+    </ion-buttons>     -->
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content>
+
+   <!-- <button ion-button secondary menuToggle>Toggle Menu</button>  -->
+
+  <div>
+  <ion-segment [(ngModel)]="customerMessages" class="segment-color">
+    <ion-segment-button value="customerMessages">
+     Customer Messages
+    </ion-segment-button>
+    <ion-segment-button value="userContacted">
+     User Contacted
+	</ion-segment-button>
+  </ion-segment>
+</div>
+
+<div class="col-xs-12">
+<div [ngSwitch]="customerMessages">
+  <ion-list *ngSwitchCase="'customerMessages'" >
+		
+ <!-- <p class="zeroMessages" *ngIf="errormsg">No Claims found</p>  -->
+
+    <div class="col-xs-12 promotion-box-outer">
+      <div class="col-xs-12 promotion-box">
+        <table class="table table-messages ltr">
+          <tr>
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>Abd al Alim</td>
+            <td (click)="goToChat()">
+              <img src="assets/imgs/chat.png">
+            </td>
+            <!-- <td>
+              <img src="assets/imgs/profile.png">
+            </td> -->
+          </tr>
+
+          <tr>
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>Abd al Alim</td>
+            <td (click)="goToChat()">
+              <img src="assets/imgs/chat.png">
+            </td>
+            <!-- <td>
+              <img src="assets/imgs/profile.png">
+            </td> -->
+          </tr>
+
+          <tr>
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>Abd al Alim</td>
+            <td (click)="goToChat()">
+              <img src="assets/imgs/chat.png">
+            </td>
+            <!-- <td>
+              <img src="assets/imgs/profile.png">
+            </td> -->
+          </tr>
+
+          <tr>
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>Abd al Alim</td>
+            <td (click)="goToChat()">
+              <img src="assets/imgs/chat.png">
+            </td>
+            <!-- <td>
+              <img src="assets/imgs/profile.png">
+            </td> -->
+          </tr>
+          
+        </table>		
+      </div>
+    </div>
+  </ion-list>
+
+<!--accepted Segment-->
+
+  <ion-list *ngSwitchCase="'userContacted'">
+
+		<!-- <p class="zeroMessages" *ngIf="errormsg2">No claims found</p> -->
+    <div class="col-xs-12 promotion-box-outer">
+      <div class="col-xs-12 promotion-box">
+        <table class="table table-messages user ltr">
+          <tr (click)="goToUserDetail()">
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>
+              Abd al Alim
+              <br>
+              <span class="text-sm">abdalalim@hotmail.com</span>
+              </td>
+            <td>
+              <img src="assets/imgs/next.png" class="img-arrow">
+            </td>				
+          </tr>
+
+          <tr (click)="goToUserDetail()">
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>
+              Abd al Alim
+              <br>
+              <span class="text-sm">abdalalim@hotmail.com</span>
+              </td>
+            <td>
+              <img src="assets/imgs/next.png" class="img-arrow">
+            </td>				
+          </tr>
+
+          <tr (click)="goToUserDetail()">
+            <td>
+              <div class="msg-pic">
+                <img src="assets/imgs/pic.png" imageViewer/>
+              </div>
+            </td>
+            <td>
+              Abd al Alim
+              <br>
+              <span class="text-sm">abdalalim@hotmail.com</span>
+              </td>
+            <td>
+              <img src="assets/imgs/next.png" class="img-arrow">
+            </td>				
+          </tr>
+        </table>		
+      </div>
+    </div>
+
+  </ion-list>
+
+
+</div>
+</div>
+</ion-content>
+

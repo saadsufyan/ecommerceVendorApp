@@ -1,0 +1,113 @@
+
+<ion-header>
+
+  <ion-navbar class="black-header">
+     <button ion-button menuToggle>
+      <ion-icon name="menu" style="color:white"></ion-icon>
+    </button> 		
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Basic</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
+    </ion-buttons>    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<div class="container form-box">
+	<div class="col-xs-12">
+		    <form class="form-signup" dir="ltr">
+		      <div class="form-group">
+		      	<label class="dark">Product Name (In English)</label>
+		        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="">
+		      </div>
+		      <div class="form-group">	      	
+		      	<label class="dark">Product Name (In Arabic)</label>
+		        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="">
+		      </div>
+		      <div class="form-group">
+		      	<label class="dark">Product Description (In English)</label>
+		        <input type="email" class="text-box form-control dark" placeholder="Zara" required="">
+		      </div>
+		      <div class="form-group">	      	
+		      	<label class="dark">Product Description (In Arabic)</label>
+		        <input type="text" class="text-box form-control dark" placeholder="Zara" required="">
+		      </div>
+		      <div class="form-group">	      	
+		      	<label class="dark">Category</label>
+		      	<br>
+		        <select class="dropdown dark">
+		        	<option>Fashion</option>
+		        	<option>Electronics</option>
+		        </select>
+		      </div>
+		      <div class="form-group">	      	
+		      	<label class="dark">Sub-Category</label>
+		      	<br>
+		        <select class="dropdown dark">
+		        	<option>Clothing</option>
+		        	<option>Footwear</option>
+		        </select>
+		      </div>
+		      
+		      <div class="form-group">
+		      	<label class="dark">Thumbnail Image</label> <br>
+		        <span id="fileselector">
+		          <label class="btn btn-default" for="upload-file-selector">
+		              <input id="upload-file-selector" type="file">
+									<!-- <img src="images/icon_upload.png"> -->
+									<span class="color-red"><b>Choose File</b></span>
+		          </label>
+		        </span>
+		      </div>
+		      <span class="line"></span>
+		      <br>
+		      <div class="form-group">
+		      	<label class="dark">Product Image</label> <br>
+		        <span id="fileselector">
+		          <label class="btn btn-default" for="upload-file-selector">
+		              <input id="upload-file-selector" type="file">
+									<!-- <img src="images/icon_upload.png"> -->
+									<span class="color-red"><b>Choose File</b></span>
+		          </label>
+		        </span>
+		      </div>
+		      <div class="form-group">
+		      	<label class="dark">Price In Local Currency (SAR)</label>
+		        <input type="email" class="text-box form-control dark" placeholder="25" required="">
+		      </div>
+		      <div class="checkbox ltr">
+			  	<label class="dark"><input type="checkbox" value="">Show Calender</label> &nbsp;&nbsp;
+			  	<label class="dark"><input type="checkbox" value="">Show Time</label>
+			  </div>
+			  
+
+
+		      <br>
+	          <div class="col-xs-12" style="text-align: center;">
+	          	<button class="btn-nazik" (click)="goToSpecifications()">Save</button>	
+	          </div>
+	          <br><br><br><br>
+		    </form>
+    </div>
+</div>  
+</ion-content>
+<!--  
+<ion-footer>
+   <ion-toolbar> 
+    <div class="col-xs-12 btn-box fixed">
+      <div class="col-xs-4">
+        <h5 class="red">Basic</h5>
+      </div>
+      <div class="col-xs-4">
+        <h5 class="white">Specifications</h5>
+      </div>
+      <div class="col-xs-4">
+        <h5 class="white">Stock</h5>
+      </div>
+    </div>
+   </ion-toolbar> 
+</ion-footer>  -->
+
+

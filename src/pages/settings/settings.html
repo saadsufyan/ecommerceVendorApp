@@ -1,0 +1,83 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar class="black-header">
+    <button ion-button menuToggle>
+	    <ion-icon name="menu" style="color: white"></ion-icon>
+    </button>      
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Settings</ion-title>
+    <!-- <ion-buttons right>
+      <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
+    </ion-buttons>     -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<!-- settings -->
+<div class="col-xs-12 settings">
+
+  <div class="col-xs-12 settings-box border">
+    <div class="pull-left-ltr">
+        <h4 class="settings-text">Arabic Language</h4> 
+    </div>
+    <div class="col-xs-4 toggle-box-ltr pull-right-ltr">
+      <ion-toggle [(ngModel)]="Language" style="float:right"></ion-toggle> 
+    </div>
+  
+  </div>
+
+  <div class="col-xs-12 settings-box border">
+    <div class="pull-left-ltr">
+        <h4 href="#demo" class="settings-text" data-toggle="collapse" style="color:black">
+          Terms and Conditions
+          <!-- <i class="fa fa-angle-right fa-2x fa-arrow show-ltr" aria-hidden="true"></i> -->
+        </h4>
+    </div>
+    <div id="demo" class="collapse">
+      <div class="panel-body">
+        <h4>Terms and Conditions (in English)</h4> 
+
+        ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+        <h4>Terms and Conditions (in Arabic)</h4>
+
+        ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+    </div>      
+    <div class="col-xs-2 toggle-box-ltr pull-right-ltr">
+        <!-- <i class="fa fa-angle-right fa-2x fa-arrow show-ltr" aria-hidden="true"></i> -->
+        <!-- <i class="fa fa-angle-left fa-2x fa-arrow hide-ltr" aria-hidden="true"></i>  -->
+    </div>
+  </div>
+
+  <div class="col-xs-12 settings-box border" (click)="presentPrompt()">
+    <div class="pull-left-ltr">
+        <h4 class="settings-text">Update Password</h4>
+    </div>
+    <div class="col-xs-2 toggle-box-ltr pull-right-ltr">
+        <!-- <i class="fa fa-angle-right fa-2x fa-arrow show-ltr" aria-hidden="true"></i> -->
+        <!-- <i class="fa fa-angle-left fa-2x fa-arrow hide-ltr" aria-hidden="true"></i> -->
+    </div>
+    </div>
+</div>
+<!-- settings -->
+
+<div class="btn-box-settings">
+  <button class="btn-nazik">Save</button>
+</div>
+
+
+
+
+</ion-content>

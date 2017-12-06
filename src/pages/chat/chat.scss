@@ -1,0 +1,74 @@
+page-chat {
+
+}
+
+
+.msg-send {
+    background: #707379;
+    width: 80%;
+    padding: 10px 20px;
+    border-radius: 4px;
+    float: right;
+    margin: 6px 10px;
+    color: #fff;
+    font-weight: 300;
+    font-size: 14px;
+    position: relative;
+}
+
+.msg-recieve {
+    width: 80%;
+    background: #f6f7f7;
+    padding: 10px 20px;
+    border-radius: 4px;
+    float: left;
+    margin: 6px 10px;
+    font-weight: 300;
+    font-size: 14px;
+    position: relative;
+}
+
+.btn-send.ltr {
+    float: right;
+}
+
+.btn.btn-send {
+    background: #e1e4e5 !important;
+    border: none;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+        margin: 0px 14px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
+}
+
+.type-box.ltr {
+    float: left;
+}
+
+.type-box {
+    border: none;
+    padding: 6px 10px;
+    width: 77%;
+    border-radius: 2px;
+    margin: 4px 10px;
+}
+
+.message-box {
+    padding: 20px 0 !important;
+}
+
+.btn-box.fixed1 {
+    position: fixed;
+    bottom: 0;
+    background: #eee;
+    padding: 10px 0;
+}
+
+.btn:focus {
+    outline: none !important;
+    outline-offset: -2px;
+}
