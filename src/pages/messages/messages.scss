@@ -20,6 +20,11 @@ page-messages {
     padding: 24px 10px !important;
     width: 150px !important;
 }
+
+.table-messages.customer tr td:nth-child(3){
+padding-top: 23px;
+}
+
 .table-messages {
     background: white;
     margin: 0 !important;

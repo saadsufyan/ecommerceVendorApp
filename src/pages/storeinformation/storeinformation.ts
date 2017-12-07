@@ -17,6 +17,8 @@ import { MapPage } from '../map/map';
 export class StoreinformationPage {
 
 
+  public countryname: any
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController) {
   }
 
@@ -40,6 +42,7 @@ export class StoreinformationPage {
   }
 
 presentPrompt() {
+  console.log(this.countryname)
   let alert = this.alertCtrl.create({
     title: 'Select City',
     inputs: [
