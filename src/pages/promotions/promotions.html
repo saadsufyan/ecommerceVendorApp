@@ -23,26 +23,26 @@
 <div class="outer-box">
 
 	<!-- Promotion box -->
-	<div class="col-xs-12 promotion-box-outer">
+	<div class="col-xs-12 promotion-box-outer" *ngFor="let x of PromoArray">
 		<div class="col-xs-12 promotion-box">
 			<table class="table table-promotion ltr">
 				<tr>
 					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
+					<td>{{x.title}}</td>
 				</tr>
 				<tr>
 					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
+					<td>{{x.title_ar}}</td>
 				</tr>
 			</table>
 			<table class="table table-promotion ltr">
 				<tr>
 					<td>Product Name (In English)</td>
-					<td>Zara</td>
+					<td>{{x.product}}</td>
 				</tr>
 				<tr>
 					<td>Product Name (In Arabic)</td>
-					<td>Zara</td>
+					<td>{{x.product_ar}}</td>
 				</tr>
 			</table>
 			<div class="col-xs-12 no-p">
@@ -50,85 +50,12 @@
 					<img src="assets/imgs/product.png" imageViewer/>
 				</div>
 				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
+					<button class="btn-nazik black sm1" (click)="goToUpdatePromotions(x.id)">Edit</button>
 					<button class="btn-nazik sm">Delete</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Promotion box  -->
-
-	<!-- Promotion box -->
-	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Product Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Product Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
-					<img src="assets/imgs/product.png" imageViewer/>
-				</div>
-				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Promotion box  -->
-
-	<!-- Promotion box -->
-	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Product Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Product Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
-					<img src="assets/imgs/product.png" imageViewer/>
-				</div>
-				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Promotion box  -->
 
 
 </div>

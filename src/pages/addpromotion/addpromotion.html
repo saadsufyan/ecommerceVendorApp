@@ -25,19 +25,19 @@
 			    <form class="form-signup" dir="ltr">
 			      <div class="form-group">
 			      	<label class="dark">Name</label>
-			        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="">
+			        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="" [(ngModel)]="title" name="title"> 
 			      </div>
 			      <div class="form-group">	      	
 			      	<label class="dark">Name (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="">
+			        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="" [(ngModel)]="title_ar" name="title_ar">
 			      </div>
 			      <div class="form-group">
 			      	<label class="dark">Description (In English)</label>
-			        <input type="email" class="text-box form-control dark" placeholder="Zara" required="">
+			        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description">
 			      </div>
 			      <div class="form-group">	      	
 			      	<label class="dark">Description (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="">
+			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="desrcription_ar">
 			      </div>
 			      <div class="form-group">	      	
 			      	<label class="dark">Product</label>
@@ -49,7 +49,7 @@
 			      </div>
 			      <div class="form-group">
 			      	<label class="dark">Discount Percent (SAR)</label>
-			        <input type="email" class="text-box form-control dark" placeholder="20" required="">
+			        <input type="email" class="text-box form-control dark" placeholder="20" required="" [(ngModel)]="discount" name="discount">
 			      </div>
 			      <div class="form-group">
 			      	<label class="dark">Image</label> <br>
@@ -67,7 +67,7 @@
 
 			      <br>
 		          <div class="col-xs-12" style="text-align: center;">
-		          	<button class="btn-nazik">Add</button>	
+		          	<button class="btn-nazik" (click)="updatePromotion(promoDetails.id)">Add</button>	
 		          </div>
 		          <br><br><br>
 			    </form>

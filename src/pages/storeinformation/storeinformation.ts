@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { MapPage } from '../map/map';
+import { StoreInformationService } from '../../services/storeinformation';
+import { NetworkService } from '../../services/network';
+import { AlertView } from '../../uicomponents/alert';
 
 /**
  * Generated class for the StoreinformationPage page.
@@ -13,16 +16,71 @@ import { MapPage } from '../map/map';
 @Component({
   selector: 'page-storeinformation',
   templateUrl: 'storeinformation.html',
+  providers: [StoreInformationService, NetworkService, AlertView]
 })
 export class StoreinformationPage {
 
 
-  public countryname: any
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController) {
+  public citylist = [
+    {
+      'id': "6",
+      'checked': true,
+      'city': "LA"
+    },
+    {
+      'id': "7",
+      'checked': true,
+      'city': "NY"
+    },
+    {
+      'id': "8",
+      'checked': true,
+      'city': "Kuwait city"
+    },
+    {
+      'id': "9",
+      'checked': false,
+      'city': "Mecca"
+    },
+    {
+      'id': "10",
+      'checked': false,
+      'city': "Dehli"
+    },
+
+  ]
+
+  public vendorData = {
+    name: "Zara",
+    name_ar: "زارا",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    description_ar: "أبجد هوز هو مجرد دمية النص من الطباعة والتنضيد الصناعة.",
+    phone: "+9116854878",
+    in_city_shipment_charges: 500,
+    out_city_shipment_charges: 800,
+    weekends: "Friday",
+    lat: "29.3104398",
+    long: "47.6274115",
+    logo: "http..."
   }
 
-  ionViewDidLoad() {
+  public vendorname: any = this.vendorData.name
+  public vendorname_ar : any = this.vendorData.name_ar
+  public description: any = this.vendorData.description
+  public description_ar: any = this.vendorData.description_ar
+  public phone: any = this.vendorData.phone
+  public in_city_shipment_charges: any = this.vendorData.in_city_shipment_charges
+  public out_city_shipment_charges: any = this.vendorData.out_city_shipment_charges
+  public countryname: any
+  public offdays: any
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
+  
+    // this.getCities()
+  }
+
+  ionViewDidLoad() { 
     console.log('ionViewDidLoad StoreinformationPage');
   }
   ionViewWillEnter(){
@@ -36,157 +94,75 @@ export class StoreinformationPage {
     this.navCtrl.push(MapPage,{animation: 'left'})
   }
 
+  getCountry(){
+    console.log("country: " + this.countryname)
+  }
 
   getCities(){
 
+    this.storeinfoservice.onGetCities(this.countryname).subscribe(res=>{
+      console.log(res)
+      res.status && res.response.length > 0 ? this.citylist = res.response : this.popup.showToast('No cities found', 1500, 'bottom', false, "")
+    })
+  }
+
+  getLocation(){
+    
+  }
+
+  updateVendor(){
+    let data = {
+
+      name: this.vendorname,
+      name_ar: this.vendorname_ar,
+      description: this.description,
+      description_ar: this.description_ar,
+      phone: this.phone,
+      in_city_shipment_charges: this.in_city_shipment_charges,
+      out_city_shipment_charges: this.out_city_shipment_charges,
+      country: this.countryname,
+      weekends: this.offdays,
+      lat: "29.3104398",
+      long: "47.6274115",
+      city: "Kuwait"
+    }
+    console.log(data)
+    this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
+      console.log(res)
+    })
   }
 
 presentPrompt() {
-  console.log(this.countryname)
-  let alert = this.alertCtrl.create({
-    title: 'Select City',
-    inputs: [
-      {
-         name: 'All',
-         type:'checkbox',
-         checked:false,
-         label:'All',
-         value:"true"
+  this.getCities()
+  let alert = this.alertCtrl.create();
+  
+  alert.setTitle('Select City');
+
+    for (let i = 0; i< this.citylist.length; i++ ){
+
+      alert.addInput({
+        type: 'checkbox',
+        label: this.citylist[i].city,
+        value: this.citylist[i].id,
+        checked: this.citylist[i].checked
       },
-      {
-         name: 'riyadh',
-         type:'checkbox',
-         checked:false,
-         label:'Al Riyadh',
-         value:"true"
-      },
-      {
-         name: 'majmaah',
-         type:'checkbox',
-         checked:false,
-         label:'Al Majmaah',
-         value:"true"
-      },      {
-         name: 'quwaiiyah',
-         type:'checkbox',
-         checked:false,
-         label:'Al Quwaiiyah',
-         value:"true"
-      },
-      {
-         name: 'afif',
-         type:'checkbox',
-         checked:false,
-         label:'Al Afif',
-         value:"true"
-      },          
-      {
-         name: 'tamim',
-         type:'checkbox',
-         checked:false,
-         label:'Howtat bani tamim',
-         value:"true"
-      },
-      {
-         name: 'hayathem',
-         type:'checkbox',
-         checked:false,
-         label:'Al hayathem',
-         value:"true"
-      },      {
-         name: 'badayea',
-         type:'checkbox',
-         checked:false,
-         label:'Al Badayea',
-         value:"true"
-      }, 
-      {
-         name: 'dammam',
-         type:'checkbox',
-         checked:false,
-         label:'Dammam',
-         value:"true"
-      },
-      {
-         name: 'khobar',
-         type:'checkbox',
-         checked:false,
-         label:'Al khobar',
-         value:"true"
-      },      {
-         name: 'tannurah',
-         type:'checkbox',
-         checked:false,
-         label:'Ras tannurah',
-         value:"true"
-      },
-      {
-         name: 'sayhat',
-         type:'checkbox',
-         checked:false,
-         label:'Sayhat',
-         value:"true"
-      },      {
-         name: 'jubail',
-         type:'checkbox',
-         checked:false,
-         label:'Al Jubail',
-         value:"true"
-      },
-      {
-         name: 'buqayq',
-         type:'checkbox',
-         checked:false,
-         label:'Buqayq',
-         value:"true"
-      },      
-      {
-         name: 'batin',
-         type:'checkbox',
-         checked:false,
-         label:'Hafir Al Batin',
-         value:"true"
-      },
-      {
-         name: 'mecca',
-         type:'checkbox',
-         checked:false,
-         label:'Mecca',
-         value:"true"
-      },    
-      {
-         name: 'rabigh',
-         type:'checkbox',
-         checked:false,
-         label:'rabigh',
-         value:"true"
-      },
-      {
-         name: 'khulais',
-         type:'checkbox',
-         checked:false,
-         label:'Khulais',
-         value:"true"
-      },    
-      {
-         name: 'mushayt',
-         type:'checkbox',
-         checked:false,
-         label:'Khamis mushayt',
-         value:"true"
+    )
+    };
+    alert.addButton({
+      text: 'Confirm',
+      role: 'accept',
+      handler: data => {
+        console.log(data);
+        this.storeinfoservice.onUpdateCities(this.countryname,data).subscribe(res=>{
+          console.log(res)
+        })
       }
-    ],
-    buttons: [
-      {
-        text: 'Confirm',
-        role: 'accept',
-        handler: data => {
-          console.log('Confirm clicked');
-        }
-      }
-    ]
-  });
+      
+    });
+
+
   alert.present();
 }  
+
 
 }

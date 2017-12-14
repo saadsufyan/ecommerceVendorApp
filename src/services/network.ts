@@ -32,7 +32,9 @@ export class NetworkService{
         console.log(userIsLoggedIn, 'from network layer')
         if(userIsLoggedIn == "true"){
             let user = JSON.parse(localStorage.getItem('user'))
+            // console.log(user)
             var token = user.access_token
+            console.log("Token " + user.access_token)
             return this.getAuthHeaders(token)
         }
         else if (userIsLoggedIn == "false"){

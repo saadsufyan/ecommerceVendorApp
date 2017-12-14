@@ -88,4 +88,5 @@
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.11" />
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
     <engine name="android" spec="~6.2.3" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>
