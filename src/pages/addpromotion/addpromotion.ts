@@ -31,16 +31,17 @@ export class AddpromotionPage {
     description_ar: "بائع اختبار",
     image: "http://localhost/gomallbackend/public/avatar/1512729688"
   }
-    public title: any = this.promoDetails.promotion
-    public title_ar: any = this.promoDetails.promotion_ar
-    public description : any = this.promoDetails.description
-    public description_ar : any = this.promoDetails.description_ar
+    public title: any
+    public title_ar: any 
+    public description : any 
+    public description_ar : any
     public discount : any
-    public image : any = this.promoDetails.image
+    public image : any 
 
 
   public updatePromo = {}
   public promotionId: any
+  public product_id
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
   
@@ -62,7 +63,30 @@ export class AddpromotionPage {
     this.promotionservice.onGetPromotionById(this.promotionId).subscribe(res=>{
 
       console.log(res)
+      
+      this.title = res.response.promotion
+      this.title_ar = res.response.promotion_ar
+      this.description = res.response.description_ar
+      this.discount = res.response.discount
+      this.image = res.response.image
+    
       res.status && res.response.length > 0 ? this.promoDetails = res.response : this.popup.showToast('No Promotion found', 1500, 'bottom', false, "")
+    })
+  }
+
+  addPromotion(){
+    let data = {
+      title: this.title,
+      title_ar: this.title_ar,
+      description: this.description,
+      description_ar: this.description_ar,
+      product_id: this.product_id,
+      discount: this.discount,
+      image: "http://localhost/gomallbackend/public/avatar/1512729688"
+    }
+    this.promotionservice.onAddpromotion(data).subscribe(res=>{
+
+      console.log(res)
     })
   }
 

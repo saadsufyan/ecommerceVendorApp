@@ -28,7 +28,7 @@
 		<div class="form-group">	      	
 	      	<label class="dark">Choose any Type</label>
 	      	<br>
-	        <select class="dropdown dark">
+	        <select class="dropdown dark" [(ngModel)]="filterValue" name="filterValue"> 
 	        	<option>Pending</option>
 	        	<option>Electronics</option>
 	    	</select>
@@ -40,13 +40,13 @@
 	  		<label class="dark"> &nbsp; Select Date Range</label>
         <img src="assets/imgs/date.png" class="pull-left">
            <!-- <br><label class="dark"> Start Date</label>  -->
-         <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required="">
+         <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required="" [(ngModel)]="startdate" name="startdate">
           <!-- <label class="dark">End date</label>  -->
-         <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required=""> 
+         <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required="" [(ngModel)]="enddate" name="enddate"> 
 	  	</div>  	  	
 	</div>
 	<div class="col-xs-2">
-		<button class="btn  btn-search-filter"><img src="assets/imgs/search.png"></button>
+		<button class="btn  btn-search-filter" (click)="search()"><img src="assets/imgs/search.png"></button>
 	</div>
 
 </div>
@@ -54,22 +54,22 @@
 
 
 <!-- Order box -->
-<div class="col-xs-12 promotion-box-outer">
+<div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion ltr">
 			<tr>
 				<td>Name:</td>
-				<td>Khalid</td>
+				<td>{{x.name}}</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>Order Date:</td>
-				<td>04-05-2017</td>
+				<td>{{x.date}}</td>
 				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
 			</tr>
 			<tr>
 				<td>Order Status</td>
-				<td>Pending</td>
+				<td>{{x.status}}</td>
 				<td></td>
 			</tr>
 		</table>		
@@ -77,53 +77,6 @@
 </div>
 <!-- Order box  -->
 
-<!-- Order box -->
-<div class="col-xs-12 promotion-box-outer">
-	<div class="col-xs-12 promotion-box">
-		<table class="table table-promotion ltr">
-			<tr>
-				<td>Name:</td>
-				<td>Khalid</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Order Date:</td>
-				<td>04-05-2017</td>
-				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
-			</tr>
-			<tr>
-				<td>Order Status</td>
-				<td>Pending</td>
-				<td></td>
-			</tr>
-		</table>		
-	</div>
-</div>
-<!-- Order box  -->
-
-<!-- Order box -->
-<div class="col-xs-12 promotion-box-outer">
-	<div class="col-xs-12 promotion-box">
-		<table class="table table-promotion ltr">
-			<tr>
-				<td>Name:</td>
-				<td>Khalid</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Order Date:</td>
-				<td>04-05-2017</td>
-				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
-			</tr>
-			<tr>
-				<td>Order Status</td>
-				<td>Pending</td>
-				<td></td>
-			</tr>
-		</table>		
-	</div>
-</div>
-<!-- Order box  -->
 
 
 </ion-content>

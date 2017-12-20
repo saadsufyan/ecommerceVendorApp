@@ -44,58 +44,13 @@
     <div class="col-xs-12 promotion-box-outer">
       <div class="col-xs-12 promotion-box">
         <table class="table table-messages customer ltr">
-          <tr>
+          <tr *ngFor="let x of messageslist">
             <td>
               <div class="msg-pic">
                 <img src="assets/imgs/pic.png" imageViewer/>
               </div>
             </td>
-            <td>Abd al Alim</td>
-            <td (click)="goToChat()">
-              <img src="assets/imgs/chat.png">
-            </td>
-            <!-- <td>
-              <img src="assets/imgs/profile.png">
-            </td> -->
-          </tr>
-
-          <tr>
-            <td>
-              <div class="msg-pic">
-                <img src="assets/imgs/pic.png" imageViewer/>
-              </div>
-            </td>
-            <td>Abd al Alim</td>
-            <td (click)="goToChat()">
-              <img src="assets/imgs/chat.png">
-            </td>
-            <!-- <td>
-              <img src="assets/imgs/profile.png">
-            </td> -->
-          </tr>
-
-          <tr>
-            <td>
-              <div class="msg-pic">
-                <img src="assets/imgs/pic.png" imageViewer/>
-              </div>
-            </td>
-            <td>Abd al Alim</td>
-            <td (click)="goToChat()">
-              <img src="assets/imgs/chat.png">
-            </td>
-            <!-- <td>
-              <img src="assets/imgs/profile.png">
-            </td> -->
-          </tr>
-
-          <tr>
-            <td>
-              <div class="msg-pic">
-                <img src="assets/imgs/pic.png" imageViewer/>
-              </div>
-            </td>
-            <td>Abd al Alim</td>
+            <td>{{x.user_name}}</td>
             <td (click)="goToChat()">
               <img src="assets/imgs/chat.png">
             </td>
@@ -117,48 +72,16 @@
     <div class="col-xs-12 promotion-box-outer">
       <div class="col-xs-12 promotion-box">
         <table class="table table-messages user ltr">
-          <tr (click)="goToUserDetail()">
+          <tr (click)="goToUserDetail()" *ngFor="let x of contacts">
             <td>
               <div class="msg-pic">
                 <img src="assets/imgs/pic.png" imageViewer/>
               </div>
             </td>
             <td>
-              Abd al Alim
+              {{x.user_name}}
               <br>
-              <span class="text-sm">abdalalim@hotmail.com</span>
-              </td>
-            <td>
-              <img src="assets/imgs/next.png" class="img-arrow">
-            </td>				
-          </tr>
-
-          <tr (click)="goToUserDetail()">
-            <td>
-              <div class="msg-pic">
-                <img src="assets/imgs/pic.png" imageViewer/>
-              </div>
-            </td>
-            <td>
-              Abd al Alim
-              <br>
-              <span class="text-sm">abdalalim@hotmail.com</span>
-              </td>
-            <td>
-              <img src="assets/imgs/next.png" class="img-arrow">
-            </td>				
-          </tr>
-
-          <tr (click)="goToUserDetail()">
-            <td>
-              <div class="msg-pic">
-                <img src="assets/imgs/pic.png" imageViewer/>
-              </div>
-            </td>
-            <td>
-              Abd al Alim
-              <br>
-              <span class="text-sm">abdalalim@hotmail.com</span>
+              <span class="text-sm">{{x.user_email}}</span>
               </td>
             <td>
               <img src="assets/imgs/next.png" class="img-arrow">

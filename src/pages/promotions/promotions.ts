@@ -24,25 +24,26 @@ export class PromotionsPage {
   PromoArray = [
     {
       id: 2,
-      title: "Promotion 2",
-      title_ar: "لانا",
+      promotion: "Promotion 2",
+      promotion_ar: "لانا",
       product: "product 1",
       product_ar: "إعلانات",
       description: "Promotion 2",
       description_ar: "لانا",
-      Image: "http://localhost/gomallbackend/public/avatar/1512729451"
+      image: "http://localhost/gomallbackend/public/avatar/1512729451"
     },
     {
       id: 3,
-      title: "Promotion 3",
-      title_ar: "لانا",
-      product: "product 2",
-      product_ar: "إعلانات",
-      description: "Promotion 3",
-      description_ar: "لانا",
-      Image: "http://localhost/gomallbackend/public/avatar/1512729451"
+      promotion: "Promo 3",
+      promotion_ar: "لانا",
+      product: "Product 2",
+      product_ar: "لانا",
+      description: "Promo 3",
+      description_ar: "بائع اختبار",
+      image: "http://localhost/gomallbackend/public/avatar/1512729688"
     }
   ]
+  public errorMessage: any = ""
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public promotionservice: PromotionsService, public popup: AlertView) {
   }
 
@@ -70,6 +71,29 @@ export class PromotionsPage {
     this.promotionservice.onGetPromotions().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.PromoArray = res.response : this.popup.showToast('No Promotions found', 1500, 'bottom', false, "")
-    })
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+})
+  }
+
+  deletePromotion(id){
+
+    this.promotionservice.onDeletePromotion(id).subscribe(res=>{
+      console.log(res)
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+})
   }
 }

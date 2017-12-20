@@ -18,6 +18,10 @@ export class StoreInformationService{
         let url = this.basicUrl + "/cities/" + country;
         return this.network.doPost(url,data)
     }
+    onGetVendor(){
+        let url = this.basicUrl
+        return this.network.doGet(url)
+    }
 
     onUpdateVendor(data){
         let url = this.basicUrl

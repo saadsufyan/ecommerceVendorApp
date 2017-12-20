@@ -28,11 +28,11 @@
 			<table class="table table-promotion ltr">
 				<tr>
 					<td>Promotion Name (In English)</td>
-					<td>{{x.title}}</td>
+					<td>{{x.promotion}}</td>
 				</tr>
 				<tr>
 					<td>Promotion Name (In Arabic)</td>
-					<td>{{x.title_ar}}</td>
+					<td>{{x.promotion_ar}}</td>
 				</tr>
 			</table>
 			<table class="table table-promotion ltr">
@@ -51,7 +51,7 @@
 				</div>
 				<div class="two-btn-box ltr">
 					<button class="btn-nazik black sm1" (click)="goToUpdatePromotions(x.id)">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
+					<button class="btn-nazik sm" (click)="deletePromotion(x.id)">Delete</button>
 				</div>
 			</div>
 		</div>

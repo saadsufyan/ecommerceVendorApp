@@ -18,11 +18,21 @@ export class PromotionsService{
         let url = this.basicUrl + "/promotions/" + id;
         return this.network.doGet(url)        
     }
+    
+    onAddpromotion(data): Observable<any> {
+        let url = this.basicUrl + "/promotions?page=1&limit=1000";
+        return this.network.doPut(url, data)
+    }
 
     onUpdatePromotion(id, data) : Observable<any> {
 
         let url = this.basicUrl + "/promotions/" + id;
         return this.network.doPost(url, data)
+    }
+
+    onDeletePromotion(id): Observable<any> {
+        let url = this.basicUrl + "/promotions/" + id;
+        return this.network.doDelete(url)
     }
 
 

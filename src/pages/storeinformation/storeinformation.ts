@@ -22,59 +22,21 @@ export class StoreinformationPage {
 
 
 
-  public citylist = [
-    {
-      'id': "6",
-      'checked': true,
-      'city': "LA"
-    },
-    {
-      'id': "7",
-      'checked': true,
-      'city': "NY"
-    },
-    {
-      'id': "8",
-      'checked': true,
-      'city': "Kuwait city"
-    },
-    {
-      'id': "9",
-      'checked': false,
-      'city': "Mecca"
-    },
-    {
-      'id': "10",
-      'checked': false,
-      'city': "Dehli"
-    },
+  public citylist = []
 
-  ]
+  public vendorData = {}
 
-  public vendorData = {
-    name: "Zara",
-    name_ar: "زارا",
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    description_ar: "أبجد هوز هو مجرد دمية النص من الطباعة والتنضيد الصناعة.",
-    phone: "+9116854878",
-    in_city_shipment_charges: 500,
-    out_city_shipment_charges: 800,
-    weekends: "Friday",
-    lat: "29.3104398",
-    long: "47.6274115",
-    logo: "http..."
-  }
-
-  public vendorname: any = this.vendorData.name
-  public vendorname_ar : any = this.vendorData.name_ar
-  public description: any = this.vendorData.description
-  public description_ar: any = this.vendorData.description_ar
-  public phone: any = this.vendorData.phone
-  public in_city_shipment_charges: any = this.vendorData.in_city_shipment_charges
-  public out_city_shipment_charges: any = this.vendorData.out_city_shipment_charges
+  public vendorname: any 
+  public vendorname_ar : any 
+  public description: any 
+  public description_ar: any 
+  public phone: any 
+  public in_city_shipment_charges: any
+  public out_city_shipment_charges: any 
   public countryname: any
   public offdays: any
 
+  public errorMessage: any = ""
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
   
     // this.getCities()
@@ -82,6 +44,8 @@ export class StoreinformationPage {
 
   ionViewDidLoad() { 
     console.log('ionViewDidLoad StoreinformationPage');
+    this.getVendorData()
+    // this.getCities()
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
@@ -96,21 +60,54 @@ export class StoreinformationPage {
 
   getCountry(){
     console.log("country: " + this.countryname)
+    this.getCities()
   }
 
   getCities(){
 
+    console.log(this.countryname)
     this.storeinfoservice.onGetCities(this.countryname).subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.citylist = res.response : this.popup.showToast('No cities found', 1500, 'bottom', false, "")
-    })
+      console.log(this.citylist)
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+})
   }
 
-  getLocation(){
+  getVendorData(){
+    this.storeinfoservice.onGetVendor().subscribe(res=>{
+      console.log(res)
+      this.vendorData = res.response
+
+      this.vendorname = res.response.name
+      this.vendorname_ar = res.response.name_ar
+      this.description = res.response.description
+      this.description_ar = res.response.description_ar
+      this.phone = res.response.phone
+      this.in_city_shipment_charges = res.response.in_city_shipment_charges
+      this.out_city_shipment_charges = res.response.out_city_shipment_charges
+      this.offdays = res.response.weekends
+
+    }, err=>{
+
+      console.log("masla ha ");
+      console.log(err)
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+    })
     
   }
 
   updateVendor(){
+    this.popup.showLoader()
     let data = {
 
       name: this.vendorname,
@@ -129,11 +126,22 @@ export class StoreinformationPage {
     console.log(data)
     this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
       console.log(res)
+      this.popup.hideLoader()
+      this.navCtrl.pop()
+    },  err => {
+      console.log("masla ha ")
+      console.log(err);
+      this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
     })
   }
 
 presentPrompt() {
-  this.getCities()
+  // this.getCities()
+  console.log("in prompt")
   let alert = this.alertCtrl.create();
   
   alert.setTitle('Select City');
@@ -153,9 +161,21 @@ presentPrompt() {
       role: 'accept',
       handler: data => {
         console.log(data);
-        this.storeinfoservice.onUpdateCities(this.countryname,data).subscribe(res=>{
+        let selectedCities = {
+          cities : data
+        }
+        console.log(selectedCities)
+        this.storeinfoservice.onUpdateCities(this.countryname,selectedCities).subscribe(res=>{
           console.log(res)
-        })
+        },err => {
+          console.log("masla ha ")
+          console.log(err);
+          // this.popup.hideLoader()
+          this.errorMessage = JSON.parse(err._body)
+          console.log(this.errorMessage)
+          this.errorMessage = this.errorMessage.error.message[0]
+          this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
       }
       
     });

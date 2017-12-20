@@ -14,7 +14,7 @@ import { SettingsPage } from '../settings/settings';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public menu: MenuController) {
-    this.menu.swipeEnable(false);
+    this.menu.swipeEnable(true);
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);

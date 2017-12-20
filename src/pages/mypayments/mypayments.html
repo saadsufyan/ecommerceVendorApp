@@ -20,77 +20,28 @@
 
 <ion-content>
 <!-- Payment box -->
-<div class="col-xs-12 promotion-box-outer">
+<div class="col-xs-12 promotion-box-outer" *ngFor="let x of items.payments">
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-details ltr">
 			<tr>
 				<td>Vendor:</td>
-				<td>Zara</td>
+				<td>{{name}}</td>
 			</tr>
 			<tr>
 				<td>Arabic Name:</td>
-				<td>Zara</td>
+				<td>{{name_ar}}</td>
 			</tr>
 			<tr>
 				<td>Amount:</td>
-				<td>200 SAR</td>
+				<td>{{x.amount}} SAR</td>
 			</tr>
 			<tr>
 				<td>Date:</td>
-				<td>04-05-2017</td>
+				<td>{{x.created_at}}</td>
 			</tr>			
 		</table>		
 	</div>
 </div>
 <!-- Payment box  -->
 
-<!-- Payment box -->
-<div class="col-xs-12 promotion-box-outer">
-	<div class="col-xs-12 promotion-box">
-		<table class="table table-details ltr">
-			<tr>
-				<td>Vendor:</td>
-				<td>Zara</td>
-			</tr>
-			<tr>
-				<td>Arabic Name:</td>
-				<td>Zara</td>
-			</tr>
-			<tr>
-				<td>Amount:</td>
-				<td>200 SAR</td>
-			</tr>
-			<tr>
-				<td>Date:</td>
-				<td>04-05-2017</td>
-			</tr>			
-		</table>		
-	</div>
-</div>
-<!-- Payment box  -->
-
-<!-- Payment box -->
-<div class="col-xs-12 promotion-box-outer">
-	<div class="col-xs-12 promotion-box">
-		<table class="table table-details ltr">
-			<tr>
-				<td>Vendor:</td>
-				<td>Zara</td>
-			</tr>
-			<tr>
-				<td>Arabic Name:</td>
-				<td>Zara</td>
-			</tr>
-			<tr>
-				<td>Amount:</td>
-				<td>200 SAR</td>
-			</tr>
-			<tr>
-				<td>Date:</td>
-				<td>04-05-2017</td>
-			</tr>			
-		</table>		
-	</div>
-</div>
-<!-- Payment box  -->
 </ion-content>

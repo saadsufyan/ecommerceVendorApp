@@ -27,29 +27,28 @@
 		<table class="table table-details ltr">
 			<tr>
 				<td>Name:</td>
-				<td>Khalid</td>
+				<td>{{items.name}}</td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td>+911 65878 7</td>
+				<td>{{items.phone}}</td>
 			</tr>
 			<tr>
 				<td>Order Amount</td>
-				<td>200 SAR</td>
+				<td>{{items.order_amount}} SAR</td>
 			</tr>
 			<tr>
 				<td>Shipment Charges:</td>
-				<td>200 SAR</td>
+				<td>{{items.shipment_charges}} SAR</td>
 			</tr>			
 			<tr>
 				<td>Order Type:</td>
-				<td>Product</td>
+				<td>{{items.type}}</td>
 			</tr>
 			<tr>
 				<td>Order Details</td>
 				<td>
 						<button class="btn-nazik btn-nazik-view" (click)="presentAlert()">View Order</button>	<br><br>
-						<button class="btn-nazik btn-nazik-view" (click)="presentAlert()">View Order</button>
 					<!-- <span data-toggle="modal" data-target=".view-details" (click)="presentAlert()">View Orders</span> <br> -->
 				</td>
 			</tr>
@@ -69,8 +68,8 @@
 
 
 <div class="btn-box" style="text-align: center;">
-	<button class="btn-nazik black sm">Confirm</button>	 &nbsp;
-	<button class="btn-nazik sm">Reject</button>	
+	<button class="btn-nazik black sm" (click)="VendorAccept()">Confirm</button>	 &nbsp;
+	<button class="btn-nazik sm" (click)="VendorReject()">Reject</button>	
 </div>
 
 

@@ -21,44 +21,44 @@
 <ion-content>
 
 <!-- Top Product box -->
-<div class="col-xs-12 promotion-box-outer">
+<div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-details ltr">
 			<tr>
 				<td>Name:</td>
-				<td>Shrit</td>
+				<td>{{items.name}}</td>
 			</tr>
 			<tr>
 				<td>Arabic Name:</td>
-				<td>Shirt</td>
+				<td>{{items.name_ar}}</td>
 			</tr>
 			<tr>
 				<td>Type:</td>
-				<td>Service</td>
+				<td>{{items.type}}</td>
 			</tr>
 			<tr>
 				<td>Price:</td>
-				<td>SAR 120</td>
+				<td>SAR {{items.price}}</td>
 			</tr>			
 			<tr>
 				<td>Favorites:</td>
-				<td>1</td>
+				<td>{{items.favorites}}</td>
 			</tr>
 			<tr>
 				<td>Rating:</td>
-				<td>0</td>
+				<td>{{items.rating}}</td>
 			</tr>
 			<tr>
 				<td>Number of Request</td>
-				<td>1</td>
+				<td>{{items.number_of_request}}</td>
 			</tr>
 			<tr>
 				<td>Country:</td>
-				<td>Saudi Arabia</td>
+				<td>{{items.country}}</td>
 			</tr>
 			<tr>
 				<td>City:</td>
-				<td>Riyadh</td>
+				<td>{{items.city}}</td>
 			</tr>
 		</table>	
 		<div class="col-xs-12 no-p">
@@ -72,59 +72,5 @@
 	</div>
 </div>
 <!-- Top Product box  -->
-
-<!-- Top Product box -->
-<div class="col-xs-12 promotion-box-outer">
-	<div class="col-xs-12 promotion-box">
-		<table class="table table-details ltr">
-			<tr>
-				<td>Name:</td>
-				<td>Shrit</td>
-			</tr>
-			<tr>
-				<td>Arabic Name:</td>
-				<td>Shirt</td>
-			</tr>
-			<tr>
-				<td>Type:</td>
-				<td>Service</td>
-			</tr>
-			<tr>
-				<td>Price:</td>
-				<td>SAR 120</td>
-			</tr>			
-			<tr>
-				<td>Favorites:</td>
-				<td>1</td>
-			</tr>
-			<tr>
-				<td>Rating:</td>
-				<td>0</td>
-			</tr>
-			<tr>
-				<td>Number of Request</td>
-				<td>1</td>
-			</tr>
-			<tr>
-				<td>Country:</td>
-				<td>Saudi Arabia</td>
-			</tr>
-			<tr>
-				<td>City:</td>
-				<td>Riyadh</td>
-			</tr>
-		</table>	
-		<div class="col-xs-12 no-p">
-			<div dir="ltr">
-				<h5><b>Images</b></h5>
-			</div>
-			<div class="product-box ltr">
-				<img src="assets/imgs/product.png" imageViewer/>
-			</div>			
-		</div>	
-	</div>
-</div>
-<!-- Top Product box  -->
-
 
 </ion-content>
