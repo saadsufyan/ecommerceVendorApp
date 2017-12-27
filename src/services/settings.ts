@@ -15,7 +15,7 @@ export class SettingsService{
         return this.network.doGet(url)
     }
     onchangePassword(data) : Observable<any> {
-        let url = this.basicUrl = "/password";
+        let url = this.basicUrl + "/password";
         return this.network.doPost(url,data)
     }
 

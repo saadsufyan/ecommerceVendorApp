@@ -34,7 +34,9 @@
 	    	</select>
 	    </div>	    
 	</div>
-	<div class="col-xs-2"></div>
+	<div class="col-xs-2">
+			<button class="btn  btn-search-filter" (click)="search()"><img src="assets/imgs/search.png"></button>			
+	</div>
 	<div class="col-xs-9">
 		<div class="form-group">	      	
 	  		<label class="dark"> &nbsp; Select Date Range</label>
@@ -46,12 +48,12 @@
 	  	</div>  	  	
 	</div>
 	<div class="col-xs-2">
-		<button class="btn  btn-search-filter" (click)="search()"><img src="assets/imgs/search.png"></button>
 	</div>
 
 </div>
 <!-- Filters -->
 
+<p class="zeroQuotes" *ngIf="errormsg">No Orders Found</p>
 
 <!-- Order box -->
 <div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
@@ -65,7 +67,7 @@
 			<tr>
 				<td>Order Date:</td>
 				<td>{{x.date}}</td>
-				<td (click)="goToDetails()"><img src="assets/imgs/next.png"></td>
+				<td (click)="goToDetails(x.id)"><img src="assets/imgs/next.png"></td>
 			</tr>
 			<tr>
 				<td>Order Status</td>

@@ -27,6 +27,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MapPage } from '../pages/map/map';
 
+import { SharedService } from '../services/sharedService';
 import { NetworkService } from '../services/network';
 import { AlertView } from '../uicomponents/alert';
 
@@ -107,6 +108,7 @@ export function createTranslateLoader(http: Http) {
     StatusBar,
     SplashScreen,
     NetworkService,
+    SharedService,
     PhotoViewer,
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

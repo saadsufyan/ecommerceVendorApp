@@ -21,29 +21,9 @@ import { AlertView } from '../../uicomponents/alert';
 })
 export class PromotionsPage {
 
-  PromoArray = [
-    {
-      id: 2,
-      promotion: "Promotion 2",
-      promotion_ar: "لانا",
-      product: "product 1",
-      product_ar: "إعلانات",
-      description: "Promotion 2",
-      description_ar: "لانا",
-      image: "http://localhost/gomallbackend/public/avatar/1512729451"
-    },
-    {
-      id: 3,
-      promotion: "Promo 3",
-      promotion_ar: "لانا",
-      product: "Product 2",
-      product_ar: "لانا",
-      description: "Promo 3",
-      description_ar: "بائع اختبار",
-      image: "http://localhost/gomallbackend/public/avatar/1512729688"
-    }
-  ]
+  PromoArray = []
   public errorMessage: any = ""
+  public errormsg : any = true
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public promotionservice: PromotionsService, public popup: AlertView) {
   }
 
@@ -71,6 +51,11 @@ export class PromotionsPage {
     this.promotionservice.onGetPromotions().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.PromoArray = res.response : this.popup.showToast('No Promotions found', 1500, 'bottom', false, "")
+    
+      if(res.status && res.response.length > 0 ){
+        this.errormsg = false
+        console.log(this.errormsg)
+      }
     },err => {
       console.log("masla ha ")
       console.log(err);

@@ -19,33 +19,9 @@ import { AlertView } from '../../uicomponents/alert';
 })
 export class TopproductsPage {
 
-  public items: any = [
-    {
-      name: "shirt",
-      name_ar: "قميص",
-      type: "service",
-      price: 120,
-      favourites: 1,
-      rating: 5,
-      number_of_requests: 10,
-      country: "Saudi Arabia",
-      city: "RIyadh",
-      image: "<image_url>"
-    },
-    {
-      name: "mobile",
-      name_ar: "التليفون المحمول",
-      type: "service",
-      price: 200,
-      favourites: 1,
-      rating: 8,
-      number_of_requests: 15,
-      country: "Saudi Arabia",
-      city: "RIyadh",
-      image: "<image_url>"
-    }
-  ]
+  public items: any = []
   public errorMessage: any = ""
+  public errormsg : any = true
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public productservice: ProductsService, public popup: AlertView) {
   }
@@ -60,6 +36,10 @@ export class TopproductsPage {
     this.productservice.onGetTopProducts().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No products found', 1500, 'bottom', false, "")
+      if(res.status && res.response.length > 0 ){
+        this.errormsg = false
+        console.log(this.errormsg)
+      }    
     },err => {
       console.log("masla ha ")
       console.log(err);

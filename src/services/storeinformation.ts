@@ -9,6 +9,10 @@ export class StoreInformationService{
     private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/vendor"
     constructor (public network : NetworkService) {}
  
+    onGetCountries() : Observable<any> {
+        let url = this.basicUrl + "/countries";
+        return this.network.doGet(url)        
+    }
     onGetCities(country) : Observable<any> {
         let url = this.basicUrl + "/cities/" + country;
         return this.network.doGet(url)

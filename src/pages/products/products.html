@@ -21,18 +21,18 @@
 
 <ion-content>
 <div class="outer-box">
-
+	<p class="zeroQuotes" *ngIf="errormsg">No Products Found</p>
 	<!-- Product box -->
 	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
+		<div class="col-xs-12 promotion-box" *ngFor="let x of items">
 			<table class="table table-promotion ltr">
 				<tr>
 					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
+					<td>{{x.name}}</td>
 				</tr>
 				<tr>
 					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
+					<td>{{x.name_ar}}</td>
 				</tr>
 			</table>
 			<div class="col-xs-12 no-p">
@@ -47,113 +47,6 @@
 		</div>
 	</div>
 	<!-- Product box  -->
-
-
-	<!-- Product box -->
-	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
-					<img src="assets/imgs/product.png" imageViewer/>
-				</div>
-				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Product box  -->
-
-
-	<!-- Product box -->
-	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
-					<img src="assets/imgs/product.png" imageViewer/>
-				</div>
-				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Product box  -->
-
-	<!-- Product box -->
-	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
-					<img src="assets/imgs/product.png" imageViewer/>
-				</div>
-				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Product box  -->
-
-	<!-- Product box -->
-	<div class="col-xs-12 promotion-box-outer">
-		<div class="col-xs-12 promotion-box">
-			<table class="table table-promotion ltr">
-				<tr>
-					<td>Promotion Name (In English)</td>
-					<td>Zara</td>
-				</tr>
-				<tr>
-					<td>Promotion Name (In Arabic)</td>
-					<td>Zara</td>
-				</tr>
-			</table>
-			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
-					<img src="assets/imgs/product.png" imageViewer/>
-				</div>
-				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1">Edit</button>
-					<button class="btn-nazik sm">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Product box  -->
-
 </div>
 
 </ion-content>

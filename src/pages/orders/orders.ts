@@ -23,24 +23,14 @@ export class OrdersPage {
   public myDate : any
   public filter: boolean = false
 
-  public items: any = [
-    {
-      name: "ashley",
-      date: 1452850218,
-      status: "pending"
-    },
-    {
-      name: "morgan",
-      date: 1452850218,
-      status: "confirmed"
-    }
-  ]
+  public items: any = []
   public filterValue : any
   public startdate: any
   public enddate: any
   public newStartdate: any
   public newEnddate: any
   public errorMessage : any = "";
+  public errormsg : any = true
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public orderservice: OrderService, public popup: AlertView) {
 
@@ -57,18 +47,38 @@ export class OrdersPage {
   goBack(){
     this.navCtrl.pop()
   }
-  goToDetails(){
-    this.navCtrl.push(OrderdetailPage, {animation: 'left'})
+  goToDetails(id){
+    this.navCtrl.push(OrderdetailPage,{id: id}, {animation: 'left'})
   }
 
   showFilter(){
     this.filter == true ? this.filter = false : this.filter = true
   }
   search(){
-    this.getOrders()
+    this.getOrdersWithFilters()
+  }
+  getOrders(){
+    this.orderservice.onGetVendorOrders().subscribe(res=>{
+      console.log(res)
+      res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No Orders found', 1500, 'bottom', false, "") 
+      
+      if(res.status && res.response.length > 0 ){
+        this.errormsg = false
+        console.log(this.errormsg)
+      }
+
+    }, err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
   }
 
-  getOrders(){
+  getOrdersWithFilters(){
     console.log(this.filterValue)
 
     this.newStartdate = new Date(this.startdate);
@@ -101,9 +111,14 @@ export class OrdersPage {
     
     }      
     
-    this.orderservice.onGetVendorOrders(this.filterValue,this.startdate,this.enddate).subscribe(res=>{
+    this.orderservice.onGetVendorsFilter(this.filterValue,this.newStartdate.getTime()/1000, this.newEnddate.getTime()/1000).subscribe(res=>{
       console.log(res)
-      // res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No Orders found', 1500, 'bottom', false, "")   
+      res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No Orders found', 1500, 'bottom', false, "")   
+
+      if(res.status && res.response.length > 0 ){
+        this.errormsg = false
+        console.log(this.errormsg)
+      }
 
       console.log("inside api call")
       if(this.items){

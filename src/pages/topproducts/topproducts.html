@@ -19,7 +19,7 @@
 
 
 <ion-content>
-
+	<p class="zeroQuotes" *ngIf="errormsg">No Products found</p>
 <!-- Top Product box -->
 <div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
 	<div class="col-xs-12 promotion-box">

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angula
 import { PromotionsService } from '../../services/promotions';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert'; 
+import { HomePage } from '../home/home';
 
 
 /**
@@ -20,17 +21,7 @@ import { AlertView } from '../../uicomponents/alert';
 })
 export class AddpromotionPage {
 
-  public promoDetails = 
-  {
-    id: 3,
-    promotion: "Promo 3",
-    promotion_ar: "لانا",
-    product: "Product 2",
-    product_ar: "لانا",
-    description: "Promo 3",
-    description_ar: "بائع اختبار",
-    image: "http://localhost/gomallbackend/public/avatar/1512729688"
-  }
+  public promoDetails = {}
     public title: any
     public title_ar: any 
     public description : any 
@@ -42,15 +33,19 @@ export class AddpromotionPage {
   public updatePromo = {}
   public promotionId: any
   public product_id
+  public errorMessage : any = ""
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
   
     this.promotionId = this.navParams.get('id')
+    if(this.promotionId != null){
+      this.getPromotion()
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddpromotionPage');
-    this.getPromotion()
+    // this.getPromotion()
     
   }
   ionViewWillEnter(){
@@ -71,10 +66,20 @@ export class AddpromotionPage {
       this.image = res.response.image
     
       res.status && res.response.length > 0 ? this.promoDetails = res.response : this.popup.showToast('No Promotion found', 1500, 'bottom', false, "")
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
     })
   }
 
   addPromotion(){
+    this.popup.showLoader()
+
     let data = {
       title: this.title,
       title_ar: this.title_ar,
@@ -87,6 +92,17 @@ export class AddpromotionPage {
     this.promotionservice.onAddpromotion(data).subscribe(res=>{
 
       console.log(res)
+      this.popup.hideLoader()
+      this.navCtrl.push(HomePage)
+
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
     })
   }
 
@@ -104,6 +120,14 @@ export class AddpromotionPage {
     console.log(data)
     this.promotionservice.onUpdatePromotion(id,data).subscribe(res=>{
       console.log(res)
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
     })
   }
 

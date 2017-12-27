@@ -21,6 +21,7 @@ import { AlertView } from '../../uicomponents/alert';
 export class StoreinformationPage {
 
 
+  public countrylist = []
 
   public citylist = []
 
@@ -45,6 +46,7 @@ export class StoreinformationPage {
   ionViewDidLoad() { 
     console.log('ionViewDidLoad StoreinformationPage');
     this.getVendorData()
+    this.getCountries()
     // this.getCities()
   }
   ionViewWillEnter(){
@@ -61,6 +63,21 @@ export class StoreinformationPage {
   getCountry(){
     console.log("country: " + this.countryname)
     this.getCities()
+  }
+  getCountries(){
+    this.storeinfoservice.onGetCountries().subscribe(res=>{
+      console.log(res)
+      res.status && res.response.length ? this.countrylist = res.response : console.log("countries not found")
+
+    },err=>{
+
+      console.log("masla ha ")
+      console.log(err)
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")      
+    })
   }
 
   getCities(){

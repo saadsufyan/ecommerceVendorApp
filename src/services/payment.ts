@@ -11,7 +11,7 @@ export class PaymentService{
     constructor (public network : NetworkService) {}
 
     onGetMyPayments(){
-        let url = this.basicUrl + "/payments?page=page&limit=limit";
+        let url = this.basicUrl + "/payments?page=1&limit=1000";
         return this.network.doGet(url)
     }
 

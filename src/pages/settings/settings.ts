@@ -17,9 +17,8 @@ import { AlertView } from '../../uicomponents/alert';
   providers: [SettingsService, NetworkService, AlertView]
 })
 export class SettingsPage {
-  public password
+  public password : string
   public terms: any = {}
-  public terms_ar: any = {}
   public errorMessage : any = ""
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public settingservice : SettingsService, public popup : AlertView) {}
@@ -38,8 +37,9 @@ export class SettingsPage {
 
   getTermsAndConditions(){
     this.settingservice.onGetTermsAndConditions().subscribe(res=>{
-      this.terms = res.response.terms
-      this.terms_ar = res.response.terms_ar
+      console.log(res)
+      this.terms = res.response
+      
     }, err => {
       console.log("masla ha ")
       console.log(err);
@@ -58,7 +58,7 @@ export class SettingsPage {
     title: 'Update Password',
     inputs: [
       {
-        name: 'Password',
+        name: 'new_password',
         placeholder: 'Type Here',
         type: 'password',
 
@@ -72,10 +72,7 @@ export class SettingsPage {
 
           console.log('Save clicked');
 
-          this.password = data
-          console.log(this.password)
-          
-          this.settingservice.onchangePassword(this.password).subscribe(res=>{
+          this.settingservice.onchangePassword(data).subscribe(res=>{
             console.log(res)
           },err=>{
             console.log("masla ha ")

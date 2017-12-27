@@ -23,7 +23,11 @@ export class ProductstabPage {
   tab2Root = 'Tab2Page'
   tab3Root = 'Tab3Page'
 
+  
 
-  constructor(public navCtrl: NavController) {}
+
+  constructor(public navCtrl: NavController) {
+    this.tab1Root
+  }
 
 }

@@ -20,19 +20,19 @@
 		    <form class="form-signup" dir="ltr">
 		      <div class="form-group">
 		      	<label class="dark">Product Name (In English)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="">
+		        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="" [(ngModel)]="name" name="name">
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Product Name (In Arabic)</label>
-		        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="">
+		        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="" [(ngModel)]="name_ar" name="name_ar">
 		      </div>
 		      <div class="form-group">
 		      	<label class="dark">Product Description (In English)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="Zara" required="">
+		        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description">
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Product Description (In Arabic)</label>
-		        <input type="text" class="text-box form-control dark" placeholder="Zara" required="">
+		        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar">
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Category</label>
@@ -55,7 +55,7 @@
 		      	<label class="dark">Thumbnail Image</label> <br>
 		        <span id="fileselector">
 		          <label class="btn btn-default" for="upload-file-selector">
-		              <input id="upload-file-selector" type="file">
+		              <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail">
 									<!-- <img src="images/icon_upload.png"> -->
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>
@@ -67,7 +67,7 @@
 		      	<label class="dark">Product Image</label> <br>
 		        <span id="fileselector">
 		          <label class="btn btn-default" for="upload-file-selector">
-		              <input id="upload-file-selector" type="file">
+		              <input id="upload-file-selector" type="file" [(ngModel)]="images" name="images">
 									<!-- <img src="images/icon_upload.png"> -->
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>
@@ -75,18 +75,18 @@
 		      </div>
 		      <div class="form-group">
 		      	<label class="dark">Price In Local Currency (SAR)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="25" required="">
+		        <input type="email" class="text-box form-control dark" placeholder="25" required="" [(ngModel)]="price" name="price">
 		      </div>
 		      <div class="checkbox ltr">
-			  	<label class="dark"><input type="checkbox" value="">Show Calender</label> &nbsp;&nbsp;
-			  	<label class="dark"><input type="checkbox" value="">Show Time</label>
+			  	<label class="dark"><input type="checkbox" value="" [(ngModel)]="show_calender" name="show_calender">Show Calender</label> &nbsp;&nbsp;
+			  	<label class="dark"><input type="checkbox" value="" [(ngModel)]="show_time" name="show_time">Show Time</label>
 			  </div>
 			  
 
 
 		      <br>
 	          <div class="col-xs-12" style="text-align: center;">
-	          	<button class="btn-nazik" (click)="goToSpecifications()">Save</button>	
+	          	<button class="btn-nazik" (click)="addProduct(name, name_ar, description, description_ar, sub_cat, thumbnail,images,price,show_calender,show_time)">Save</button>	
 	          </div>
 	          <br><br><br><br>
 		    </form>
