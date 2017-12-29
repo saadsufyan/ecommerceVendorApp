@@ -44,6 +44,9 @@ export class ProductsPage {
     // this.navCtrl.push(BasicPage, {animation: 'left'})
     this.navCtrl.push(ProductstabPage);
   }
+  editProduct(id){
+    this.navCtrl.push(ProductsPage, {id:id}, {animation: 'left'})
+  }
 
   getAllProducts(){
     this.productservice.onGetAllProducts().subscribe(res=>{

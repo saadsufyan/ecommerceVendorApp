@@ -55,7 +55,8 @@
 		      	<label class="dark">Thumbnail Image</label> <br>
 		        <span id="fileselector">
 		          <label class="btn btn-default" for="upload-file-selector">
-		              <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail">
+									<!-- <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail"> -->
+									<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
 									<!-- <img src="images/icon_upload.png"> -->
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>
@@ -67,7 +68,8 @@
 		      	<label class="dark">Product Image</label> <br>
 		        <span id="fileselector">
 		          <label class="btn btn-default" for="upload-file-selector">
-		              <input id="upload-file-selector" type="file" [(ngModel)]="images" name="images">
+									<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+									<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 									<!-- <img src="images/icon_upload.png"> -->
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>

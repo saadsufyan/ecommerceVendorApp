@@ -19,6 +19,10 @@ export class ProductsService{
         let url = this.basicUrl  + "/products";
         return this.network.doGet(url)
     }
+    onGetProductDetails(id) : Observable<any> {
+        let url = this.basicUrl + "/products" + id;
+        return this.network.doGet(url)
+    }
     OnAddProduct(data) : Observable<any> {
         let url = this.basicUrl + "/products";
         return this.network.doPut(url, data)
@@ -28,5 +32,10 @@ export class ProductsService{
         console.log(url)
         return this.network.doGet(url)
     }
+    uploadPicture(data) : Observable<any> {
+        let url = this.basicUrl + "/image/upload";
+        return this.network.doPostPictures(url,data)
+    }
+
 
 }

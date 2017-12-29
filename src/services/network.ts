@@ -26,6 +26,21 @@ export class NetworkService{
     doDelete(url) : any {
         return this.http.delete(url, this.getHeaders()).map(res => res.json());
     }
+    doPostPictures(url,postdata) : any {
+        return this.http.post(url, postdata, this.getMultiPartHeaders()).map(res =>  res.json())
+    }
+
+    getMultiPartHeaders() : any {
+        let user = JSON.parse(localStorage.getItem('user')) 
+        var token = user.access_token
+         var header = {
+            'Authorization': 'Bearer '+token            
+        };
+        console.log(header)
+        let headers = new Headers(header);
+        let options = new RequestOptions({ headers: headers });
+        return options;
+    }    
 
     getHeaders() : any {
         let userIsLoggedIn : any = localStorage.getItem('isLoggedIn');

@@ -20,26 +20,27 @@
 
 
 <ion-content>
-<div class="col-xs-12 promotion-box-outer">
+<div class="col-xs-12 promotion-box-outer"  id="specifications" *ngFor="let x of specs">
+
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion ltr">
 			<tr>
-				<td>Specifications Name (In English)</td>
-				<td>Color</td>
+				<td>Specifications Name <br>(In English)</td>
+				<td><input id="" placeholder="specification name">{{x.key}}</td>
 			</tr>
 			<tr>
-				<td>Specifications Name (In Arabic)</td>
-				<td>Color</td>
+				<td>Specifications Name <br>(In Arabic)</td>
+				<td><input id="" placeholder="اسم المواصفات"></td>
 			</tr>
 		</table>
-		<table class="table table-promotion ltr">
+		<table class="table table-promotion ltr" id="addvalue_spec_1">
 			<tr>
-				<td>Specifications Value (In English)</td>
-				<td>Red</td>
+				<td>Specifications Value <br>(In English)</td>
+				<td><input id="" placeholder="specification value"></td>
 			</tr>
 			<tr>
-				<td>Specifications Value (In Arabic)</td>
-				<td>Red</td>
+				<td>Specifications Value <br>(In Arabic)</td>
+				<td><input id="" placeholder="قيمة المواصفات"></td>
 			</tr>
 		</table>
 		<div class="col-xs-12 text-center">
@@ -48,32 +49,54 @@
 			<br><br>
 		</div>
 	</div>
+
 </div>
+
+
+
+<div class="one" [innerHtml]="htmlToAdd"></div>
+
+<!-- <div class="col-xs-12 promotion-box-outer"  *ngIf="specbox">
+
+	<div class="col-xs-12 promotion-box">
+		<table class="table table-promotion ltr">
+			<tr>
+				<td>Specifications Name <br>(In English)</td>
+				<td><input id="" placeholder="specification name"></td>
+			</tr>
+			<tr>
+				<td>Specifications Name <br>(In Arabic)</td>
+				<td><input id="" placeholder="اسم المواصفات"></td>
+			</tr>
+		</table>
+		<table class="table table-promotion ltr" id="addvalue_spec_1">
+			<tr>
+				<td>Specifications Value <br>(In English)</td>
+				<td><input id="" placeholder="specification value"></td>
+			</tr>
+			<tr>
+				<td>Specifications Value <br>(In Arabic)</td>
+				<td><input id="" placeholder="قيمة المواصفات"></td>
+			</tr>
+		</table>
+		<div class="col-xs-12 text-center">
+			<br>
+			<button class="btn btn-nazik black sm">Add Value</button>
+			<br><br>
+		</div>
+	</div>
+
+</div> -->
 <!-- Specifications box  -->
 
 <div class="col-xs-12" style="text-align: center;">
 	<br>
-	<button class="btn btn-nazik black">Add Specifications</button>	
+	<button class="btn btn-nazik black" (click)="get_spec_box()">Add Specifications</button>	
 </div>
 
-<div class="btn-box" style="text-align: center;">
-	<button class="btn-nazik" (click)="goToStocks()">Proceed to Stock</button>	
+<div class="btn-box1" style="text-align: center;">
+	<button class="btn-nazik-stock" (click)="goToStocks()">Proceed to Stock</button>	
 </div>
 
 </ion-content>
 
-<!-- <ion-footer>
-  <ion-toolbar>
-    <div class="col-xs-12 btn-box fixed">
-      <div class="col-xs-4">
-        <h5 class="white">Basic</h5>
-      </div>
-      <div class="col-xs-4">
-        <h5 class="red">Specifications</h5>
-      </div>
-      <div class="col-xs-4">
-        <h5 class="white">Stock</h5>
-      </div>
-    </div>
-  </ion-toolbar>
-</ion-footer> -->
