@@ -51,7 +51,7 @@ export class ProductsPage {
   getAllProducts(){
     this.productservice.onGetAllProducts().subscribe(res=>{
       console.log(res)
-      res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No products found', 1500, 'bottom', false, "")
+      res.status && res.response.length > 0 ? this.items = res.response : console.log("no products found")
     
       if(res.status && res.response.length > 0 ){
         this.errormsg = false

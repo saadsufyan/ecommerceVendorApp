@@ -6,6 +6,9 @@
 -->
 <ion-header>
 
+
+
+
   <ion-navbar class="black-header">
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
@@ -20,7 +23,9 @@
 
 
 <ion-content>
-<div class="col-xs-12 promotion-box-outer"  id="specifications" *ngFor="let x of specs">
+
+	<!-- <input type="button" id="btnfun" value="bindfun"> -->
+<!-- <div class="col-xs-12 promotion-box-outer"  id="specifications" *ngFor="let x of specs">
 
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion ltr">
@@ -50,53 +55,78 @@
 		</div>
 	</div>
 
-</div>
+</div> -->
+
+<!-- temp work  -->
+<!-- <div class="col-xs-12" id="abc" *ngFor="let input of inputs;let i = index; trackBy: trackByIndex">
+	<h3>Specification</h3>
+	<label>Type here</label>
+	<input type="text" id="{{input.id}}" [(ngModel)]="specname">
+</div> -->
+<!-- temp work -->
+
+<!-- this worked for me  -->
+<!-- <form name="userForm">
+		<table style="background-color:cadetblue">
+		<tr *ngFor="let item of itemList; let in = index">
+		  <td>First Name<input type="text" name="lastname-{{in}}" [(ngModel)]="item.firstname"></td><br>
+		  <td>Last Name<input type="text" name="middlename-{{in}}" [(ngModel)]="item.lastname"></td><br>
+		</tr>
+		</table>
+		<button (click)="getSpecForm()">Click</button>
+</form> -->
+<!-- this worked for me  -->
+
+<!-- <p>Temp work</p>
+<label style="color:black" *ngFor="let item of items; let i = index; trackBy:trackByIndex">
+	{{items[i]}}
+	<input type="number" min="0" max="10" step="2" [(ngModel)]="items[i]">
+</label> -->
 
 
+<!-- <div class="one" [innerHtml]="htmlToAdd"></div> -->
 
-<div class="one" [innerHtml]="htmlToAdd"></div>
+<div class="col-xs-12 promotion-box-outer" id="specifications" *ngIf="specbox">
 
-<!-- <div class="col-xs-12 promotion-box-outer"  *ngIf="specbox">
-
-	<div class="col-xs-12 promotion-box">
+	<div class="col-xs-12 promotion-box specificationbox" *ngFor="let item of specBox; let in = index"> 
 		<table class="table table-promotion ltr">
 			<tr>
 				<td>Specifications Name <br>(In English)</td>
-				<td><input id="" placeholder="specification name"></td>
+				<td><input id="spec_name_{{item.key_id}}_en" name="key-{{in}}" [(ngModel)]="item.key" placeholder="specification name"></td>
 			</tr>
 			<tr>
 				<td>Specifications Name <br>(In Arabic)</td>
-				<td><input id="" placeholder="اسم المواصفات"></td>
+				<td><input id="spec_name_{{item.key_id}}_ar" name="key_ar-{{in}}" [(ngModel)]="item.key_ar" placeholder="اسم المواصفات"></td>
 			</tr>
 		</table>
-		<table class="table table-promotion ltr" id="addvalue_spec_1">
-			<tr>
+		<table class="table table-promotion ltr" id="addvalue_spec_{{item.key_id}}">
+			<tr > 
 				<td>Specifications Value <br>(In English)</td>
-				<td><input id="" placeholder="specification value"></td>
+				<td><input class="spec_{{item.key_id}}_value" id="spec_{{item.key_id}}_value_1_en" name="" placeholder="value_en"></td>
 			</tr>
 			<tr>
 				<td>Specifications Value <br>(In Arabic)</td>
-				<td><input id="" placeholder="قيمة المواصفات"></td>
+				<td><input id="spec_{{item.key_id}}_value_1_ar"  name="" placeholder="قيمة المواصفات"></td>
 			</tr>
 		</table>
 		<div class="col-xs-12 text-center">
 			<br>
-			<button class="btn btn-nazik black sm">Add Value</button>
+			<button class="btn btn-nazik black sm" (click)="get_value_box(item.key_id)">Add Value</button>
 			<br><br>
 		</div>
 	</div>
 
-</div> -->
+</div>
 <!-- Specifications box  -->
 
 <div class="col-xs-12" style="text-align: center;">
 	<br>
-	<button class="btn btn-nazik black" (click)="get_spec_box()">Add Specifications</button>	
+	<button class="btn btn-nazik black" (click)="getSpec()">Add Specifications</button>	
 </div>
 
 <div class="btn-box1" style="text-align: center;">
 	<button class="btn-nazik-stock" (click)="goToStocks()">Proceed to Stock</button>	
 </div>
 
-</ion-content>
 
+</ion-content>

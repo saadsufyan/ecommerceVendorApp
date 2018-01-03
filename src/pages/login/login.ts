@@ -49,11 +49,12 @@ export class LoginPage {
       this.popup.hideLoader()
       if(res.status){
         console.log(res)
-        localStorage.setItem('user' , JSON.stringify(res.response[0]))
+        localStorage.setItem('user' , JSON.stringify(res.response))
         localStorage.setItem('isLoggedIn', "true")
         this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
         }
       }, err => {
+                alert(err)
                 console.log(err);
                 this.popup.hideLoader()
                 this.errorMessage = JSON.parse(err._body)

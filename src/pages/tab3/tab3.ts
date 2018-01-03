@@ -15,7 +15,11 @@ import { ProductsPage } from '../products/products';
 })
 export class Tab3Page {
 
+  public val
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App) {
+  
+    this.val = this.navParams.get('data')
+    console.log(this.val)
   }
 
   ionViewDidLoad() {

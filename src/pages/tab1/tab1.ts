@@ -118,6 +118,7 @@ export class Tab1Page {
       type : "product",
       show_calender : show_calender,
       show_time : show_time,
+      specifications: []
 
     }
     console.log(data)
