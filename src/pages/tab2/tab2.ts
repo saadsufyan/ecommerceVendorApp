@@ -70,45 +70,30 @@ export class Tab2Page {
   
 
 
-  public data = {}
-  public specs =   [
-    {
-      key_id: 1,
-      key: "color",
-      key_ar: "اللون",
-      values: [
-        "blue",
-        "green"
-      ],
-      values_ar: [
-        "أزرق",
-        "أخضر"
-      ]
-    },
-    {
-      key_id: 2,
-      key: "size",
-      key_ar: "اللون",
-      values: [
-        "15",
-        "17"
-      ],
-      values_ar: [
-        "15_ar",
-        "17_ar"
-      ]
-    }    
-  ]
+  public data
+  public specs =   []
 
 
 
   public specbox : boolean = false
   public name
   public errorMessage : any = ""
+
+  public specbutton : boolean = false
+  public productid :any
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     this.data = this.sharedservice.fetchData()
+    console.log("Form Data: ")
     console.log(this.data)    
+
+    this.specs = this.sharedservice.fetchSpecifications()
+    console.log("Spec data: ")
+    this.productid = this.sharedservice.fetchProductId()
+    console.log(this.specs)
+    if(this.productid == null){
+      this.specbutton = true
+    }
   }
 
   ionViewDidLoad() {
@@ -168,10 +153,6 @@ export class Tab2Page {
 
         var value_box_en_val = $('#'+value_box_en).val();
         var value_box_ar_val = $('#'+value_box_ar).val();
-        // console.log("value "+value_box_en);
-        // console.log();
-        // console.log($('#'+value_box_ar).val());
-
 
         spec_class.values.push(value_box_en_val);
         spec_class.values_ar.push(value_box_ar_val);
@@ -186,15 +167,17 @@ specifications.push(spec_class);
 
     let my_data = this.data;
 
+  //  this.data.specifications 
+   console.log(this.data.specifications)
+   this.data.specifications = specifications
+
+   console.log(this.data)
+
   console.log("complete data");
   console.log(specifications);
 
 
-  // this.data.specifications = specifications
-
-  // my_data.specification = specifications;
-
-    // this.productservice.OnAddProduct().subscribe(res=>{
+    // this.productservice.OnAddProduct(this.data).subscribe(res=>{
       
     //   if(res.status){
     //     console.log(res)
@@ -211,7 +194,7 @@ specifications.push(spec_class);
   }
 
 
-  get_value_box(spec_num){
+  addValue(spec_num){
     // alert(spec_num)
     var spec = document.getElementById('addvalue_spec_'+spec_num)
     $('#addvalue_spec_'+spec_num).append(this.get_value_html(spec_num));
@@ -229,12 +212,78 @@ specifications.push(spec_class);
   </tr>
   <tr>
     <td>Specifications Value <br>(In Arabic)</td>
-    <td><input id="spec_`+spec_num+`_value_`+spec_value+`_ar" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
+    <td><input id="spec_`+spec_num+`_value_`+spec_value+`_ar" (keyup)="validation_val_ar(`+spec_num+`,`+spec_value+`)" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
   </tr>`;
   }
   
 
-  getSpec(x,y){
+  validation_spec_ar(key_id){
+
+    var tb = $('#spec_name_'+key_id+'_ar');
+    var tb_value: any = tb.val();        
+
+      if(!this.validate_arabic_without_spaces(tb_value)){
+        tb.val('');
+        tb.attr('placeholder','Only Arabic Allowed');
+      }      
+  }
+  
+
+  validation_val_ar(key_id,value_id){
+    
+    var tb = $('#spec_'+key_id+'_value_'+value_id+'_ar');
+    var tb_value: any = tb.val();           
+
+      if(!this.validate_arabic_without_spaces(tb_value)){
+        tb.val('');
+        tb.attr('placeholder','Only Arabic Allowed');
+      }      
+  }
+
+  rejex_arabic(){
+    return /^([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd]|[\n])*$/g;
+  }
+
+  validate_arabic_with_spaces(arabic){
+
+    if(!(this.rejex_arabic().test(arabic)===true)){
+      return false;
+  }
+    return true;
+  }
+
+  validate_arabic_without_spaces(arabic){
+
+    var arabic = (arabic.replace(/ /g,''));
+
+    return this.validate_arabic_with_spaces(arabic);
+  }
+
+
+
+
+  removeSpec(){
+    this.specBox.pop()
+    console.log(this.specBox)
+  }
+
+  removeValue(id){
+
+    var spec_box_sel = '#addvalue_spec_'+id;
+
+    var trs = $(spec_box_sel+' tr').length;
+
+    if(trs<3){
+      return;
+    }
+
+    var last_tr = spec_box_sel+' tr:last';
+    $(last_tr).remove()
+    $(last_tr).remove()
+    
+  }
+
+  addSpec(x,y){
 
     this.specbox = true
 

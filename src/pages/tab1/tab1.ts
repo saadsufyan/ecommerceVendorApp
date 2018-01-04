@@ -40,15 +40,20 @@ export class Tab1Page {
 
   public imageFile
   public productId
+  public specifications = []
+  public completeData
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
   
     this.productId = this.navParams.get('id')
     console.log(this.productId)
+    this.sharedservice.sendProductId(this.productId)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Tab1Page');
-    // this.getAllCategory()
+    this.getAllCategory()
+    // this.getProductDetails()
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
@@ -59,12 +64,19 @@ export class Tab1Page {
   }  
 
   goToSpecifications(){
+
+    this.sharedservice.sendSpecifications(this.specifications)
     this.navCtrl.parent.select(1)
+
   }
   getAllCategory(){
     this.productservice.onGetAllParentCategory().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.categoryList = res.response : console.log("no category found")
+
+      
+
+
 
     },err => {
       console.log("masla ha ")
@@ -92,6 +104,7 @@ export class Tab1Page {
       this.price = res.response.price
       this.show_calender = res.response.show_calender
       this.show_time = res.response.show_time
+      this.specifications = res.response.specifications
       
     },err => {
       console.log("masla ha ")
@@ -123,11 +136,20 @@ export class Tab1Page {
     }
     console.log(data)
 
-    this.sharedservice.send(data)
+    
 
-    this.navCtrl.parent.select(1).rootParams = {
-      name: name
+    if(this.productId != null){
+      this.sharedservice.sendSpecifications(this.specifications)
+      this.navCtrl.parent.select(1)
     }
+    else{
+      this.sharedservice.send(data)
+      this.navCtrl.parent.select(1)
+    }
+
+   
+
+
 
   }
 

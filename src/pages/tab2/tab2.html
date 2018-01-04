@@ -25,27 +25,27 @@
 <ion-content>
 
 	<!-- <input type="button" id="btnfun" value="bindfun"> -->
-<!-- <div class="col-xs-12 promotion-box-outer"  id="specifications" *ngFor="let x of specs">
+<div class="col-xs-12 promotion-box-outer"  id="specifications" *ngFor="let x of specs; let i = index">
 
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion ltr">
 			<tr>
 				<td>Specifications Name <br>(In English)</td>
-				<td><input id="" placeholder="specification name">{{x.key}}</td>
+				<td><input id="" [(ngModel)]="x.key"></td>
 			</tr>
 			<tr>
 				<td>Specifications Name <br>(In Arabic)</td>
-				<td><input id="" placeholder="اسم المواصفات"></td>
+				<td><input id="" [(ngModel)]="x.key_ar"></td>
 			</tr>
 		</table>
 		<table class="table table-promotion ltr" id="addvalue_spec_1">
 			<tr>
 				<td>Specifications Value <br>(In English)</td>
-				<td><input id="" placeholder="specification value"></td>
+				<td><input id="" [(ngModel)]="x.values[i]"></td>
 			</tr>
 			<tr>
 				<td>Specifications Value <br>(In Arabic)</td>
-				<td><input id="" placeholder="قيمة المواصفات"></td>
+				<td><input id="" [(ngModel)]="x.values_ar[i]"></td>
 			</tr>
 		</table>
 		<div class="col-xs-12 text-center">
@@ -55,7 +55,7 @@
 		</div>
 	</div>
 
-</div> -->
+</div>
 
 <!-- temp work  -->
 <!-- <div class="col-xs-12" id="abc" *ngFor="let input of inputs;let i = index; trackBy: trackByIndex">
@@ -96,22 +96,24 @@
 			</tr>
 			<tr>
 				<td>Specifications Name <br>(In Arabic)</td>
-				<td><input id="spec_name_{{item.key_id}}_ar" name="key_ar-{{in}}" [(ngModel)]="item.key_ar" placeholder="اسم المواصفات"></td>
+				<td><input id="spec_name_{{item.key_id}}_ar" (keyup)="validation_spec_ar(item.key_id)" name="key_ar-{{in}}" [(ngModel)]="item.key_ar" placeholder="اسم المواصفات"></td>
 			</tr>
 		</table>
-		<table class="table table-promotion ltr" id="addvalue_spec_{{item.key_id}}">
+		<table class="table table-promotion ltr value_{{item.key_id}}_en_ar" id="addvalue_spec_{{item.key_id}}">
 			<tr > 
 				<td>Specifications Value <br>(In English)</td>
 				<td><input class="spec_{{item.key_id}}_value" id="spec_{{item.key_id}}_value_1_en" name="" placeholder="value_en"></td>
 			</tr>
 			<tr>
 				<td>Specifications Value <br>(In Arabic)</td>
-				<td><input id="spec_{{item.key_id}}_value_1_ar"  name="" placeholder="قيمة المواصفات"></td>
+				<td><input id="spec_{{item.key_id}}_value_1_ar" (keyup)="validation_val_ar(item.key_id,1)" name="" placeholder="قيمة المواصفات"></td>
 			</tr>
 		</table>
 		<div class="col-xs-12 text-center">
 			<br>
-			<button class="btn btn-nazik black sm" (click)="get_value_box(item.key_id)">Add Value</button>
+			<button class="btn-nazik-add-value" (click)="addValue(item.key_id);">Add Value</button>
+			
+			<button class="btn-nazik-remove-value" (click)="removeValue(item.key_id)">Remove Value</button>
 			<br><br>
 		</div>
 	</div>
@@ -121,7 +123,8 @@
 
 <div class="col-xs-12" style="text-align: center;">
 	<br>
-	<button class="btn btn-nazik black" (click)="getSpec()">Add Specifications</button>	
+	<button class="btn-nazik-add" *ngIf="specbutton" (click)="addSpec()">Add </button>	
+	<button class="btn-nazik-remove" *ngIf="specbutton" (click)="removeSpec()">Remove </button>	
 </div>
 
 <div class="btn-box1" style="text-align: center;">

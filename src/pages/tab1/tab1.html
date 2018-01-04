@@ -37,9 +37,8 @@
 		      <div class="form-group">	      	
 		      	<label class="dark">Category</label>
 		      	<br>
-		        <select class="dropdown dark">
-		        	<option>Fashion</option>
-		        	<option>Electronics</option>
+		        <select class="dropdown dark" name="categoryName" [(ngModel)]="categoryName">
+		        	<option *ngFor="let x of categoryList;let i = index" value="{{x.name}}">{{x.name}}</option>
 		        </select>
 		      </div>
 		      <div class="form-group">	      	
@@ -49,8 +48,15 @@
 		        	<option>Clothing</option>
 		        	<option>Footwear</option>
 		        </select>
-		      </div>
-		      
+					</div>
+					
+					<div class="col-xs-12 text-center">
+						<br>
+						<button class="btn-nazik-undo">Undo</button>
+						<button class="btn-nazik-remove-value">Select Category</button>
+						<br><br>
+					</div>
+
 		      <div class="form-group">
 		      	<label class="dark">Thumbnail Image</label> <br>
 		        <span id="fileselector">
@@ -88,7 +94,9 @@
 
 		      <br>
 	          <div class="col-xs-12" style="text-align: center;">
-	          	<button class="btn-nazik" (click)="addProduct(name, name_ar, description, description_ar, sub_cat, thumbnail,images,price,show_calender,show_time)">Save</button>	
+							<button class="btn-nazik" (click)="addProduct(name, name_ar, description, description_ar, sub_cat, thumbnail,images,price,show_calender,show_time)">Save</button>	
+							<!-- <button class="btn-nazik" (click)="goToSpecifications()">Save</button>	 -->
+
 	          </div>
 	          <br><br><br><br>
 		    </form>
