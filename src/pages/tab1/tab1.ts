@@ -7,6 +7,7 @@ import { SharedService } from '../../services/sharedService';
 import { AlertView } from '../../uicomponents/alert';
 import { Tab2Page } from '../tab2/tab2';
 
+
 /**
  * Generated class for the Tab1Page page.
  *
@@ -24,7 +25,6 @@ export class Tab1Page {
 
   public user = JSON.parse(localStorage.getItem('user'))
 
-  public categoryList : any  = []
   public errorMessage :any = ""
 
   public name
@@ -43,6 +43,25 @@ export class Tab1Page {
   public specifications = []
   public completeData
 
+  public categoryObj
+  public subcategoryObj
+  public subcategoryid
+  public specificsubcategory
+
+  public categoryList : any  = []
+  public subcategoryList : any = []
+  public specificsubcategoryList : any = []
+
+  public categoryArray : any 
+  public tempSubCatId : any
+  public tempCatId : any
+
+  public tempArray = []
+
+  public count
+
+  public categoryButton : boolean = true
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
   
     this.productId = this.navParams.get('id')
@@ -52,6 +71,8 @@ export class Tab1Page {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Tab1Page');
+    $('#Cat_button').attr('disabled','disabled');
+    $('#Undo_button').attr('disabled','disabled');
     this.getAllCategory()
     // this.getProductDetails()
   }
@@ -64,19 +85,109 @@ export class Tab1Page {
   }  
 
   goToSpecifications(){
-
+    
     this.sharedservice.sendSpecifications(this.specifications)
     this.navCtrl.parent.select(1)
-
   }
   getAllCategory(){
     this.productservice.onGetAllParentCategory().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.categoryList = res.response : console.log("no category found")
 
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
+  }
+
+  getSubCategory(){
+    console.log(this.categoryObj)
+
+    console.log("Category Name: " + this.categoryObj.name)
+
+    this.tempArray.push(this.categoryObj.name)
+
+    console.log(this.tempArray)
+    console.log(this.categoryList)
+
+    this.tempCatId = this.categoryObj.id
+    console.log(this.tempCatId)
+
+    this.getSubCategories()
+  }
+
+  onSubCategoryChange(){
+    console.log("outside Loop on change sub Category")
+    if(this.tempCatId!=null){
+      console.log("inside loop on change sub category")
+      this.categoryButton = false
+      $('#Cat_button').removeAttr('disabled');
+    }
+  }
+
+  getSubCategories(){
+    this.productservice.onGetSubCategory(this.tempCatId).subscribe(res=>{
+      console.log(res)
+      res.status && res.response.subcategories.length > 0 ? this.subcategoryList = res.response.subcategories : console.log("no category found")
+
+      this.count = res.response.count
+      console.log("intermediate Count: " + this.count)
+      console.log(this.subcategoryList)
+
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
+
+  }
+
+  onChangeGetSubCategory(){
+    console.log(this.subcategoryObj)
+    if(this.count> 0){
+      this.tempCatId = this.subcategoryObj.id
+      console.log("last sub category: " + this.tempCatId)
       
+     this.getSubCategories() 
+    }
+    else{
+      $('#Undo_button').removeAttr('disabled');
+      this.popup.showToast('No sub catoegories', 1000, 'bottom', false, "")
+    }    
+  }
+
+  onClickUndo(){
+    if(this.count== 0){
+      this.getParentCategoryOfSpecificSubCategory()
+    }
+    
+  }
+
+  getParentCategoryOfSpecificSubCategory(){
+    this.productservice.onGetParentCategoryOfSpecificSubCategory(this.tempCatId).subscribe(res=>{
+      console.log(res)
+
+      res.status && res.response.subcategories.length > 0 ? this.subcategoryList = res.response.subcategories : console.log("no category found")
+      
+      this.count = res.response.count
+
+      console.log("lat sub cat: " + this.tempCatId)
+      console.log("final count: " + this.count)
+
+      console.log(this.subcategoryList)
 
 
+      console.log("sub cat id: " + this.subcategoryObj.id)
+      console.log("sub cat name: " + this.subcategoryObj.name)
 
     },err => {
       console.log("masla ha ")
@@ -132,11 +243,8 @@ export class Tab1Page {
       show_calender : show_calender,
       show_time : show_time,
       specifications: []
-
     }
     console.log(data)
-
-    
 
     if(this.productId != null){
       this.sharedservice.sendSpecifications(this.specifications)
@@ -146,11 +254,6 @@ export class Tab1Page {
       this.sharedservice.send(data)
       this.navCtrl.parent.select(1)
     }
-
-   
-
-
-
   }
 
   onChange(event) {

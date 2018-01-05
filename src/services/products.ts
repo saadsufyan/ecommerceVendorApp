@@ -32,6 +32,18 @@ export class ProductsService{
         console.log(url)
         return this.network.doGet(url)
     }
+
+    onGetSubCategory(cat_id) : Observable<any> {
+        let url = this.basicUrl + "/categories/" + cat_id + "/subcategories";
+        console.log(url)
+        return this.network.doGet(url)
+    }
+    onGetParentCategoryOfSpecificSubCategory(sub_cat_id) : Observable<any> {
+        let url = this.basicUrl + "/subcategories/" + sub_cat_id + "/category";
+        console.log(url)
+        return this.network.doGet(url)
+    }
+
     uploadPicture(data) : Observable<any> {
         let url = this.basicUrl + "/image/upload";
         return this.network.doPostPictures(url,data)
