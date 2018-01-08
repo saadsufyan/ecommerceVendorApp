@@ -71,7 +71,7 @@ export class Tab2Page {
 
 
   public data
-  public specs =   []
+  public specs : any
 
 
 
@@ -81,6 +81,7 @@ export class Tab2Page {
 
   public specbutton : boolean = false
   public productid :any
+  public stock_data : any
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     this.data = this.sharedservice.fetchData()
@@ -114,8 +115,14 @@ export class Tab2Page {
     
     var spec_num = 1;
     let specifications = []
+    var update_spec = this.specs
+    var product_id = this.productid
+
+    console.log(update_spec)
+    
     $( ".specificationbox" ).each(function(index,value) {
 
+      
       
       var spec_class = {
         key_id:null,
@@ -124,6 +131,16 @@ export class Tab2Page {
         values:[],
         values_ar:[]
       };  
+
+      var update_spec_class = {
+        key_id : update_spec.key_id,
+        key : update_spec.key,
+        key_ar : update_spec.key_ar,
+        values : [],
+        values_ar : []
+      }
+
+      console.log(update_spec_class)
       
       var spec_name_en = "spec_name_"+spec_num+"_en";
 
@@ -137,6 +154,7 @@ export class Tab2Page {
       spec_class.key_id = spec_num;
       spec_class.key = spec_name_en_val;
       spec_class.key_ar = spec_name_ar_val;
+
       
 
       // console.log("spec_class.spec_name");
@@ -156,11 +174,25 @@ export class Tab2Page {
 
         spec_class.values.push(value_box_en_val);
         spec_class.values_ar.push(value_box_ar_val);
+
+        update_spec_class.values.push(value_box_en_val);
+        update_spec_class.values_ar.push(value_box_ar_val);
       });
   console.log("complete data");
   console.log(spec_class);
+
+  console.log(update_spec_class)
 // this.get_value_box('asd');
-specifications.push(spec_class);
+
+console.log(product_id)
+  if(product_id != null){
+    
+    specifications.push(update_spec_class)
+  }
+  else{
+    specifications.push(spec_class)
+  }
+
 
       spec_num++;
     });
@@ -171,44 +203,81 @@ specifications.push(spec_class);
    console.log(this.data.specifications)
    this.data.specifications = specifications
 
+   console.log("complete data");
    console.log(this.data)
 
-  console.log("complete data");
+  console.log("complete specification data");
   console.log(specifications);
 
 
-    // this.productservice.OnAddProduct(this.data).subscribe(res=>{
+  if(this.productid == null){
+    this.popup.showLoader()
+    console.log("add product: ")
+    this.productservice.OnAddProduct(this.data).subscribe(res=>{
       
-    //   if(res.status){
-    //     console.log(res)
-    //   }
-    // },    
-    // err => {
-    //   console.log(err)
-    //   this.popup.hideLoader()
-    //   this.errorMessage = JSON.parse(err._body)
-    //   this.errorMessage = this.errorMessage.error.message[0]
-    //   this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
-    // })
+      if(res.status){
+        console.log(res)
+
+        this.popup.hideLoader()
+
+        this.stock_data = res.response 
+        this.sharedservice.sendStockData(this.stock_data)
+        console.log(this.stock_data)
+
+         this.navCtrl.parent.select(2);
+        
+      }
+    },    
+    err => {
+      console.log(err)
+      this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+    })
+  }
+  else if (this.productid != null){
+    this.popup.showLoader()
+    console.log("update product")
+    this.productservice.onUpdateProductDetails(this.productid,this.data).subscribe(res=>{
+      
+      if(res.status){
+        console.log(res)
+        this.popup.hideLoader()
+        this.navCtrl.parent.select(2);
+      }
+    },    
+    err => {
+      console.log(err)
+      this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+    })
+  }
+
 
   }
 
 
-  addValue(spec_num){
+  addValue(spec_num,TXT){
+TXT = ''||TXT;
+
+
     // alert(spec_num)
     var spec = document.getElementById('addvalue_spec_'+spec_num)
-    $('#addvalue_spec_'+spec_num).append(this.get_value_html(spec_num));
+    $('#addvalue_spec_'+spec_num).append(this.get_value_html(spec_num,TXT));
     // $("spec_values_"+spec_num).append(this.get_value_html(spec_num));
   }
 
-  get_value_html(spec_num){
-
+  get_value_html(spec_num,TXT){
+    TXT = ''||TXT;
     var spec_value = $( ".spec_"+spec_num+"_value").length + 1;
     console.log(spec_value)
     
     return `<tr>
     <td>Specifications Value <br>(In English)</td>
-    <td><input class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
+    <td><input value=`+TXT+` class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
   </tr>
   <tr>
     <td>Specifications Value <br>(In Arabic)</td>
@@ -277,10 +346,14 @@ specifications.push(spec_class);
       return;
     }
 
-    var last_tr = spec_box_sel+' tr:last';
-    $(last_tr).remove()
-    $(last_tr).remove()
-    
+var last_tr = spec_box_sel+' tr:last';
+
+    var is_fixed = $(last_tr).hasClass( "fixed" );
+
+    if(!is_fixed){
+      $(last_tr).remove()
+      $(last_tr).remove()
+    }    
   }
 
   addSpec(x,y){

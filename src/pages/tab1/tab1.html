@@ -20,19 +20,19 @@
 		    <form class="form-signup" dir="ltr">
 		      <div class="form-group">
 		      	<label class="dark">Product Name (In English)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="" [(ngModel)]="name" name="name">
+		        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="" [(ngModel)]="name" name="name" required>
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Product Name (In Arabic)</label>
-		        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="" [(ngModel)]="name_ar" name="name_ar">
+		        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="" [(ngModel)]="name_ar" name="name_ar" required>
 		      </div>
 		      <div class="form-group">
 		      	<label class="dark">Product Description (In English)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description">
+		        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description" required>
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Product Description (In Arabic)</label>
-		        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar">
+		        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar" required>
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Category</label>
@@ -51,9 +51,18 @@
 					
 					<div class="col-xs-12 text-center">
 						<br>
-						<button id="Undo_button" class="btn-nazik-undo" (click)="onClickUndo()">Undo</button>
+						<button  class="btn-nazik-undo" (click)="onClickUndo()">Undo</button>
 						<button id="Cat_button" class="btn-nazik-remove-value" (click)="onChangeGetSubCategory()">Select Category</button>
 						<br><br>
+					</div>
+
+					<div class="form-group">	      	
+		      	<label class="dark">Type</label>
+		      	<br>
+		        <select class="dropdown dark" name="productType" [(ngModel)]="producttype">
+							<option value="product">Product</option>
+							<option vlaue="services">Services</option>
+		        </select>
 					</div>
 
 		      <div class="form-group">
@@ -61,7 +70,7 @@
 		        <span id="fileselector">
 		          <label class="btn btn-default" for="upload-file-selector">
 									<!-- <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail"> -->
-									<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+									<input class="fileInput" type="file" name="file1" (change)="onChange1($event)">
 									<!-- <img src="images/icon_upload.png"> -->
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>
@@ -85,15 +94,15 @@
 		        <input type="email" class="text-box form-control dark" placeholder="25" required="" [(ngModel)]="price" name="price">
 		      </div>
 		      <div class="checkbox ltr">
-			  	<label class="dark"><input type="checkbox" value="" [(ngModel)]="show_calender" name="show_calender">Show Calender</label> &nbsp;&nbsp;
-			  	<label class="dark"><input type="checkbox" value="" [(ngModel)]="show_time" name="show_time">Show Time</label>
+			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_calender" name="show_calender">Show Calender</label> &nbsp;&nbsp;
+			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_time" name="show_time">Show Time</label>
 			  </div>
 			  
 
 
 		      <br>
 	          <div class="col-xs-12" style="text-align: center;">
-							<button class="btn-nazik" (click)="addProduct(name, name_ar, description, description_ar, sub_cat, thumbnail,images,price,show_calender,show_time)">Save</button>	
+							<button class="btn-nazik" (click)="addProduct()">Save</button>	
 							<!-- <button class="btn-nazik" (click)="goToSpecifications()">Save</button>	 -->
 
 	          </div>

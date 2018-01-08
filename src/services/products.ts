@@ -20,12 +20,16 @@ export class ProductsService{
         return this.network.doGet(url)
     }
     onGetProductDetails(id) : Observable<any> {
-        let url = this.basicUrl + "/products" + id;
+        let url = this.basicUrl + "/products/" + id;
         return this.network.doGet(url)
     }
     OnAddProduct(data) : Observable<any> {
         let url = this.basicUrl + "/products";
         return this.network.doPut(url, data)
+    }
+    onUpdateProductDetails(id, data) : Observable<any> {
+        let url = this.basicUrl + "/products/" + id
+        return this.network.doPost(url, data)
     }
     onGetAllParentCategory() : Observable<any> {
         let url = this.basicUrl + "/categories";

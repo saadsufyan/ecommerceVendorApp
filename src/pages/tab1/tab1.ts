@@ -35,8 +35,8 @@ export class Tab1Page {
   public thumbnail
   public images = []
   public price
-  public show_calender
-  public show_time
+  public show_calender : boolean = false
+  public show_time : boolean = false
 
   public imageFile
   public productId
@@ -60,11 +60,13 @@ export class Tab1Page {
 
   public count
 
+  public product_details : any 
   public categoryButton : boolean = true
+  public producttype
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
   
-    this.productId = this.navParams.get('id')
+    this.productId = this.sharedservice.fetchProductId()
     console.log(this.productId)
     this.sharedservice.sendProductId(this.productId)
   }
@@ -74,7 +76,10 @@ export class Tab1Page {
     $('#Cat_button').attr('disabled','disabled');
     $('#Undo_button').attr('disabled','disabled');
     this.getAllCategory()
-    // this.getProductDetails()
+    if(this.productId != null){
+      this.getProductDetails()
+    }
+    
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
@@ -201,9 +206,12 @@ export class Tab1Page {
   }
 
   getProductDetails(){
+    console.log("mil gai id: "  + this.productId)
 
     this.productservice.onGetProductDetails(this.productId).subscribe(res=>{
       console.log(res)
+
+      this.product_details = res.response
 
       this.name = res.response.name
       this.name_ar = res.response.name_ar
@@ -229,32 +237,42 @@ export class Tab1Page {
     
   }
 
-  addProduct(name, name_ar, description, description_ar, sub_cat, thumbnail,images,price,show_calender,show_time){
+  addProduct(){
     let data = {
-      name: name,
-      name_ar : name_ar,
-      description: description,
-      description_ar: description_ar,
-      sub_cat : sub_cat,
-      thumbnail : thumbnail,
+      name: this.name,
+      name_ar : this.name_ar,
+      description: this.description,
+      description_ar: this.description_ar,
+      sub_cat : this.tempCatId,
+      thumbnail : this.thumbnail,
       images : this.images,
-      price : price,
-      type : "product",
-      show_calender : show_calender,
-      show_time : show_time,
-      specifications: []
+      price : this.price,
+      type : this.producttype,
+      show_calender : this.show_calender,
+      show_time : this.show_time,
+      specifications: [] 
     }
     console.log(data)
 
-    if(this.productId != null){
-      this.sharedservice.sendSpecifications(this.specifications)
-      this.navCtrl.parent.select(1)
+    if(this.name != null && this.name_ar != null && this.description != null && this.description_ar != null && this.tempCatId !=null && this.price !=null){
+      if(this.productId != null && this.product_details != null){
+        console.log("product Update ")
+        this.sharedservice.send(data)
+        this.sharedservice.sendSpecifications(this.specifications)
+        this.navCtrl.parent.select(1)
+      }
+      else{
+        console.log("Add product ")
+        this.sharedservice.send(data)
+        this.navCtrl.parent.select(1)
+      }
+    }else{
+      this.popup.showToast('please fill all required fields ', 2000 , 'bottom' ,false , "")
     }
-    else{
-      this.sharedservice.send(data)
-      this.navCtrl.parent.select(1)
-    }
+
+
   }
+  
 
   onChange(event) {
     this.popup.showLoader()
@@ -301,6 +319,50 @@ export class Tab1Page {
     }
 
   }  
+ 
+  onChange1(event) {
+    this.popup.showLoader()
+
+    this.imageFile = event.srcElement.files[0];
+
+    // this.imageFile = this.imageFile.split('.').pop();
+
+    console.log(this.imageFile)
+    
+    let file = event.srcElement.files[0];
+
+    var formdata = new FormData();
+    console.log(file.type.substring(0,5))
+
+    if(file.type.substring(0,5) == "image"){
+      //image
+      formdata.append('avatar', file);
+      this.productservice.uploadPicture(formdata).subscribe(res => {
+      console.log(res)
+      if(res.status > 0){
+        this.popup.hideLoader()
+        this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
+        let user = JSON.parse(localStorage.getItem('user'))
+          
+        //this.pictures.file = res.response.file
+
+        this.thumbnail = res.response
+
+        console.log(this.thumbnail)
+
+        localStorage.setItem('user' , JSON.stringify(user))
+        console.log(JSON.parse(localStorage.getItem('user'))) 
+      }
+    },
+    err => {
+      console.log(err)
+      this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+    })
+    }
+  }    
 
   
 }

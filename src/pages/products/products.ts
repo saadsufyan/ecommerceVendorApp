@@ -4,6 +4,7 @@ import { ProductstabPage } from '../productstab/productstab';
 import { ProductsService } from '../../services/products';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
+import { SharedService } from '../../services/sharedService';
 
 
 /**
@@ -17,7 +18,7 @@ import { AlertView } from '../../uicomponents/alert';
 @Component({
   selector: 'page-products',
   templateUrl: 'products.html',
-  providers: [ProductsService, NetworkService, AlertView]
+  providers: [ProductsService, NetworkService, SharedService, AlertView]
 })
 export class ProductsPage {
 
@@ -26,12 +27,14 @@ export class ProductsPage {
   public errorMessage
   public errormsg : any = true
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView, public sharedservice: SharedService) {
+  
+    this.getAllProducts()
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProductsPage');
-    this.getAllProducts()
+    
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
@@ -45,7 +48,9 @@ export class ProductsPage {
     this.navCtrl.push(ProductstabPage);
   }
   editProduct(id){
-    this.navCtrl.push(ProductsPage, {id:id}, {animation: 'left'})
+    console.log(id)
+    this.sharedservice.sendProductId(id)
+    this.navCtrl.push(ProductstabPage, {id:id}, {animation: 'left'})
   }
 
   getAllProducts(){

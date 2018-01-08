@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 let temp = {}
 let temp1 = []
+let temp2 = {}
 let productId
 @Injectable()
 export class SharedService {
@@ -47,6 +48,14 @@ export class SharedService {
     fetchProductId(){
         console.log("product Id: " + productId)
         return productId
+    }
+
+    sendStockData(data){
+        temp2 = data
+        console.log(temp2)
+    }
+    fetchStockData(){
+        return temp2
     }
     
 }

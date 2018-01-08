@@ -25,9 +25,9 @@
 <ion-content>
 
 	<!-- <input type="button" id="btnfun" value="bindfun"> -->
-<div class="col-xs-12 promotion-box-outer"  id="specifications" *ngFor="let x of specs; let i = index">
+<div class="col-xs-12 promotion-box-outer fixed"  id="specifications" *ngFor="let x of specs; let i = index">
 
-	<div class="col-xs-12 promotion-box">
+	<div class="col-xs-12 promotion-box specificationbox">
 		<table class="table table-promotion ltr">
 			<tr>
 				<td>Specifications Name <br>(In English)</td>
@@ -38,19 +38,21 @@
 				<td><input id="" [(ngModel)]="x.key_ar"></td>
 			</tr>
 		</table>
-		<table class="table table-promotion ltr" id="addvalue_spec_1">
-			<tr>
+		<table class="table table-promotion ltr value_{{x.key_id}}_en_ar" id="addvalue_spec_{{x.key_id}}">
+			<tr class="fixed">
 				<td>Specifications Value <br>(In English)</td>
-				<td><input id="" [(ngModel)]="x.values[i]"></td>
+				<td><input class="spec_{{x.key_id}}_value" id="spec_{{x.key_id}}_value_1_en" name="" [(ngModel)]="x.values[i]"></td>
 			</tr>
-			<tr>
+			<tr class="fixed">
 				<td>Specifications Value <br>(In Arabic)</td>
-				<td><input id="" [(ngModel)]="x.values_ar[i]"></td>
+				<td><input id="spec_{{x.key_id}}_value_1_ar" (keyup)="validation_val_ar(x.key_id,1)" name="" [(ngModel)]="x.values_ar[i]"></td>
 			</tr>
 		</table>
 		<div class="col-xs-12 text-center">
 			<br>
-			<button class="btn btn-nazik black sm">Add Value</button>
+			<button class="btn-nazik-add-value" (click)="addValue(x.key_id);">Add Value</button>
+			
+			<button class="btn-nazik-remove-value" (click)="removeValue(x.key_id)">Remove Value</button>
 			<br><br>
 		</div>
 	</div>
@@ -133,3 +135,6 @@
 
 
 </ion-content>
+
+
+

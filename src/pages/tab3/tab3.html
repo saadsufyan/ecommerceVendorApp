@@ -20,45 +20,26 @@
 
 
 <ion-content>
-<div class="col-xs-12 promotion-box-outer">
+<div class="col-xs-12 promotion-box-outer" *ngFor="let x of specifications">
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion ltr">
 			<tr>
 				<td>Specifications Value (In English)</td>
-				<td>Red</td>
+				<td>{{x.spec_en}}</td>
 			</tr>
 			<tr>
 				<td>Specifications Value (In Arabic)</td>
-				<td>Red</td>
+				<td>{{x.spec_ar}}</td>
 			</tr>
 			<tr>
 				<td>Stock</td>
-				<td>20</td>
+				<td><input id="" name="stock" [(ngModel)]="x.stock" placeholder=""></td>
 			</tr>
 		</table>		
 	</div>
 </div>
 <!-- Stock box  -->
 
-<!-- Stock box -->
-<div class="col-xs-12 promotion-box-outer">
-	<div class="col-xs-12 promotion-box">
-		<table class="table table-promotion ltr">
-			<tr>
-				<td>Specifications Value (In English)</td>
-				<td>Blue</td>
-			</tr>
-			<tr>
-				<td>Specifications Value (In Arabic)</td>
-				<td>Blue</td>
-			</tr>
-			<tr>
-				<td>Stock</td>
-				<td>50</td>
-			</tr>
-		</table>		
-	</div>
-</div>
 
 <div class="btn-box" style="text-align: center;">
 	<button class="btn-nazik">Save</button>	
