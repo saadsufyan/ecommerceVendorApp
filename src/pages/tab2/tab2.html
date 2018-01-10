@@ -19,13 +19,13 @@
     </ion-buttons>    
   </ion-navbar>
 
-</ion-header>
+</ion-header> 
 
 
 <ion-content>
 
 	<!-- <input type="button" id="btnfun" value="bindfun"> -->
-<div class="col-xs-12 promotion-box-outer fixed"  id="specifications" *ngFor="let x of specs; let i = index">
+<!-- <div class="col-xs-12 promotion-box-outer fixed"  id="specifications" *ngFor="let x of specs; let i = index">
 
 	<div class="col-xs-12 promotion-box specificationbox">
 		<table class="table table-promotion ltr">
@@ -39,9 +39,9 @@
 			</tr>
 		</table>
 		<table class="table table-promotion ltr value_{{x.key_id}}_en_ar" id="addvalue_spec_{{x.key_id}}">
-			<tr class="fixed">
+			<tr class="fixed" *ngFor="let y of x.values; let k = index">
 				<td>Specifications Value <br>(In English)</td>
-				<td><input class="spec_{{x.key_id}}_value" id="spec_{{x.key_id}}_value_1_en" name="" [(ngModel)]="x.values[i]"></td>
+				<td><input class="spec_{{x.key_id}}_value" id="spec_{{x.key_id}}_value_1_en" name="" [(ngModel)]="x.values[0]"></td>
 			</tr>
 			<tr class="fixed">
 				<td>Specifications Value <br>(In Arabic)</td>
@@ -57,7 +57,7 @@
 		</div>
 	</div>
 
-</div>
+</div> -->
 
 <!-- temp work  -->
 <!-- <div class="col-xs-12" id="abc" *ngFor="let input of inputs;let i = index; trackBy: trackByIndex">

@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { LanguagePage } from '../pages/language/language';
 import { FirstPage } from '../pages/first/first';
 import { LoginPage } from '../pages/login/login';
 import { StoreinformationPage } from '../pages/storeinformation/storeinformation';
@@ -45,6 +46,7 @@ export function createTranslateLoader(http: Http) {
   declarations: [
     MyApp,
     HomePage,
+    LanguagePage,
     FirstPage,
     LoginPage,
     StoreinformationPage,
@@ -83,6 +85,7 @@ export function createTranslateLoader(http: Http) {
   entryComponents: [
     MyApp,
     HomePage,
+    LanguagePage,
     FirstPage,
     LoginPage,
     StoreinformationPage,

@@ -14,6 +14,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TopproductsPage } from '../pages/topproducts/topproducts';
 import { MypaymentsPage } from '../pages/mypayments/mypayments';
 import { FirstPage } from '../pages/first/first';
+import { LanguagePage } from '../pages/language/language';
 
 @Component({
   templateUrl: 'app.html'
@@ -55,7 +56,7 @@ export class MyApp {
       if(this.isLoggedIn == "true"){
             this.rootPage = HomePage;
         }else{
-          console.log("first page")
+          console.log("Language page")
           this.rootPage = FirstPage
           localStorage.setItem('isLoggedIn', "false")
         }

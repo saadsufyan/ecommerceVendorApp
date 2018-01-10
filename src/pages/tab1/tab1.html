@@ -65,29 +65,45 @@
 		        </select>
 					</div>
 
-		      <div class="form-group">
+		      <div class="form-group product_image">
+							<div class="col-xs-6">
 		      	<label class="dark">Thumbnail Image</label> <br>
 		        <span id="fileselector">
-		          <label class="btn btn-default" for="upload-file-selector">
+		          <label class="" for="upload-file-selector">
 									<!-- <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail"> -->
 									<input class="fileInput" type="file" name="file1" (change)="onChange1($event)">
-									<!-- <img src="images/icon_upload.png"> -->
+									
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>
-		        </span>
-		      </div>
+						</span>
+		      	</div>
+						<div class="col-xs-6 product_left_image">
+						<img class="product_left_image" src="{{thumbnail}}" value="thumbnail" imageViewer/>
+						</div>
+					</div>
+					
+
 		      <span class="line"></span>
-		      <br>
-		      <div class="form-group">
+					<br>
+					
+
+
+		      <div class="form-group product_image">
+							<div class="col-xs-6">
 		      	<label class="dark">Product Image</label> <br>
 		        <span id="fileselector">
-		          <label class="btn btn-default" for="upload-file-selector">
+		          <label class="" for="upload-file-selector">
 									<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
 									<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 									<!-- <img src="images/icon_upload.png"> -->
 									<span class="color-red"><b>Choose File</b></span>
 		          </label>
-		        </span>
+						</span>
+							</div>
+
+						<div class="col-xs-6" *ngFor="let image of images">
+								<img class="product_left_image" src="{{image}}" value="image" imageViewer/>
+								</div>
 		      </div>
 		      <div class="form-group">
 		      	<label class="dark">Price In Local Currency (SAR)</label>

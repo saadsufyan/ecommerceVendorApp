@@ -12,7 +12,7 @@
     </button>     
     <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Store Information</ion-title>
      <ion-buttons right>
-      <button ion-button icon-only><ion-icon class= "back-icon" ios="ios-log-out" md="ios-log-out"  ></ion-icon></button>
+      <button ion-button icon-only (click)="onUserLogout()"><ion-icon class= "back-icon" ios="ios-log-out" md="ios-log-out"></ion-icon></button>
     </ion-buttons> 
   </ion-navbar>
 </ion-header>
@@ -76,10 +76,18 @@
 			      <div class="form-group" (click)="openMap()">	      	
 			      	<label class="dark" style="text-decoration: underline;">Click here for map </label>&nbsp; <img src="assets/imgs/map.png">
 			      </div>
-			      <div class="form-group">	      	
-			      	<label class="dark">Store Logo</label>
-			        <input type="file" name="pic" accept="image/*">
-			      </div>
+						<div class="form-group">
+							<label class="dark">Store Logo</label> <br>
+							<span id="fileselector">
+								<label class="btn btn-default" for="upload-file-selector">
+										<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+										<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
+										
+										<span class="color-red"><b>Choose File</b></span>
+								</label>
+							</span>
+							<img src="{{logo}}" value="logo">
+						</div>
 			      <div class="form-group">	      	
 			      	<label class="dark">Select Off Day</label>
 			      	<br>

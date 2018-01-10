@@ -32,5 +32,10 @@ export class StoreInformationService{
         return this.network.doPost(url,data)
     }
 
+    uploadPicture(data) : Observable<any> {
+        let url = this.basicUrl + "/image/upload";
+        return this.network.doPostPictures(url,data)
+    }
+
 
 }

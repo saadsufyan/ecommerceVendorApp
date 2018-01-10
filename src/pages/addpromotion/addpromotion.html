@@ -51,23 +51,26 @@
 			      	<label class="dark">Discount Percent (SAR)</label>
 			        <input type="email" class="text-box form-control dark" placeholder="20" required="" [(ngModel)]="discount" name="discount">
 			      </div>
-			      <div class="form-group">
-			      	<label class="dark">Image</label> <br>
-			        <span id="fileselector">
-			          <label class="btn btn-default" for="upload-file-selector">
-			              <input id="upload-file-selector" type="file">
-										<!-- <img src="assets/imgs/icon_upload.png"> -->
+						<div class="form-group">
+							<label class="dark">Image</label> <br>
+							<span id="fileselector">
+								<label class="" for="upload-file-selector">
+										<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+										<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
+										
 										<span class="color-red"><b>Choose File</b></span>
-			          </label>
-			        </span>
-			      </div>
+								</label>
+							</span>
+
+							<img src="{{image}}" value="image">
+						</div>
 			      <span class="line"></span>
 			      
 
 
 			      <br>
 		          <div class="col-xs-12" style="text-align: center;">
-		          	<button class="btn-nazik" (click)="addPromotion()">Add</button>	
+		          	<button class="btn-nazik" (click)="promotionButton()">Add</button>	
 		          </div>
 		          <br><br><br>
 			    </form>

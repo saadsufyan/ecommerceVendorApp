@@ -14,5 +14,10 @@ export class LoginService{
         return this.network.doPost(url,data)
     }
 
+    onUserLogout() : Observable<any> {
+        let url = this.basicUrl + "/logout";
+        return this.network.doGet(url)
+    }
+
 
 }

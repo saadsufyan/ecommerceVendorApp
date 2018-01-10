@@ -73,4 +73,22 @@ export class ProductsPage {
     })
   }
 
+  deleteProduct(id){
+    this.popup.showLoader()
+    this.productservice.onDeleteProduct(id).subscribe(res=>{
+      console.log(res)
+      this.popup.hideLoader()
+      location.reload();
+      
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
+  }
+
 }

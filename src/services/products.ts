@@ -48,6 +48,11 @@ export class ProductsService{
         return this.network.doGet(url)
     }
 
+    onDeleteProduct(id) : Observable<any> {
+        let url = this.basicUrl + "/products/" + id;
+        return this.network.doDelete(url)
+    }
+
     uploadPicture(data) : Observable<any> {
         let url = this.basicUrl + "/image/upload";
         return this.network.doPostPictures(url,data)

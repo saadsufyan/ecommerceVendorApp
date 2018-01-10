@@ -346,7 +346,7 @@ export class Tab1Page {
           
         //this.pictures.file = res.response.file
 
-        this.thumbnail = res.response
+        this.thumbnail = res.response.avatar
 
         console.log(this.thumbnail)
 

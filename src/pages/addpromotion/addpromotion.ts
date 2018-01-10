@@ -29,6 +29,7 @@ export class AddpromotionPage {
     public discount : any
     public image : any 
 
+    public imageFile
 
   public updatePromo = {}
   public promotionId: any
@@ -54,6 +55,17 @@ export class AddpromotionPage {
   goBack(){
     this.navCtrl.pop()
   }
+
+  promotionButton(){
+    if(this.promotionId != null){
+
+      this.updatePromotion(this.promotionId)
+    }
+    else{
+      this.addPromotion()
+    }
+  }
+
   getPromotion(){
     this.promotionservice.onGetPromotionById(this.promotionId).subscribe(res=>{
 
@@ -87,7 +99,7 @@ export class AddpromotionPage {
       description_ar: this.description_ar,
       product_id: this.product_id,
       discount: this.discount,
-      image: "http://localhost/gomallbackend/public/avatar/1512729688"
+      image: this.image
     }
     this.promotionservice.onAddpromotion(data).subscribe(res=>{
 
@@ -114,7 +126,7 @@ export class AddpromotionPage {
       description: this.description,
       description_ar: this.description_ar,
       discount: this.discount,
-      image: "http://localhost/gomallbackend/public/avatar/1512729688"
+      image: this.image
     }
 
     console.log(data)
@@ -131,6 +143,52 @@ export class AddpromotionPage {
     })
   }
 
+
+  onChange(event) {
+    this.popup.showLoader()
+
+    this.imageFile = event.srcElement.files[0];
+
+    // this.imageFile = this.imageFile.split('.').pop();
+
+    console.log(this.imageFile)
+    
+    let file = event.srcElement.files[0];
+
+    var formdata = new FormData();
+    console.log(file.type.substring(0,5))
+
+    if(file.type.substring(0,5) == "image"){
+      //image
+      formdata.append('avatar', file);
+      this.promotionservice.uploadPicture(formdata).subscribe(res => {
+      console.log(res)
+      if(res.status > 0){
+        this.popup.hideLoader()
+        this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
+        let user = JSON.parse(localStorage.getItem('user'))
+          
+        //this.pictures.file = res.response.file
+        this.image = res.response.avatar
+
+        console.log(this.image)
+
+        localStorage.setItem('user' , JSON.stringify(user))
+        console.log(JSON.parse(localStorage.getItem('user'))) 
+      }
+    },
+    err => {
+      console.log(err)
+      this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+    })
+
+    }
+
+  }  
+   
 
 
 }

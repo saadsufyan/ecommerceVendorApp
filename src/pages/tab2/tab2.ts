@@ -82,6 +82,8 @@ export class Tab2Page {
   public specbutton : boolean = false
   public productid :any
   public stock_data : any
+  public tempValue_en : any = []
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     this.data = this.sharedservice.fetchData()
@@ -89,24 +91,51 @@ export class Tab2Page {
     console.log(this.data)    
 
     this.specs = this.sharedservice.fetchSpecifications()
-    console.log("Spec data: ")
-    this.productid = this.sharedservice.fetchProductId()
-    console.log(this.specs)
-    if(this.productid == null){
-      this.specbutton = true
-    }
+    console.log("Spec data: "+this.specs)
+
+
+
+
+
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Tab2Page');
 
+    // $(function(){try()});
+    this.try()
+    
+
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+    // this.try()
+
   }
 
   goBack(){
     this.app.navPop()
+  }
+
+  ngAfterViewInit(){
+    // this.try()
+  }
+
+  try(){
+    for(var i = 0 ; i<this.specs.length;i++){
+      console.log(this.specs)
+      console.log(this.specs[i])
+          this.addSpec(i); 
+    }
+
+    this.productid = this.sharedservice.fetchProductId()
+    console.log(this.specs)
+    if(this.productid == null){
+      this.specbutton = true
+    }
+
+
   }
 
   goToStocks(){
@@ -132,15 +161,9 @@ export class Tab2Page {
         values_ar:[]
       };  
 
-      var update_spec_class = {
-        key_id : update_spec.key_id,
-        key : update_spec.key,
-        key_ar : update_spec.key_ar,
-        values : [],
-        values_ar : []
-      }
 
-      console.log(update_spec_class)
+
+
       
       var spec_name_en = "spec_name_"+spec_num+"_en";
 
@@ -148,19 +171,10 @@ export class Tab2Page {
 
       var spec_name_en_val = $('#'+spec_name_en).val();
       var spec_name_ar_val = $('#'+spec_name_ar).val();
-      // console.log(spec_name_en_val);
-      // console.log($('#'+spec_name_ar).val());
 
       spec_class.key_id = spec_num;
       spec_class.key = spec_name_en_val;
       spec_class.key_ar = spec_name_ar_val;
-
-      
-
-      // console.log("spec_class.spec_name");
-      // console.log(spec_class);
-
-
       
     var inputs = 1;
 
@@ -175,24 +189,14 @@ export class Tab2Page {
         spec_class.values.push(value_box_en_val);
         spec_class.values_ar.push(value_box_ar_val);
 
-        update_spec_class.values.push(value_box_en_val);
-        update_spec_class.values_ar.push(value_box_ar_val);
+
       });
   console.log("complete data");
   console.log(spec_class);
 
-  console.log(update_spec_class)
-// this.get_value_box('asd');
+  console.log(product_id)
 
-console.log(product_id)
-  if(product_id != null){
-    
-    specifications.push(update_spec_class)
-  }
-  else{
     specifications.push(spec_class)
-  }
-
 
       spec_num++;
     });
@@ -202,13 +206,6 @@ console.log(product_id)
   //  this.data.specifications 
    console.log(this.data.specifications)
    this.data.specifications = specifications
-
-   console.log("complete data");
-   console.log(this.data)
-
-  console.log("complete specification data");
-  console.log(specifications);
-
 
   if(this.productid == null){
     this.popup.showLoader()
@@ -260,30 +257,42 @@ console.log(product_id)
   }
 
 
-  addValue(spec_num,TXT){
-TXT = ''||TXT;
+  addValue(spec_num,value,value_ar,is_fixed){
 
+if(value=='undefined'){
+  value = '';
+}
+
+  
+    value_ar = ''||value_ar;
 
     // alert(spec_num)
     var spec = document.getElementById('addvalue_spec_'+spec_num)
-    $('#addvalue_spec_'+spec_num).append(this.get_value_html(spec_num,TXT));
-    // $("spec_values_"+spec_num).append(this.get_value_html(spec_num));
+    $('#addvalue_spec_'+spec_num).append(get_value_html(spec_num,value,value_ar,is_fixed));
+
+    function get_value_html(spec_num,value,value_ar,is_fixed){
+
+      if(is_fixed){
+        var class_fixed = "class='fixed'";
+      }
+      else{
+        var class_fixed = "";
+      }
+    
+      var spec_value = $( ".spec_"+spec_num+"_value").length + 1;      
+      
+      return `<tr `+class_fixed+`>
+      <td>Specifications Value <br>(In English)</td>
+      <td><input value=`+value+` class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
+    </tr>
+    <tr>
+      <td>Specifications Value <br>(In Arabic)</td>
+      <td><input  value=`+value_ar+` id="spec_`+spec_num+`_value_`+spec_value+`_ar" (keyup)="validation_val_ar(`+spec_num+`,`+spec_value+`)" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
+    </tr>`;
+    }
   }
 
-  get_value_html(spec_num,TXT){
-    TXT = ''||TXT;
-    var spec_value = $( ".spec_"+spec_num+"_value").length + 1;
-    console.log(spec_value)
-    
-    return `<tr>
-    <td>Specifications Value <br>(In English)</td>
-    <td><input value=`+TXT+` class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
-  </tr>
-  <tr>
-    <td>Specifications Value <br>(In Arabic)</td>
-    <td><input id="spec_`+spec_num+`_value_`+spec_value+`_ar" (keyup)="validation_val_ar(`+spec_num+`,`+spec_value+`)" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
-  </tr>`;
-  }
+  
   
 
   validation_spec_ar(key_id){
@@ -337,10 +346,20 @@ TXT = ''||TXT;
   }
 
   removeValue(id){
+    console.log(id)
+    console.log(this.specs[id].values)
+
+    var spec_input_en = '#spec_name_'+id+'_en'
+    console.log(spec_input_en)
 
     var spec_box_sel = '#addvalue_spec_'+id;
 
     var trs = $(spec_box_sel+' tr').length;
+
+    if(this.specs[id].values.length == (trs/2)){
+      $(spec_input_en).prop('disabled', true);  
+      return;
+    }
 
     if(trs<3){
       return;
@@ -349,54 +368,57 @@ TXT = ''||TXT;
 var last_tr = spec_box_sel+' tr:last';
 
     var is_fixed = $(last_tr).hasClass( "fixed" );
-
+    console.log('check');
+console.log($(last_tr));
+console.log(is_fixed);
     if(!is_fixed){
       $(last_tr).remove()
       $(last_tr).remove()
     }    
   }
 
-  addSpec(x,y){
+  addSpec(spec_id){
 
     this.specbox = true
+
+    var spec_index : any = this.specs.length; 
 
     var id : any = this.specBox.length + 1;
     console.log("outside box: " + id)
 
     let temp = {
       key_id : id,
-      key: x,
-      key_ar: y,
-      
     }
     this.specBox.push(temp)
-    console.log(this.specBox)
+ if(this.specs.length > 0){
 
+
+    setTimeout(set_params, 1000, id,this.specs,this.addValue);
+   
+}    
+
+    function set_params(id, spec,addValue) {
+      // alert(id);
+
+      
+      
+      spec = spec[(id-1)];
+      var values = spec.values;
+      var values_ar = spec.values_ar;
+
+      $('#spec_name_'+id+'_en').val(spec.key);
+      $('#spec_name_'+id+'_ar').val(spec.key_ar);
+
+      $('#spec_'+id+'_value_1_en').val(values[0]);
+      $('#spec_'+id+'_value_1_ar').val(values_ar[0]);
+
+        for(var val_index=1 ; val_index<values.length ; val_index++){
+
+          addValue(id,values[val_index],values_ar[val_index],true);
+  
+        console.log(('#spec_'+id+'_value_'+(val_index+1)+'_en'))
+      }
   }
-
-  clickonDiv(id){
-
-    console.log("div Id: " + id)
-
-    var val_Id = this.valueBox.length + 1;
-
-    console.log("inside box: " +val_Id)
-
-    let tempEng = [
-      this.value_en 
-    ]
-    let temp_ar = [
-      this.value_ar
-    ]
-
-    console.log("empty");
-    console.log(this.valueBox);
-
-    // this.valueBox.push()
-    this.valueBox.push(tempEng)
-    console.log("not empty");
-    console.log(this.valueBox)
-
+  
   }
-
 }

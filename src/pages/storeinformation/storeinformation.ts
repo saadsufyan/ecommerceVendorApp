@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { Component,ViewChild, ElementRef   } from '@angular/core';
+import { Nav ,IonicPage, NavController, NavParams, ViewController, AlertController, Loading, LoadingController } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { StoreInformationService } from '../../services/storeinformation';
+import { LoginPage } from '../login/login';
 import { NetworkService } from '../../services/network';
+import { LoginService } from '../../services/login';
 import { AlertView } from '../../uicomponents/alert';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /**
  * Generated class for the StoreinformationPage page.
@@ -12,20 +15,32 @@ import { AlertView } from '../../uicomponents/alert';
  * Ionic pages and navigation.
  */
 
+declare var google; 
+
 @IonicPage()
 @Component({
   selector: 'page-storeinformation',
   templateUrl: 'storeinformation.html',
-  providers: [StoreInformationService, NetworkService, AlertView]
+  providers: [StoreInformationService, NetworkService,LoginService, AlertView]
 })
 export class StoreinformationPage {
+  @ViewChild('map') mapElement: ElementRef;
+  @ViewChild(Nav) nav: Nav;
+  map: any;
+  loc : any
 
+  loading : Loading
+
+  currentLocation : any
 
   public countrylist = []
 
   public citylist = []
 
   public vendorData = {}
+
+  public imageFile 
+  public logo
 
   public vendorname: any 
   public vendorname_ar : any 
@@ -36,9 +51,11 @@ export class StoreinformationPage {
   public out_city_shipment_charges: any 
   public countryname: any
   public offdays: any
+  public lat : any
+  public long :any
 
   public errorMessage: any = ""
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
   
     // this.getCities()
   }
@@ -47,6 +64,7 @@ export class StoreinformationPage {
     console.log('ionViewDidLoad StoreinformationPage');
     this.getVendorData()
     this.getCountries()
+    this.loadMap()
     // this.getCities()
   }
   ionViewWillEnter(){
@@ -57,6 +75,7 @@ export class StoreinformationPage {
   }
     
   openMap(){
+    console.log(this.loc)
     this.navCtrl.push(MapPage,{animation: 'left'})
   }
 
@@ -111,6 +130,9 @@ export class StoreinformationPage {
       this.in_city_shipment_charges = res.response.in_city_shipment_charges
       this.out_city_shipment_charges = res.response.out_city_shipment_charges
       this.offdays = res.response.weekends
+      this.lat = res.response.lat,
+      this.long = res.response.long,
+      this.logo = res.response.logo
 
     }, err=>{
 
@@ -136,9 +158,9 @@ export class StoreinformationPage {
       out_city_shipment_charges: this.out_city_shipment_charges,
       country: this.countryname,
       weekends: this.offdays,
-      lat: "29.3104398",
-      long: "47.6274115",
-      city: "Kuwait"
+      lat: this.lat,
+      long: this.long,
+      logo: this.logo
     }
     console.log(data)
     this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
@@ -200,6 +222,103 @@ presentPrompt() {
 
   alert.present();
 }  
+
+onChange(event) {
+  this.popup.showLoader()
+
+  this.imageFile = event.srcElement.files[0];
+
+  // this.imageFile = this.imageFile.split('.').pop();
+
+  console.log(this.imageFile)
+  
+  let file = event.srcElement.files[0];
+
+  var formdata = new FormData();
+  console.log(file.type.substring(0,5))
+
+  if(file.type.substring(0,5) == "image"){
+    //image
+    formdata.append('avatar', file);
+    this.storeinfoservice.uploadPicture(formdata).subscribe(res => {
+    console.log(res)
+    if(res.status > 0){
+      this.popup.hideLoader()
+      this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
+      let user = JSON.parse(localStorage.getItem('user'))
+        
+      //this.pictures.file = res.response.file
+      this.logo = res.response.avatar
+
+      console.log(this.logo)
+
+      localStorage.setItem('user' , JSON.stringify(user))
+      console.log(JSON.parse(localStorage.getItem('user'))) 
+    }
+  },
+  err => {
+    console.log(err)
+    this.popup.hideLoader()
+    this.errorMessage = JSON.parse(err._body)
+    this.errorMessage = this.errorMessage.error.message[0]
+    this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+  })
+
+  }
+
+}
+
+loadMap(){
+ 
+  this.geolocation.getCurrentPosition().then((position) => {
+
+
+    this.loc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+    this.lat = position.coords.latitude
+    this.long = position.coords.longitude
+    console.log("lat "  + position.coords.latitude)
+    console.log("long "  + position.coords.longitude)
+
+
+  }, (err) => {
+    console.log(err);
+  });
+
+}
+
+
+onUserLogout(){
+  //this.popup.showLoader()
+  this.showLoading()
+  this.loginservice.onUserLogout().subscribe((res) => {
+            
+    
+    console.log(res)
+    //this.popup.hideLoader()
+    if(res.status){
+      localStorage.setItem('isLoggedIn', null)
+      //localStorage.setItem('user' , null)
+
+      this.navCtrl.push(LoginPage,{animation: 'left'})
+    }
+  },
+  err => {
+    console.log("logged out")
+    //this.popup.hideLoader()
+    //this.popup.showToast(err.data.error.message[0] , 1500 , 'bottom' , false , "")
+  })  
+
+}
+
+showLoading(){
+  this.loading = this.loadingCtrl.create({
+    spinner: 'bubbles',
+    dismissOnPageChange: true
+  });
+  this.loading.present();
+}
+
 
 
 }

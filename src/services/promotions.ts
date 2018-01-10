@@ -35,5 +35,11 @@ export class PromotionsService{
         return this.network.doDelete(url)
     }
 
+    uploadPicture(data) : Observable<any> {
+        let url = this.basicUrl + "/image/upload";
+        return this.network.doPostPictures(url,data)
+    }
+
+
 
 }

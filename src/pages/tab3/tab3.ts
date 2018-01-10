@@ -48,15 +48,21 @@ export class Tab3Page {
   }  
 
   onStock(){
-    this.stockservice.onUpdateStock(data).subscribe(res=>{
-      console.log(res)
-    },    
-    err => {
-      console.log(err)
-      this.popup.hideLoader()
-      this.errorMessage = JSON.parse(err._body)
-      this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
-    })
+    // let data = [
+    //   {
+    //     id: this.stockData.specs.id,
+    //     quantity: this.stockData.specs.stock
+    //   }
+    // ]
+    // this.stockservice.onUpdateStock(data).subscribe(res=>{
+    //   console.log(res)
+    // },    
+    // err => {
+    //   console.log(err)
+    //   this.popup.hideLoader()
+    //   this.errorMessage = JSON.parse(err._body)
+    //   this.errorMessage = this.errorMessage.error.message[0]
+    //   this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+    // })
   }
 }
