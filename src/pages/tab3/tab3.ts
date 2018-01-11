@@ -5,6 +5,7 @@ import { NetworkService } from '../../services/network';
 import { SharedService } from '../../services/sharedService';
 import { StockService } from '../../services/stock';
 import { AlertView } from '../../uicomponents/alert';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the Tab3Page page.
@@ -24,6 +25,8 @@ export class Tab3Page {
   public val
   public stockData
   public specifications
+  public stockUpdate = []
+  public quantity
   public errorMessage : any = ""
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App,public stockservice : StockService, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
@@ -48,21 +51,32 @@ export class Tab3Page {
   }  
 
   onStock(){
-    // let data = [
-    //   {
-    //     id: this.stockData.specs.id,
-    //     quantity: this.stockData.specs.stock
-    //   }
-    // ]
-    // this.stockservice.onUpdateStock(data).subscribe(res=>{
-    //   console.log(res)
-    // },    
-    // err => {
-    //   console.log(err)
-    //   this.popup.hideLoader()
-    //   this.errorMessage = JSON.parse(err._body)
-    //   this.errorMessage = this.errorMessage.error.message[0]
-    //   this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
-    // })
+    this.popup.showLoader()
+
+    for(var i=0; i< this.specifications.length; i++){
+
+      let data = {
+        id: this.specifications[i].id,
+        quantity: this.specifications[i].stock
+      }
+  
+      this.stockUpdate.push(data)
+    }
+    
+    console.log(this.stockUpdate)
+
+    this.stockservice.onUpdateStock(this.stockUpdate).subscribe(res=>{
+      console.log(res)
+      this.popup.hideLoader()
+      this.navCtrl.push(HomePage, {animation: 'left'})
+
+    },    
+    err => {
+      console.log(err)
+      this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+    })
   }
 }

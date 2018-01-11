@@ -221,7 +221,7 @@ export class Tab2Page {
         this.sharedservice.sendStockData(this.stock_data)
         console.log(this.stock_data)
 
-         this.navCtrl.parent.select(2);
+         this.navCtrl.parent.select(2, {animation: 'left'});
         
       }
     },    
@@ -241,7 +241,10 @@ export class Tab2Page {
       if(res.status){
         console.log(res)
         this.popup.hideLoader()
-        this.navCtrl.parent.select(2);
+        this.stock_data = res.response 
+        console.log(this.stock_data)
+        this.sharedservice.sendStockData(this.stock_data)
+        this.navCtrl.parent.select(2, {animation: 'left'});
       }
     },    
     err => {
@@ -274,20 +277,22 @@ if(value=='undefined'){
 
       if(is_fixed){
         var class_fixed = "class='fixed'";
+        var disable = 'disabled';
       }
       else{
         var class_fixed = "";
+        var disable = '';
       }
     
       var spec_value = $( ".spec_"+spec_num+"_value").length + 1;      
       
       return `<tr `+class_fixed+`>
       <td>Specifications Value <br>(In English)</td>
-      <td><input value=`+value+` class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
+      <td><input `+disable+` value=`+value+` class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
     </tr>
     <tr>
       <td>Specifications Value <br>(In Arabic)</td>
-      <td><input  value=`+value_ar+` id="spec_`+spec_num+`_value_`+spec_value+`_ar" (keyup)="validation_val_ar(`+spec_num+`,`+spec_value+`)" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
+      <td><input  `+disable+` value=`+value_ar+` id="spec_`+spec_num+`_value_`+spec_value+`_ar" (keyup)="validation_val_ar(`+spec_num+`,`+spec_value+`)" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
     </tr>`;
     }
   }
@@ -347,17 +352,17 @@ if(value=='undefined'){
 
   removeValue(id){
     console.log(id)
-    console.log(this.specs[id].values)
+    // console.log(this.specs[id].values)
 
-    var spec_input_en = '#spec_name_'+id+'_en'
-    console.log(spec_input_en)
+    
+
 
     var spec_box_sel = '#addvalue_spec_'+id;
 
     var trs = $(spec_box_sel+' tr').length;
 
-    if(this.specs[id].values.length == (trs/2)){
-      $(spec_input_en).prop('disabled', true);  
+    if(this.specs[id-1].values.length == (trs/2)){
+        
       return;
     }
 
@@ -393,14 +398,26 @@ console.log(is_fixed);
  if(this.specs.length > 0){
 
 
+
+
+
     setTimeout(set_params, 1000, id,this.specs,this.addValue);
    
 }    
 
     function set_params(id, spec,addValue) {
-      // alert(id);
 
-      
+
+      var spec_input_en = '#spec_name_'+id+'_en'
+      var spec_input_ar = '#spec_name_'+id+'_ar'
+
+      $(spec_input_en).prop('disabled', true);
+      $(spec_input_ar).prop('disabled', true);
+
+      var value_input_en = '#spec_'+id+'_value_1_en'
+      $(value_input_en).prop('disabled', true);
+      var value_input_ar = '#spec_'+id+'_value_1_ar'
+      $(value_input_ar).prop('disabled', true);
       
       spec = spec[(id-1)];
       var values = spec.values;
@@ -411,6 +428,8 @@ console.log(is_fixed);
 
       $('#spec_'+id+'_value_1_en').val(values[0]);
       $('#spec_'+id+'_value_1_ar').val(values_ar[0]);
+
+
 
         for(var val_index=1 ; val_index<values.length ; val_index++){
 

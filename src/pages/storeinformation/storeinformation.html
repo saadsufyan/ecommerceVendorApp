@@ -49,10 +49,20 @@
 			      <div class="form-group">	      	
 			      	<label class="dark">Phone Number</label>
 			      	<br>
-			        <select class="dropdown number dark ltr">
-			        	<option>+911</option>
-			        	<option>Service</option>
-			        </select>
+			        <!-- <select class="dropdown number dark ltr">
+								<option>+1</option>
+								<option>+968</option>
+								<option>+27</option>
+								<option>+966</option>
+								<option>+98</option>
+								<option>+967</option>
+								<option>+961</option>
+								<option>+91</option>
+								<option>+44</option>
+							</select>
+							 -->
+							
+
 			        <input type="email" class="text-box number-box dark" placeholder="Phone Number" required="" [(ngModel)]="phone" name="phone">
 			      </div>
 			      <div class="form-group">
@@ -75,19 +85,26 @@
 			      </div>
 			      <div class="form-group" (click)="openMap()">	      	
 			      	<label class="dark" style="text-decoration: underline;">Click here for map </label>&nbsp; <img src="assets/imgs/map.png">
-			      </div>
-						<div class="form-group">
-							<label class="dark">Store Logo</label> <br>
-							<span id="fileselector">
-								<label class="btn btn-default" for="upload-file-selector">
-										<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
-										<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
-										
-										<span class="color-red"><b>Choose File</b></span>
-								</label>
-							</span>
-							<img src="{{logo}}" value="logo">
 						</div>
+						
+						<div class="form-group" style="height: 60px !important;">
+							<div class="col-xs-6 no-p">
+									<label class="dark">Store Logo</label> <br>
+									<span id="fileselector">
+										<label class="" for="upload-file-selector">
+												<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+												<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
+												
+												<span class="color-red"><b>Choose File</b></span>
+										</label>
+									</span>							 
+							</div>
+							<div class="col-xs-6">
+										<img class="product_left_image" src="{{logo}}" value="logo" imageViewer>						 
+							</div>
+						</div>
+
+
 			      <div class="form-group">	      	
 			      	<label class="dark">Select Off Day</label>
 			      	<br>

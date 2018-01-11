@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td>Stock</td>
-				<td><input id="" name="stock" [(ngModel)]="x.stock" placeholder=""></td>
+				<td><input class="stock" id="{{x.id}}}" name="quantity-{{x.id}}" [(ngModel)]="x.stock" placeholder="{{x.stock}}"></td>
 			</tr>
 		</table>		
 	</div>
@@ -41,8 +41,8 @@
 <!-- Stock box  -->
 
 
-<div class="btn-box" style="text-align: center;">
-	<button class="btn-nazik">Save</button>	
+<div class="btn-box-stock" style="text-align: center;">
+	<button class="btn-nazik-stock" (click)="onStock()">Save</button>	
 </div>
 
 </ion-content>

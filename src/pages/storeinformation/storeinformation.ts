@@ -147,35 +147,42 @@ export class StoreinformationPage {
 
   updateVendor(){
     this.popup.showLoader()
-    let data = {
 
-      name: this.vendorname,
-      name_ar: this.vendorname_ar,
-      description: this.description,
-      description_ar: this.description_ar,
-      phone: this.phone,
-      in_city_shipment_charges: this.in_city_shipment_charges,
-      out_city_shipment_charges: this.out_city_shipment_charges,
-      country: this.countryname,
-      weekends: this.offdays,
-      lat: this.lat,
-      long: this.long,
-      logo: this.logo
+    if(this.vendorname != null && this.vendorname_ar != null && this.description != null && this.description_ar != null && this.phone != null && this.in_city_shipment_charges != null && this.out_city_shipment_charges != null){
+      let data = {
+
+        name: this.vendorname,
+        name_ar: this.vendorname_ar,
+        description: this.description,
+        description_ar: this.description_ar,
+        phone: this.phone,
+        in_city_shipment_charges: this.in_city_shipment_charges,
+        out_city_shipment_charges: this.out_city_shipment_charges,
+        country: this.countryname,
+        weekends: this.offdays,
+        lat: this.lat,
+        long: this.long,
+        logo: this.logo
+      }
+
+      console.log(data)
+      this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
+        console.log(res)
+        this.popup.hideLoader()
+        this.navCtrl.pop()
+      },  err => {
+        console.log("masla ha ")
+        console.log(err);
+        this.popup.hideLoader()
+        this.errorMessage = JSON.parse(err._body)
+        console.log(this.errorMessage)
+        this.errorMessage = this.errorMessage.error.message[0]
+        this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      })
     }
-    console.log(data)
-    this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
-      console.log(res)
-      this.popup.hideLoader()
-      this.navCtrl.pop()
-    },  err => {
-      console.log("masla ha ")
-      console.log(err);
-      this.popup.hideLoader()
-      this.errorMessage = JSON.parse(err._body)
-      console.log(this.errorMessage)
-      this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
-    })
+    else{
+      this.popup.showToast("Please Fill all required fields",1500, 'bottom', false, "")
+    }
   }
 
 presentPrompt() {

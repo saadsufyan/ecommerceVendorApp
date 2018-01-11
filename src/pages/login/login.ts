@@ -54,7 +54,7 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
         }
       }, err => {
-                alert(err)
+                // alert(err)
                 console.log(err);
                 this.popup.hideLoader()
                 this.errorMessage = JSON.parse(err._body)

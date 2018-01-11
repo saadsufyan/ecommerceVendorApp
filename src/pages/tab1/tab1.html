@@ -39,7 +39,7 @@
 		      	<br>
 		        <select class="dropdown dark" name="categoryid" [(ngModel)]="categoryObj" (change)="getSubCategory()">
 		        	<option *ngFor="let x of categoryList;let i = index" [ngValue]="x">{{x.name}}</option>
-		        </select>
+						</select>
 		      </div>
 		      <div class="form-group">	      	
 		      	<label class="dark">Sub-Category</label>
@@ -77,8 +77,8 @@
 		          </label>
 						</span>
 		      	</div>
-						<div class="col-xs-6 product_left_image">
-						<img class="product_left_image" src="{{thumbnail}}" value="thumbnail" imageViewer/>
+						<div class="col-xs-6">
+						<img class="product_left_image" src="{{thumbnail}}" value="thumbnail" imageViewer>
 						</div>
 					</div>
 					
@@ -101,9 +101,13 @@
 						</span>
 							</div>
 
-						<div class="col-xs-6" *ngFor="let image of images">
-								<img class="product_left_image" src="{{image}}" value="image" imageViewer/>
-								</div>
+							<div class="col-xs-6">
+								<ion-slides class="image-slider" loop="true" slidesPerView="4">
+									<ion-slide *ngFor="let image of images">
+										<img class="product_left_image" src="{{image}}" imageViewer>							 
+									 </ion-slide>
+							 	</ion-slides>
+							</div>
 		      </div>
 		      <div class="form-group">
 		      	<label class="dark">Price In Local Currency (SAR)</label>

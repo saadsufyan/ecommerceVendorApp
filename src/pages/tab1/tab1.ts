@@ -33,6 +33,7 @@ export class Tab1Page {
   public description_ar
   public sub_cat
   public thumbnail
+  public tempImage
   public images = []
   public price
   public show_calender : boolean = false
@@ -47,6 +48,7 @@ export class Tab1Page {
   public subcategoryObj
   public subcategoryid
   public specificsubcategory
+  public parent_cat : any
 
   public categoryList : any  = []
   public subcategoryList : any = []
@@ -60,6 +62,7 @@ export class Tab1Page {
 
   public count
 
+  
   public product_details : any 
   public categoryButton : boolean = true
   public producttype
@@ -217,6 +220,7 @@ export class Tab1Page {
       this.name_ar = res.response.name_ar
       this.description = res.response.description
       this.description_ar = res.response.description_ar
+      this.parent_cat = res.response.parent_cat
       this.sub_cat = res.response.sub_cat
       this.thumbnail = res.response.thumbnail
       this.images = res.response.images
@@ -224,6 +228,8 @@ export class Tab1Page {
       this.show_calender = res.response.show_calender
       this.show_time = res.response.show_time
       this.specifications = res.response.specifications
+
+      console.log(this.parent_cat)
       
     },err => {
       console.log("masla ha ")
