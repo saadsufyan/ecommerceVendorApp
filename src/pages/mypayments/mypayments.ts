@@ -24,6 +24,7 @@ export class MypaymentsPage {
   public name: any
   public name_ar: any
   public errormsg : any = true
+  public payments
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public paymentservice: PaymentService, public popup: AlertView) {
   }
@@ -36,13 +37,45 @@ export class MypaymentsPage {
   MyPayment(){
     this.paymentservice.onGetMyPayments().subscribe(res=>{
       console.log(res)
-      res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No Orders found', 1500, 'bottom', false, "")
-      this.name = this.items.name
-      this.name_ar = this.items.name_ar   
+      res.status && res.response.length > 0 ? this.items = res.response : console.log("no orders found")
+      this.name = res.response.name
+      this.name_ar = res.response.name_ar   
+      this.payments = res.response.payments
 
-      if(res.status && res.response.length > 0 ){
+      console.log(this.items)
+
+      console.log(this.name)
+      console.log(this.name_ar)
+
+      if(res.status && res.response.payments.length > 0 ){
         this.errormsg = false
         console.log(this.errormsg)
+
+
+        this.payments = this.payments.map((value, index) => {
+
+          var datetime = new Date(value.created_at * 1000)
+
+
+          console.log(datetime)
+
+          // console.log(formattedDate)
+          var day = datetime.getDate()
+          var month = datetime.getMonth()
+          var year = datetime.getFullYear()
+          var strTime = day + '/' + month + '/' + year;
+  
+  
+          var temp = {
+            ...value,
+            created_at : strTime
+          }
+          // console.log(temp)
+          return temp
+        })
+
+
+
       }
     },err => {
       console.log("masla ha ")

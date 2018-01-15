@@ -26,39 +26,39 @@
 		<table class="table table-details ltr">
 			<tr>
 				<td>Name:</td>
-				<td>{{items.name}}</td>
+				<td>{{x.name}}</td>
 			</tr>
 			<tr>
 				<td>Arabic Name:</td>
-				<td>{{items.name_ar}}</td>
+				<td>{{x.name_ar}}</td>
 			</tr>
 			<tr>
 				<td>Type:</td>
-				<td>{{items.type}}</td>
+				<td>{{x.type}}</td>
 			</tr>
 			<tr>
 				<td>Price:</td>
-				<td>SAR {{items.price}}</td>
+				<td>SAR {{x.price}}</td>
 			</tr>			
 			<tr>
 				<td>Favorites:</td>
-				<td>{{items.favorites}}</td>
+				<td>{{x.favorites}}</td>
 			</tr>
 			<tr>
 				<td>Rating:</td>
-				<td>{{items.rating}}</td>
+				<td>{{x.rating}}</td>
 			</tr>
 			<tr>
 				<td>Number of Request</td>
-				<td>{{items.number_of_request}}</td>
+				<td>{{x.number_of_requests}}</td>
 			</tr>
 			<tr>
 				<td>Country:</td>
-				<td>{{items.country}}</td>
+				<td>{{x.country}}</td>
 			</tr>
 			<tr>
 				<td>City:</td>
-				<td>{{items.city}}</td>
+				<td>{{x.city}}</td>
 			</tr>
 		</table>	
 		<div class="col-xs-12 no-p">
@@ -66,7 +66,7 @@
 				<h5><b>Images</b></h5>
 			</div>
 			<div class="product-box ltr">
-				<img src="assets/imgs/product.png" imageViewer/>
+				<img src="{{x.image}}" imageViewer/>
 			</div>			
 		</div>	
 	</div>

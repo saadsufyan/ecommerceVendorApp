@@ -12,7 +12,8 @@ export class StockService{
 
     onUpdateStock(data) : Observable<any> {
         let url = this.basicUrl + "/stock";
-        return this.network.doPost(data, url)
+        console.log(url)
+        return this.network.doPost(url, data)
     }
 
 

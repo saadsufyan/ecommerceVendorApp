@@ -275,7 +275,7 @@ if(value=='undefined'){
 
     function get_value_html(spec_num,value,value_ar,is_fixed){
 
-      if(is_fixed){
+      if(is_fixed == true){
         var class_fixed = "class='fixed'";
         var disable = 'disabled';
       }
@@ -360,15 +360,19 @@ if(value=='undefined'){
     var spec_box_sel = '#addvalue_spec_'+id;
 
     var trs = $(spec_box_sel+' tr').length;
-
+    
+    if(typeof this.specs[id-1] === 'undefined') {
+      // does not exist
+  }
+  else{
     if(this.specs[id-1].values.length == (trs/2)){
-        
+      return;
+    }    
+  }
+if(trs<3){
       return;
     }
-
-    if(trs<3){
-      return;
-    }
+    
 
 var last_tr = spec_box_sel+' tr:last';
 

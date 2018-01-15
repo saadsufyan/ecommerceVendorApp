@@ -37,32 +37,37 @@
 			      </div>
 			      <div class="form-group">	      	
 			      	<label class="dark">Description (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="desrcription_ar">
+			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar">
+						</div>
+						<div class="form-group">	      	
+			      	<label class="dark">Product</label>
+			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="productname" name="productname">
 			      </div>
-			      <div class="form-group">	      	
+			      <!-- <div class="form-group">	      	
 			      	<label class="dark">Product</label>
 			      	<br>
 			        <select class="dropdown dark" [(ngModel)]="product_id" name="product_id">
 			        	<option value="1">Red Dress</option>
 			        	<option value="2">Trouser</option>
 			        </select>
-			      </div>
+			      </div> -->
 			      <div class="form-group">
 			      	<label class="dark">Discount Percent (SAR)</label>
 			        <input type="email" class="text-box form-control dark" placeholder="20" required="" [(ngModel)]="discount" name="discount">
 			      </div>
-						<div class="form-group">
-							<label class="dark">Image</label> <br>
-							<span id="fileselector">
-								<label class="" for="upload-file-selector">
-										<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
-										<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
-										
-										<span class="color-red"><b>Choose File</b></span>
-								</label>
-							</span>
-
-							<img src="{{image}}" value="image">
+						<div class="form-group" style="height: 60px !important;">
+							<div class="col-xs-6 no-p">
+									<label class="dark">Image</label> <br>
+									<span id="fileselector">
+										<label class="" for="upload-file-selector">
+												<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+												<span class="color-red"><b>Choose File</b></span>
+										</label>
+									</span>							 
+							</div>
+							<div class="col-xs-6">
+										<img class="product_left_image" src="{{image}}" value="image" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer>						 
+							</div>
 						</div>
 			      <span class="line"></span>
 			      

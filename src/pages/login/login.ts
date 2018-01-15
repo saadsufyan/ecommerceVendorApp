@@ -54,7 +54,7 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
         }
       }, err => {
-                // alert(err)
+                alert(err)
                 console.log(err);
                 this.popup.hideLoader()
                 this.errorMessage = JSON.parse(err._body)
@@ -63,6 +63,7 @@ export class LoginPage {
                 this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
       })
     }else {
+      alert("something went wrong")
       this.popup.showToast('Invalid information' , 2000 , 'bottom' ,false , "")
     }
 }  

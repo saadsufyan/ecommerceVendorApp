@@ -16,8 +16,11 @@ import { MypaymentsPage } from '../pages/mypayments/mypayments';
 import { FirstPage } from '../pages/first/first';
 import { LanguagePage } from '../pages/language/language';
 
+import { Keyboard } from '@ionic-native/keyboard';
+
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [Keyboard]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -29,7 +32,7 @@ export class MyApp {
 
   public isLoggedIn = localStorage.getItem('isLoggedIn') 
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard : Keyboard) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -52,7 +55,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
+        this.keyboard.hideKeyboardAccessoryBar(false)
+        this.keyboard.disableScroll(false);
       if(this.isLoggedIn == "true"){
             this.rootPage = HomePage;
         }else{

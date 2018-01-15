@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 let temp = {}
 let temp1 = []
 let temp2 = {}
-let productId
+let productId = null
 @Injectable()
 export class SharedService {
 

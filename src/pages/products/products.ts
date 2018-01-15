@@ -5,6 +5,7 @@ import { ProductsService } from '../../services/products';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
 import { SharedService } from '../../services/sharedService';
+import { Tab1Page } from '../tab1/tab1';
 
 
 /**
@@ -46,10 +47,11 @@ export class ProductsPage {
   goToAddproducts(){
     // this.navCtrl.push(BasicPage, {animation: 'left'})
     this.navCtrl.push(ProductstabPage);
+    // this.navCtrl.push(Tab1Page)
   }
   editProduct(id){
     console.log(id)
-    this.sharedservice.sendProductId(id)
+    // this.sharedservice.sendProductId(id)
     this.navCtrl.push(ProductstabPage, {id:id}, {animation: 'left'})
   }
 

@@ -48,7 +48,7 @@
           <tr *ngFor="let x of messageslist">
             <td>
               <div class="msg-pic">
-                <img src="{{x.image}}" imageViewer/>
+                <img src="{{x.image}}" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer/>
               </div>
             </td>
             <td>{{x.name}}</td>
@@ -77,7 +77,7 @@
           <tr (click)="goToUserDetail()" *ngFor="let x of contacts">
             <td>
               <div class="msg-pic">
-                <img src="assets/imgs/pic.png" imageViewer/>
+                <img src="assets/imgs/pic.png" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer/>
               </div>
             </td>
             <td>

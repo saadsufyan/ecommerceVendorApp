@@ -1,6 +1,8 @@
 import { Injectable , Component} from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
 import { Observable } from "rxjs/Rx";
+// import { HTTP } from '@ionic-native/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';

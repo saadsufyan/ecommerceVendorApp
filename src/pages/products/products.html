@@ -37,7 +37,7 @@
 			</table>
 			<div class="col-xs-12 no-p">
 				<div class="product-box ltr">
-					<img src="{{x.image}}" imageViewer/>
+					<img src="{{x.image}}" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer/>
 				</div>
 				<div class="two-btn-box ltr">
 					<button class="btn-nazik black sm1" (click)="editProduct(x.id)">Edit</button>

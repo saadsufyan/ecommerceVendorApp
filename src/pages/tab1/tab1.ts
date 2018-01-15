@@ -33,8 +33,8 @@ export class Tab1Page {
   public description_ar
   public sub_cat
   public thumbnail
-  public tempImage
   public images = []
+  public imageArray = []
   public price
   public show_calender : boolean = false
   public show_time : boolean = false
@@ -60,6 +60,8 @@ export class Tab1Page {
 
   public tempArray = []
 
+
+
   public count
 
   
@@ -69,9 +71,11 @@ export class Tab1Page {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
   
-    this.productId = this.sharedservice.fetchProductId()
-    console.log(this.productId)
-    this.sharedservice.sendProductId(this.productId)
+    this.productId= this.navParams.get('id')
+    console.log("new id " + this.productId)
+    // this.productId = this.sharedservice.fetchProductId()
+    // // console.log(this.productId)
+    // this.sharedservice.sendProductId(this.productId)
   }
 
   ionViewDidLoad() {
@@ -230,7 +234,8 @@ export class Tab1Page {
       this.specifications = res.response.specifications
 
       console.log(this.parent_cat)
-      
+
+      console.log(this.images.length)
     },err => {
       console.log("masla ha ")
       console.log(err);
@@ -251,7 +256,7 @@ export class Tab1Page {
       description_ar: this.description_ar,
       sub_cat : this.tempCatId,
       thumbnail : this.thumbnail,
-      images : this.images,
+      images : this.imageArray,
       price : this.price,
       type : this.producttype,
       show_calender : this.show_calender,
@@ -283,19 +288,13 @@ export class Tab1Page {
   onChange(event) {
     this.popup.showLoader()
 
-    this.imageFile = event.srcElement.files[0];
-
-    // this.imageFile = this.imageFile.split('.').pop();
-
-    console.log(this.imageFile)
+    if(event != null){
+      this.imageFile = event.srcElement.files[0];
     
     let file = event.srcElement.files[0];
 
     var formdata = new FormData();
-    console.log(file.type.substring(0,5))
 
-    if(file.type.substring(0,5) == "image"){
-      //image
       formdata.append('avatar', file);
       this.productservice.uploadPicture(formdata).subscribe(res => {
       console.log(res)
@@ -303,12 +302,13 @@ export class Tab1Page {
         this.popup.hideLoader()
         this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
         let user = JSON.parse(localStorage.getItem('user'))
-          
-        //this.pictures.file = res.response.file
 
-        this.images.push(res.response.avatar)
+        var tempimage = res.response.avatar
 
-        console.log(this.images)
+        this.imageArray = this.images.concat(tempimage)
+        console.log(this.imageArray)
+
+        this.images = this.imageArray
 
         localStorage.setItem('user' , JSON.stringify(user))
         console.log(JSON.parse(localStorage.getItem('user'))) 
@@ -321,8 +321,7 @@ export class Tab1Page {
       this.errorMessage = this.errorMessage.error.message[0]
       this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
     })
-
-    }
+  }
 
   }  
  
@@ -331,17 +330,12 @@ export class Tab1Page {
 
     this.imageFile = event.srcElement.files[0];
 
-    // this.imageFile = this.imageFile.split('.').pop();
-
     console.log(this.imageFile)
     
     let file = event.srcElement.files[0];
 
     var formdata = new FormData();
-    console.log(file.type.substring(0,5))
 
-    if(file.type.substring(0,5) == "image"){
-      //image
       formdata.append('avatar', file);
       this.productservice.uploadPicture(formdata).subscribe(res => {
       console.log(res)
@@ -349,8 +343,6 @@ export class Tab1Page {
         this.popup.hideLoader()
         this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
         let user = JSON.parse(localStorage.getItem('user'))
-          
-        //this.pictures.file = res.response.file
 
         this.thumbnail = res.response.avatar
 
@@ -367,7 +359,7 @@ export class Tab1Page {
       this.errorMessage = this.errorMessage.error.message[0]
       this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
     })
-    }
+    
   }    
 
   

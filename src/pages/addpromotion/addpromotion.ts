@@ -28,6 +28,7 @@ export class AddpromotionPage {
     public description_ar : any
     public discount : any
     public image : any 
+    public productname : any
 
     public imageFile
 
@@ -73,11 +74,16 @@ export class AddpromotionPage {
       
       this.title = res.response.promotion
       this.title_ar = res.response.promotion_ar
-      this.description = res.response.description_ar
+      this.description = res.response.description
+      this.description_ar = res.response.description_ar
+      this.productname = res.response.product
       this.discount = res.response.discount
       this.image = res.response.image
-    
-      res.status && res.response.length > 0 ? this.promoDetails = res.response : this.popup.showToast('No Promotion found', 1500, 'bottom', false, "")
+
+      if(res.status){
+        this.promoDetails = res.response
+      }
+
     },err => {
       console.log("masla ha ")
       console.log(err);
@@ -97,7 +103,7 @@ export class AddpromotionPage {
       title_ar: this.title_ar,
       description: this.description,
       description_ar: this.description_ar,
-      product_id: this.product_id,
+      product_id: this.productname,
       discount: this.discount,
       image: this.image
     }
@@ -110,7 +116,7 @@ export class AddpromotionPage {
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
@@ -120,6 +126,8 @@ export class AddpromotionPage {
 
 
   updatePromotion(id){
+
+    this.popup.showLoader()
     let data = {
       title: this.title,
       title_ar: this.title_ar,
@@ -132,10 +140,11 @@ export class AddpromotionPage {
     console.log(data)
     this.promotionservice.onUpdatePromotion(id,data).subscribe(res=>{
       console.log(res)
+      this.popup.hideLoader()
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]

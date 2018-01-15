@@ -19,7 +19,7 @@ import { UserdetailPage } from '../pages/userdetail/userdetail';
 import { ChatPage } from '../pages/chat/chat';
 import { TopproductsPage } from '../pages/topproducts/topproducts';
 import { MypaymentsPage } from '../pages/mypayments/mypayments';
-// import { Tab1Page } from '../pages/tab1/tab1';
+import { Tab1Page } from '../pages/tab1/tab1';
 // import { Tab2Page } from '../pages/tab2/tab2';
 // import { Tab3Page } from '../pages/tab3/tab3';
 import { ProductstabPage } from '../pages/productstab/productstab'
@@ -35,7 +35,8 @@ import { AlertView } from '../uicomponents/alert';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Http,HttpModule } from '@angular/http';
+import { Http,HttpModule, RequestOptions } from '@angular/http';
+import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
 
 export function createTranslateLoader(http: Http) {  
     return new TranslateStaticLoader(http, 'assets/i18n', '.json');
@@ -74,12 +75,13 @@ export function createTranslateLoader(http: Http) {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
+    NativeHttpModuleD,
     IonicImageViewerModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
       deps: [Http]
-    }),    
+    }),   
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -114,7 +116,7 @@ export function createTranslateLoader(http: Http) {
     SharedService,
     PhotoViewer,
     Geolocation,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: Http, useClass: Http, deps: [NativeHttpFallbackD, RequestOptions]}
   ]
 })
 export class AppModule {}

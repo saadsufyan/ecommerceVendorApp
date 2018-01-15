@@ -53,7 +53,7 @@ export class Tab3Page {
   onStock(){
     this.popup.showLoader()
 
-    for(var i=0; i< this.specifications.length; i++){
+    for(var i=0; i<this.specifications.length; i++){
 
       let data = {
         id: this.specifications[i].id,
@@ -62,13 +62,17 @@ export class Tab3Page {
   
       this.stockUpdate.push(data)
     }
-    
+    let temp  = {
+      stock: this.stockUpdate
+    }
     console.log(this.stockUpdate)
+    console.log(temp)
 
-    this.stockservice.onUpdateStock(this.stockUpdate).subscribe(res=>{
+    this.stockservice.onUpdateStock(temp).subscribe(res=>{
       console.log(res)
       this.popup.hideLoader()
-      this.navCtrl.push(HomePage, {animation: 'left'})
+      // this.navCtrl.push(HomePage, {animation: 'left'})
+      this.app.getRootNav().setRoot(HomePage , {} , {animation : 'left'});
 
     },    
     err => {
