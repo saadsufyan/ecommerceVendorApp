@@ -38,7 +38,7 @@
 		      	<label class="dark">Category</label>
 		      	<br>
 		        <select class="dropdown dark" name="categoryid" [(ngModel)]="categoryObj" (change)="getSubCategory()">
-		        	<option *ngFor="let x of categoryList;let i = index" [ngValue]="x">{{x.name}}</option>
+		        	<option *ngFor="let x of categoryList;let i = index" [selected]="parent_cat" [ngValue]="x">{{x.name}}</option>
 						</select>
 		      </div>
 		      <div class="form-group">	      	
@@ -60,7 +60,7 @@
 		      	<label class="dark">Type</label>
 		      	<br>
 		        <select class="dropdown dark" name="productType" [(ngModel)]="producttype">
-							<option value="product">Product</option>
+							<option value="product" [selected]="Product">Product</option>
 							<option vlaue="services">Services</option>
 		        </select>
 					</div>

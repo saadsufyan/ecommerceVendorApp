@@ -36,12 +36,16 @@ export class AddpromotionPage {
   public promotionId: any
   public product_id
   public errorMessage : any = ""
+  public allproducts : any
+  public selected_product_id
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
   
     this.promotionId = this.navParams.get('id')
     if(this.promotionId != null){
       this.getPromotion()
+    }else{
+      this.getAllProducts()
     }
   }
 
@@ -65,6 +69,27 @@ export class AddpromotionPage {
     else{
       this.addPromotion()
     }
+  }
+
+  getAllProducts(){
+    this.promotionservice.onGetAllProducts().subscribe(res=>{
+      console.log(res)
+      res.status && res.response.length > 0 ? this.allproducts = res.response : console.log("no products found")
+         
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
+  }
+
+  selectedProduct(){
+    this.selected_product_id = this.product_id.id
+    console.log(this.selected_product_id)
   }
 
   getPromotion(){
@@ -99,11 +124,11 @@ export class AddpromotionPage {
     this.popup.showLoader()
 
     let data = {
-      title: this.title,
-      title_ar: this.title_ar,
+      promotion: this.title,
+      promotion_ar: this.title_ar,
       description: this.description,
       description_ar: this.description_ar,
-      product_id: this.productname,
+      product_id: this.selected_product_id,
       discount: this.discount,
       image: this.image
     }
@@ -129,8 +154,8 @@ export class AddpromotionPage {
 
     this.popup.showLoader()
     let data = {
-      title: this.title,
-      title_ar: this.title_ar,
+      promotion: this.title,
+      promotion_ar: this.title_ar,
       description: this.description,
       description_ar: this.description_ar,
       discount: this.discount,
@@ -141,6 +166,7 @@ export class AddpromotionPage {
     this.promotionservice.onUpdatePromotion(id,data).subscribe(res=>{
       console.log(res)
       this.popup.hideLoader()
+      this.navCtrl.push(HomePage, {animation: 'left'})
     },err => {
       console.log("masla ha ")
       console.log(err);

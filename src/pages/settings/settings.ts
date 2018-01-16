@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
 import { SettingsService } from '../../services/settings';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -71,19 +72,25 @@ export class SettingsPage {
         handler: data => {
 
           console.log('Save clicked');
-
-          this.settingservice.onchangePassword(data).subscribe(res=>{
-            console.log(res)
-          },err=>{
-            console.log("masla ha ")
-            console.log(err)
-            this.errorMessage = JSON.parse(err._body)
-            console.log(this.errorMessage)
-            this.errorMessage = this.errorMessage.error.message[0]
-
-
-          })
-
+          if(data != null){
+            this.popup.showLoader()
+            this.settingservice.onchangePassword(data).subscribe(res=>{
+              console.log(res)
+              this.popup.hideLoader()
+              this.navCtrl.push(HomePage, {animation: 'left'})
+            },err=>{
+              console.log("masla ha ")
+              console.log(err)
+              this.popup.hideLoader()
+              this.errorMessage = JSON.parse(err._body)
+              console.log(this.errorMessage)
+              this.errorMessage = this.errorMessage.error.message[0]
+              this.popup.showToast(this.errorMessage, 1500, 'bottom', false, "")
+            })
+          }
+          else {
+            this.popup.showToast('password field is required', 1500, 'bottom', false, "")
+          }
         }
       }
     ]

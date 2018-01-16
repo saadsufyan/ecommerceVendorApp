@@ -81,7 +81,7 @@ export function createTranslateLoader(http: Http) {
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
       deps: [Http]
-    }),   
+    }),  
   ],
   bootstrap: [IonicApp],
   entryComponents: [

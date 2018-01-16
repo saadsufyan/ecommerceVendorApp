@@ -87,6 +87,7 @@ export class ChatPage {
       console.log("masla ha ")
       console.log(err);
       // this.popup.hideLoader()
+      this.showImage = false
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]

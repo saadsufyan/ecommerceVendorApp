@@ -39,21 +39,20 @@
 			      	<label class="dark">Description (In Arabic)</label>
 			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar">
 						</div>
-						<div class="form-group">	      	
+						<div class="form-group" *ngIf="promotionId">	      	
 			      	<label class="dark">Product</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="productname" name="productname">
+			        <input disabled type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="productname" name="productname">
 			      </div>
-			      <!-- <div class="form-group">	      	
+			      <div class="form-group" *ngIf="!promotionId">	      	
 			      	<label class="dark">Product</label>
 			      	<br>
-			        <select class="dropdown dark" [(ngModel)]="product_id" name="product_id">
-			        	<option value="1">Red Dress</option>
-			        	<option value="2">Trouser</option>
+			        <select class="dropdown dark" [(ngModel)]="product_id" name="product_id" (change)="selectedProduct()">
+			        	<option *ngFor="let x of allproducts;let i = index" [ngValue]="x">{{x.name}}</option>
 			        </select>
-			      </div> -->
+			      </div>
 			      <div class="form-group">
 			      	<label class="dark">Discount Percent (SAR)</label>
-			        <input type="email" class="text-box form-control dark" placeholder="20" required="" [(ngModel)]="discount" name="discount">
+			        <input type="number" class="text-box form-control dark" placeholder="20" required="" [(ngModel)]="discount" name="discount">
 			      </div>
 						<div class="form-group" style="height: 60px !important;">
 							<div class="col-xs-6 no-p">

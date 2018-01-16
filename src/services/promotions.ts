@@ -40,6 +40,11 @@ export class PromotionsService{
         return this.network.doPostPictures(url,data)
     }
 
+    onGetAllProducts() : Observable<any> {
+        let url = this.basicUrl  + "/products";
+        return this.network.doGet(url)
+    }
+
 
 
 }
