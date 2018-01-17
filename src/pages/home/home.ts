@@ -6,6 +6,8 @@ import { PromotionsPage } from '../promotions/promotions';
 import { OrdersPage } from '../orders/orders';
 import { MessagesPage } from '../messages/messages';
 import { SettingsPage } from '../settings/settings';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 @Component({
   selector: 'page-home',
@@ -13,7 +15,7 @@ import { SettingsPage } from '../settings/settings';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, public menu: MenuController) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public viewCtrl: ViewController, public menu: MenuController) {
     this.menu.swipeEnable(true);
   }
   ionViewWillEnter(){

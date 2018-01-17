@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
     </button> 		
-		<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Promotion</ion-title>
+		<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'promotion_page' | translate}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>		
@@ -22,45 +22,45 @@
 <ion-content>
 	<div class="container form-box">
 		<div class="col-xs-12">
-			    <form class="form-signup" dir="ltr">
+			    <form class="form-signup" dir="{{util.dir}}">
 			      <div class="form-group">
-			      	<label class="dark">Name</label>
-			        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="" [(ngModel)]="title" name="title"> 
+			      	<label class="dark">{{'promotion_name_en' | translate}}</label>
+			        <input type="email" class="text-box form-control dark" placeholder="{{'promotion_name_en_placeholder' | translate}}" required="" [(ngModel)]="title" name="title"> 
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Name (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="" [(ngModel)]="title_ar" name="title_ar">
+			      	<label class="dark">{{'promotion_name_ar' | translate}}</label>
+			        <input type="text" class="text-box form-control dark" placeholder="{{'promotion_name_ar_placeholder' | translate}}" required="" [(ngModel)]="title_ar" name="title_ar">
 			      </div>
 			      <div class="form-group">
-			      	<label class="dark">Description (In English)</label>
-			        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description">
+			      	<label class="dark">{{'promotion_description_en' | translate}}</label>
+			        <input type="email" class="text-box form-control dark" placeholder="{{'promotion_description_en_placeholder' | translate}}" required="" [(ngModel)]="description" name="description">
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Description (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar">
+			      	<label class="dark">{{'promotion_description_ar' | translate}}</label>
+			        <input type="text" class="text-box form-control dark" placeholder="{{'promotion_description_ar_placeholder' | translate}}" required="" [(ngModel)]="description_ar" name="description_ar">
 						</div>
 						<div class="form-group" *ngIf="promotionId">	      	
-			      	<label class="dark">Product</label>
-			        <input disabled type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="productname" name="productname">
+			      	<label class="dark">{{'promotion_product' | translate}}</label>
+			        <input disabled type="text" class="text-box form-control dark" required="" [(ngModel)]="productname" name="productname">
 			      </div>
 			      <div class="form-group" *ngIf="!promotionId">	      	
-			      	<label class="dark">Product</label>
+			      	<label class="dark">{{'promotion_product' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" [(ngModel)]="product_id" name="product_id" (change)="selectedProduct()">
 			        	<option *ngFor="let x of allproducts;let i = index" [ngValue]="x">{{x.name}}</option>
 			        </select>
 			      </div>
 			      <div class="form-group">
-			      	<label class="dark">Discount Percent (SAR)</label>
-			        <input type="number" class="text-box form-control dark" placeholder="20" required="" [(ngModel)]="discount" name="discount">
+			      	<label class="dark">{{'promotion_discount' | translate}}</label>
+			        <input type="number" class="text-box form-control dark" placeholder="{{'promotion_discount_placeholder' | translate}}" required="" [(ngModel)]="discount" name="discount">
 			      </div>
 						<div class="form-group" style="height: 60px !important;">
 							<div class="col-xs-6 no-p">
-									<label class="dark">Image</label> <br>
+									<label class="dark">{{'promotion_image' | translate}}</label> <br>
 									<span id="fileselector">
 										<label class="" for="upload-file-selector">
 												<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
-												<span class="color-red"><b>Choose File</b></span>
+												<span class="color-red"><b>{{'choose_file' | translate}}</b></span>
 										</label>
 									</span>							 
 							</div>
@@ -74,7 +74,7 @@
 
 			      <br>
 		          <div class="col-xs-12" style="text-align: center;">
-		          	<button class="btn-nazik" (click)="promotionButton()">Add</button>	
+		          	<button class="btn-nazik" (click)="promotionButton()">{{'promotion_add' | translate}}</button>	
 		          </div>
 		          <br><br><br>
 			    </form>

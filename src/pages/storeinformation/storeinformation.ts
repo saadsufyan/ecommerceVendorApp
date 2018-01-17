@@ -7,6 +7,8 @@ import { NetworkService } from '../../services/network';
 import { LoginService } from '../../services/login';
 import { AlertView } from '../../uicomponents/alert';
 import { Geolocation } from '@ionic-native/geolocation';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 /**
  * Generated class for the StoreinformationPage page.
@@ -55,7 +57,7 @@ export class StoreinformationPage {
   public long :any
 
   public errorMessage: any = ""
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
   
     // this.getCities()
   }

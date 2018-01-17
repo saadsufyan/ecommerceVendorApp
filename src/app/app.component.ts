@@ -17,7 +17,7 @@ import { FirstPage } from '../pages/first/first';
 import { LanguagePage } from '../pages/language/language';
 
 import { Keyboard } from '@ionic-native/keyboard';
-
+import { TranslateService } from 'ng2-translate';
 @Component({
   templateUrl: 'app.html',
   providers: [Keyboard]
@@ -32,7 +32,7 @@ export class MyApp {
 
   public isLoggedIn = localStorage.getItem('isLoggedIn') 
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard : Keyboard) {
+  constructor(public translate : TranslateService, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard : Keyboard) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -53,6 +53,16 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      // this.translate.use('ar')
+      let lang  = localStorage.getItem('lang')
+      if(lang == "ar"){
+        this.translate.use('ar')
+        this.platform.setDir('rtl',true)
+      }else{
+        this.translate.use('en')
+        this.platform.setDir('ltr',true)
+        localStorage.setItem('lang','en')
+        }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
         this.keyboard.hideKeyboardAccessoryBar(false)

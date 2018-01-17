@@ -5,7 +5,8 @@ import { ChatPage } from '../chat/chat';
 import { MessagesService } from '../../services/messages';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
-
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 /**
  * Generated class for the MessagesPage page.
  *
@@ -25,49 +26,12 @@ export class MessagesPage {
 
   public errorMessage : any = "";
   public customerMessages: string = "customerMessages"
-  public messageslist: any = [
-    // {
-    //   user_id: 1,
-    //   user_name: "Kamal",
-    //   user_image: "<image_url>"
-    // },
-    // {
-    //   user_id: 2,
-    //   user_name: "Abd al Alim",
-    //   user_image: "<image_url>"
-    // },
-    // {
-    //   user_id: 3,
-    //   user_name: "Asad",
-    //   user_image: "<image_url>"
-    // }
-  ]
+  public messageslist: any = []
 
-  public contacts = [
-    // {
-    //   id: 1,
-    //   user_name: "user1",
-    //   user_email: "user1@hotmail.com"
-    // },
-    // {
-    //   id: 2,
-    //   user_name: "user2",
-    //   user_email: "user2@hotmail.com"
-    // },
-    // {
-    //   id: 3,
-    //   user_name: "user3",
-    //   user_email: "user3@hotmail.com"
-    // },
-    // {
-    //   id: 4,
-    //   user_name: "use43",
-    //   user_email: "user4@hotmail.com"
-    // }
-  ]
+  public contacts = []
   // public errormsg : any = true
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
   }
 
   ionViewDidLoad() {

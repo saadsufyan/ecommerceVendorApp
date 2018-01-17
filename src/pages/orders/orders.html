@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
 	    <ion-icon name="menu" style="color: white"></ion-icon>
     </button>        
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Orders</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'order_page' | translate}}</ion-title>
      <ion-buttons right>
        <button ion-button icon-only (click)="showFilter()"><ion-icon class= "back-icon" ios="ios-funnel-outline" md="ios-funnel-outline"  ></ion-icon></button> 
 		<!-- <img src="../assets/imgs/filter_icon@2x-2.png"> -->
@@ -26,7 +26,7 @@
 <div class="col-xs-12 filters" *ngIf="filter">
 	<div class="col-xs-9">
 		<div class="form-group">	      	
-	      	<label class="dark">Choose any Type</label>
+	      	<label class="dark">{{'choose_order_type' | translate}}</label>
 	      	<br>
 	        <select class="dropdown dark" [(ngModel)]="filterValue" name="filterValue"> 
 	        	<option>Pending</option>
@@ -39,7 +39,7 @@
 	</div>
 	<div class="col-xs-9">
 		<div class="form-group">	      	
-	  		<label class="dark"> &nbsp; Select Date Range</label>
+	  		<label class="dark"> &nbsp; {{'select_date_range' | translate}}</label>
         <img src="assets/imgs/date.png" class="pull-left">
            <!-- <br><label class="dark"> Start Date</label>  -->
          <input type="date" class="text-box form-control dark" placeholder="10/12/2017 - 25/12/2017" required="" [(ngModel)]="startdate" name="startdate">
@@ -53,24 +53,24 @@
 </div>
 <!-- Filters -->
 
-<p class="zeroQuotes" *ngIf="errormsg">No Orders Found</p>
+<p class="zeroQuotes" *ngIf="errormsg">{{'order_error_msg' | translate}}</p>
 
 <!-- Order box -->
 <div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion ltr">
 			<tr>
-				<td>Name:</td>
+				<td>{{'order_name' | translate}}</td>
 				<td>{{x.name}}</td>
 				<td></td>
 			</tr>
 			<tr>
-				<td>Order Date:</td>
+				<td>{{'order_date' | translate}}</td>
 				<td>{{x.date}}</td>
 				<td (click)="goToDetails(x.id)"><img src="assets/imgs/next.png"></td>
 			</tr>
 			<tr>
-				<td>Order Status</td>
+				<td>{{'order_status' | translate}}</td>
 				<td>{{x.status}}</td>
 				<td></td>
 			</tr>

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController,App , Platform } from 'ionic-angular';
 import { SettingsService } from '../../services/settings';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
 import { HomePage } from '../home/home';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 /**
  * Generated class for the SettingsPage page.
  *
@@ -21,8 +23,9 @@ export class SettingsPage {
   public password : string
   public terms: any = {}
   public errorMessage : any = ""
+  public Language
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public settingservice : SettingsService, public popup : AlertView) {}
+  constructor(public translate : TranslateService,public util: UtilProvider,public platform:Platform, public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public settingservice : SettingsService, public popup : AlertView,public app : App) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
@@ -35,7 +38,37 @@ export class SettingsPage {
   goBack(){
     this.navCtrl.pop()
   }
+  setLanguage(value){
+    console.log(value)
+    if(value == true){
+      this.platform.setDir('rtl',true)
+      this.translate.use('ar')
+      this.util.dir = 'rtl'
+      this.app.getRootNav().setRoot(HomePage , {} , {animation : 'left'});
+      this.popup.setLanguage('ar')
+    }else if (value == false){
+      this.platform.setDir('ltr',true)
+      this.translate.use('en')
+      this.util.dir = 'ltr'
+      this.popup.setLanguage('en')
+      this.app.getRootNav().setRoot(HomePage , {} , {animation : 'left'});
+    }else{
+      this.platform.setDir('ltr',true)
+      this.translate.use('en')
+      this.util.dir = 'ltr'
+      this.app.getRootNav().setRoot(HomePage , {} , {animation : 'left'});
+      this.popup.setLanguage('en')
+    }
 
+  }  
+  getPreferedLanguage(){
+    if(this.popup.getLanguage() == "ar"){
+      this.Language = true
+    }
+    else{
+      this.Language = false
+    }
+  }
   getTermsAndConditions(){
     this.settingservice.onGetTermsAndConditions().subscribe(res=>{
       console.log(res)

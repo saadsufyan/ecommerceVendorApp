@@ -1,5 +1,6 @@
 import { Injectable , Component} from "@angular/core";
-import { AlertController  , LoadingController , ToastController , NavController} from 'ionic-angular'
+import { AlertController  , LoadingController , ToastController , NavController} from 'ionic-angular';
+import { TranslateService } from 'ng2-translate';
 
 
 
@@ -16,7 +17,7 @@ export class AlertView {
     public toastShowCloseButton : boolean
     public toastCloseButtonText : string
 
-    constructor(public alertCtrl : AlertController , public loadingCtrl : LoadingController , public toastCtrl : ToastController, public navCtrl : NavController){
+    constructor(public translate : TranslateService,public alertCtrl : AlertController , public loadingCtrl : LoadingController , public toastCtrl : ToastController, public navCtrl : NavController){
 
     }
 
@@ -57,6 +58,16 @@ export class AlertView {
             closeButtonText : this.toastCloseButtonText
         })
         toast.present()
+    }
+
+    public setLanguage(lang){
+        localStorage.setItem('lang' ,lang)
+    }
+    public getTranslation(keyword){
+        return this.translate.get(keyword)
+    }
+    public getLanguage(){
+        return localStorage.getItem('lang')
     }
 
 

@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
 	    <ion-icon name="menu" style="color: white"></ion-icon>
     </button>      
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Settings</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'settings_page' | translate}}</ion-title>
     <!-- <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>     -->
@@ -24,41 +24,41 @@
 <div class="col-xs-12 settings">
 
   <div class="col-xs-12 settings-box border">
-    <div class="pull-left-ltr">
-        <h4 class="settings-text">Arabic Language</h4> 
+    <div class="pull-left-{{util.dir}}">
+        <h4 class="settings-text">{{'language_change' | translate}}</h4> 
     </div>
-    <div class="col-xs-4 toggle-box-ltr pull-right-ltr">
-      <ion-toggle [(ngModel)]="Language" style="float:right"></ion-toggle> 
+    <div class="col-xs-4 toggle-box-{{util.dir}} pull-right-{{util.dir}}">
+      <ion-toggle [(ngModel)]="Language" (ionChange)="setLanguage(Language)" style="float:right"></ion-toggle> 
     </div>
   
   </div>
 
   <div class="col-xs-12 settings-box border">
-    <div class="pull-left-ltr">
+    <div class="pull-left-{{util.dir}}">
         <h4 href="#demo" class="settings-text" data-toggle="collapse" style="color:black">
-          Terms and Conditions
+          {{'terms_and_conditions' | translate}}
           <!-- <i class="fa fa-angle-right fa-2x fa-arrow show-ltr" aria-hidden="true"></i> -->
         </h4>
     </div>
     <div id="demo" class="collapse">
-      <div class="panel-body">
-        <h4>Terms and Conditions (in English)</h4> 
+      <div class="panel-body pull-left-{{util.dir}}">
+        <h4>{{'terms_and_conditions_en' | translate}}</h4> 
           {{terms.terms}}
-        <h4>Terms and Conditions (in Arabic)</h4>
+        <h4>{{'terms_and_conditions' | translate}}</h4>
           {{terms.terms_ar}}
     </div>
     </div>      
-    <div class="col-xs-2 toggle-box-ltr pull-right-ltr">
+    <div class="col-xs-2 toggle-box-{{util.dir}} pull-right-{{util.dir}}">
         <!-- <i class="fa fa-angle-right fa-2x fa-arrow show-ltr" aria-hidden="true"></i> -->
         <!-- <i class="fa fa-angle-left fa-2x fa-arrow hide-ltr" aria-hidden="true"></i>  -->
     </div>
   </div>
 
   <div class="col-xs-12 settings-box border" (click)="presentPrompt()">
-    <div class="pull-left-ltr">
-        <h4 class="settings-text">Update Password</h4>
+    <div class="pull-left-{{util.dir}}">
+        <h4 class="settings-text">{{'update_password' | translate}}</h4>
     </div>
-    <div class="col-xs-2 toggle-box-ltr pull-right-ltr">
+    <div class="col-xs-2 toggle-box-{{util.dir}} pull-right-{{util.dir}}">
         <!-- <i class="fa fa-angle-right fa-2x fa-arrow show-ltr" aria-hidden="true"></i> -->
         <!-- <i class="fa fa-angle-left fa-2x fa-arrow hide-ltr" aria-hidden="true"></i> -->
     </div>
@@ -67,10 +67,7 @@
 <!-- settings -->
 
 <div class="btn-box-settings">
-  <button class="btn-nazik">Save</button>
+  <button class="btn-nazik">{{'save' | translate}}</button>
 </div>
-
-
-
 
 </ion-content>

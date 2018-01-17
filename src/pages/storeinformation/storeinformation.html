@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color: white"></ion-icon>
     </button>     
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Store Information</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'store_information' | translate}}</ion-title>
      <ion-buttons right>
       <button ion-button icon-only (click)="onUserLogout()"><ion-icon class= "back-icon" ios="ios-log-out" md="ios-log-out"></ion-icon></button>
     </ion-buttons> 
@@ -21,33 +21,33 @@
 <ion-content >
 	<div class="container form-box">
 		<div class="col-xs-12">
-			    <form class="form-signup" dir="ltr">
+			    <form class="form-signup" dir="{{util.dir}}">
 			      <div class="form-group">
-			      	<label class="dark">Store Name (In English)</label>
-							<input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="vendorname" name="vendorname">
+			      	<label class="dark">{{'store_name_en' | translate}}</label>
+							<input type="email" class="text-box form-control dark" placeholder="{{'store_name_en_placeholder' | translate}}" required="" [(ngModel)]="vendorname" name="vendorname">
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Store Name (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="vendorname_ar" name="vendorname_ar"> 
+			      	<label class="dark">{{'store_name_ar' | translate}}</label>
+			        <input type="text" class="text-box form-control dark" placeholder="{{'store_name_ar_placeholder' | translate}}" required="" [(ngModel)]="vendorname_ar" name="vendorname_ar"> 
 			      </div>
 			      <div class="form-group">
-			      	<label class="dark">Store Description (In English)</label>
-			        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description">
+			      	<label class="dark">{{'store_description_en' | translate}}</label>
+			        <input type="email" class="text-box form-control dark" placeholder="{{'store_description_en_placeholder' | translate}}" required="" [(ngModel)]="description" name="description">
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Store Description (In Arabic)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar">  
+			      	<label class="dark">{{'store_description_ar' | translate}}</label>
+			        <input type="text" class="text-box form-control dark" placeholder="{{'store_description_ar_placeholder' | translate}}" required="" [(ngModel)]="description_ar" name="description_ar">  
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Store Type</label>
+			      	<label class="dark">{{'store_type' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark">
-			        	<option>Product</option>
-			        	<option>Service</option>
+			        	<option>{{'store_type_product' | translate}}</option>
+			        	<option>{{'store_type_service' | translate}}</option>
 			        </select>
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Phone Number</label>
+			      	<label class="dark">{{'phone_number' | translate}}</label>
 			      	<br>
 			        <!-- <select class="dropdown number dark ltr">
 								<option>+1</option>
@@ -63,39 +63,39 @@
 							 -->
 							
 
-			        <input type="email" class="text-box number-box dark" placeholder="Phone Number" required="" [(ngModel)]="phone" name="phone">
+			        <input type="email" class="text-box number-box dark" placeholder="{{'phone_number_placeholder' | translate}}" required="" [(ngModel)]="phone" name="phone">
 			      </div>
 			      <div class="form-group">
-			      	<label class="dark">In Shipment Charges (SAR)</label>
-			        <input type="email" class="text-box form-control dark" placeholder="500" required="" [(ngModel)]="in_city_shipment_charges" name="in_city_shipment_charges">
+			      	<label class="dark">{{'in_shipment_charges' | translate}}</label>
+			        <input type="email" class="text-box form-control dark" placeholder="{{'out_shipment_charges_placeholder' | translate}}" required="" [(ngModel)]="in_city_shipment_charges" name="in_city_shipment_charges">
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Out Shipment Charges (SAR)</label>
-			        <input type="text" class="text-box form-control dark" placeholder="800" required="" [(ngModel)]="out_city_shipment_charges" name="out_city_shipment_charges">
+			      	<label class="dark">{{'out_shipment_charges' | translate}}</label>
+			        <input type="text" class="text-box form-control dark" placeholder="{{'out_shipment_charges_placeholder' | translate}}" required="" [(ngModel)]="out_city_shipment_charges" name="out_city_shipment_charges">
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark">Select Country</label>
+			      	<label class="dark">{{'select_country' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" name="countryname" [(ngModel)]="countryname" (change)="getCountry()">
 			        	<option *ngFor="let x of countrylist;let i = index" value="{{x}}">{{x}}</option>
 			        </select>
 			      </div>
 			      <div class="form-group">	      	
-			      	<label class="dark" style="text-decoration: underline;" (click)="presentPrompt()">Select City</label>
+			      	<label class="dark" style="text-decoration: underline;" (click)="presentPrompt()">{{'select_city' | translate}}</label>
 			      </div>
 			      <div class="form-group" (click)="openMap()">	      	
-			      	<label class="dark" style="text-decoration: underline;">Click here for map </label>&nbsp; <img src="assets/imgs/map.png">
+			      	<label class="dark" style="text-decoration: underline;">{{'click_on_map' | translate}}</label>&nbsp; <img src="assets/imgs/map.png">
 						</div>
 						
 						<div class="form-group" style="height: 60px !important;">
 							<div class="col-xs-6 no-p">
-									<label class="dark">Store Logo</label> <br>
+									<label class="dark">{{'store_logo' |  translate}}</label> <br>
 									<span id="fileselector">
 										<label class="" for="upload-file-selector">
 												<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
 												<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 												
-												<span class="color-red"><b>Choose File</b></span>
+												<span class="color-red"><b>{{'choose-file' | translate}}</b></span>
 										</label>
 									</span>							 
 							</div>
@@ -106,18 +106,18 @@
 
 
 			      <div class="form-group">	      	
-			      	<label class="dark">Select Off Day</label>
+			      	<label class="dark">{{'select_off_day' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" name="offdays" [(ngModel)]="offdays">
-			        	<option>Friday</option>
-			        	<option>Saturday</option>
+			        	<option>{{'select_off_day_friday' | translate}}</option>
+			        	<option>{{'select_off_day_saturday' | translate}}</option>
 			        </select>
 			      </div>
 
 
 			      <br>
 		          <div class="col-xs-12" style="text-align: center;">
-		          	<button ion-button class="btn-nazik" (click)="updateVendor()">Save</button>	
+		          	<button class="btn-nazik" (click)="updateVendor()">{{'save' | translate}}</button>	
 		          </div>
 		          <br><br><br>
 			    </form>

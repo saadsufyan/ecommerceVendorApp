@@ -38,9 +38,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Http,HttpModule, RequestOptions } from '@angular/http';
 import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
 
+import { UtilProvider } from '../providers/util/util';
+
 export function createTranslateLoader(http: Http) {  
     return new TranslateStaticLoader(http, 'assets/i18n', '.json');
 }
+
+
 
 
 @NgModule({
@@ -74,14 +78,14 @@ export function createTranslateLoader(http: Http) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule,
     NativeHttpModuleD,
     IonicImageViewerModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
       deps: [Http]
-    }),  
+    }),
+    HttpModule, 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -116,7 +120,9 @@ export function createTranslateLoader(http: Http) {
     SharedService,
     PhotoViewer,
     Geolocation,
-    {provide: Http, useClass: Http, deps: [NativeHttpFallbackD, RequestOptions]}
+    UtilProvider,
+    {provide: Http, useClass: Http, deps: [NativeHttpFallbackD, RequestOptions]},
+    UtilProvider
   ]
 })
 export class AppModule {}

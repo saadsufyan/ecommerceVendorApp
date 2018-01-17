@@ -4,6 +4,9 @@ import { HomePage } from '../home/home';
 import { LoginService } from '../../services/login';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
+
 
 /**
  * Generated class for the LoginPage page.
@@ -22,7 +25,7 @@ export class LoginPage {
 
   public errorMessage : any = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController, public service : LoginService, public popup : AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController, public service : LoginService, public popup : AlertView) {
     this.menu.swipeEnable(false);
   }
 
@@ -54,7 +57,7 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
         }
       }, err => {
-                alert(err)
+                // alert(err)
                 console.log(err);
                 this.popup.hideLoader()
                 this.errorMessage = JSON.parse(err._body)
@@ -63,7 +66,7 @@ export class LoginPage {
                 this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
       })
     }else {
-      alert("something went wrong")
+      // alert("something went wrong")
       this.popup.showToast('Invalid information' , 2000 , 'bottom' ,false , "")
     }
 }  

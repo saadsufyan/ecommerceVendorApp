@@ -4,6 +4,8 @@ import { AddpromotionPage } from '../addpromotion/addpromotion';
 import { PromotionsService } from '../../services/promotions';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 
 /**
@@ -24,7 +26,7 @@ export class PromotionsPage {
   PromoArray = []
   public errorMessage: any = ""
   public errormsg : any = true
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public promotionservice: PromotionsService, public popup: AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public promotionservice: PromotionsService, public popup: AlertView) {
   }
 
   ionViewDidLoad() {

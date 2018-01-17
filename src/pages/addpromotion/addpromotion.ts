@@ -4,6 +4,8 @@ import { PromotionsService } from '../../services/promotions';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert'; 
 import { HomePage } from '../home/home';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 
 /**
@@ -39,7 +41,7 @@ export class AddpromotionPage {
   public allproducts : any
   public selected_product_id
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
   
     this.promotionId = this.navParams.get('id')
     if(this.promotionId != null){
