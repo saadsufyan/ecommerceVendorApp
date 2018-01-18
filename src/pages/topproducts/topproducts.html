@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color: white"></ion-icon>
     </button>     
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Top Products</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'top_products_page' | translate}}</ion-title>
     <!-- <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons> -->
@@ -19,51 +19,51 @@
 
 
 <ion-content>
-	<p class="zeroQuotes" *ngIf="errormsg">No Products found</p>
+	<p class="zeroQuotes" *ngIf="errormsg">{{'top_products_error_msg' | translate}}</p>
 <!-- Top Product box -->
 <div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
 	<div class="col-xs-12 promotion-box">
-		<table class="table table-details ltr">
+		<table class="table table-details {{util.dir}}">
 			<tr>
-				<td>Name:</td>
+				<td>{{'top_products_name_en' | translate}}</td>
 				<td>{{x.name}}</td>
 			</tr>
 			<tr>
-				<td>Arabic Name:</td>
+				<td>{{'top_products_name_ar' | translate}}</td>
 				<td>{{x.name_ar}}</td>
 			</tr>
 			<tr>
-				<td>Type:</td>
+				<td>{{'top_products_type' | translate}}</td>
 				<td>{{x.type}}</td>
 			</tr>
 			<tr>
-				<td>Price:</td>
+				<td>{{'top_products_price' | translate}}</td>
 				<td>SAR {{x.price}}</td>
 			</tr>			
 			<tr>
-				<td>Favorites:</td>
+				<td>{{'top_products_favourites' | translate}}</td>
 				<td>{{x.favorites}}</td>
 			</tr>
 			<tr>
-				<td>Rating:</td>
+				<td>{{'top_products_rating' | translate}}</td>
 				<td>{{x.rating}}</td>
 			</tr>
 			<tr>
-				<td>Number of Request</td>
+				<td>{{'top_products_number_of_request' | translate}}</td>
 				<td>{{x.number_of_requests}}</td>
 			</tr>
 			<tr>
-				<td>Country:</td>
+				<td>{{'top_products_country' | translate}}</td>
 				<td>{{x.country}}</td>
 			</tr>
 			<tr>
-				<td>City:</td>
+				<td>{{'top_products_city' | translate}}</td>
 				<td>{{x.city}}</td>
 			</tr>
 		</table>	
 		<div class="col-xs-12 no-p">
 			<div dir="ltr">
-				<h5><b>Images</b></h5>
+				<h5><b>{{'top_products_images' | translate}}</b></h5>
 			</div>
 			<div class="product-box ltr">
 				<img src="{{x.image}}" imageViewer/>

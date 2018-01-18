@@ -6,6 +6,8 @@ import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
 import { SharedService } from '../../services/sharedService';
 import { Tab1Page } from '../tab1/tab1';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 
 /**
@@ -28,7 +30,7 @@ export class ProductsPage {
   public errorMessage
   public errormsg : any = true
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView, public sharedservice: SharedService) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView, public sharedservice: SharedService) {
   
     this.getAllProducts()
   }

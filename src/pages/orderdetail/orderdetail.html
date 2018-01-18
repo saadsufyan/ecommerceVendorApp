@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
 	    <ion-icon name="menu" style="color: white"></ion-icon>
     </button>      
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Order Details</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'order_detail_page' | translate}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>    
@@ -24,41 +24,41 @@
 <!-- Order Details box -->
 <div class="col-xs-12 promotion-box-outer">
 	<div class="col-xs-12 promotion-box">
-		<table class="table table-details ltr">
+		<table class="table table-details {{util.dir}}">
 			<tr>
-				<td>Name:</td>
+				<td>{{'order_name' | translate}}:</td>
 				<td>{{items.name}}</td>
 			</tr>
 			<tr>
-				<td>Phone:</td>
+				<td>{{'order_phone' | translate}}</td>
 				<td>{{items.phone}}</td>
 			</tr>
 			<tr>
-				<td>Order Amount</td>
+				<td>{{'order_amount' | translate}}</td>
 				<td>{{items.order_amount}} SAR</td>
 			</tr>
 			<tr>
-				<td>Shipment Charges:</td>
+				<td>{{'shipment_charges' | translate}}</td>
 				<td>{{items.shipment_charges}} SAR</td>
 			</tr>			
 			<tr>
-				<td>Order Type:</td>
+				<td>{{'order_type' | translate}}</td>
 				<td>{{items.type}}</td>
 			</tr>
 			<tr>
-				<td>Order Details</td>
+				<td>{{'order_detail_page' | translate}}</td>
 				<td>
 						<button class="btn-nazik btn-nazik-view" (click)="presentAlert()">View Order</button>	<br><br>
 					<!-- <span data-toggle="modal" data-target=".view-details" (click)="presentAlert()">View Orders</span> <br> -->
 				</td>
 			</tr>
 			<tr>
-				<td>Order Status:</td>
-				<td>Pending</td>
+				<td>{{'order_status' | translate}}</td>
+				<td>{{items.status}}</td>
 			</tr>
 			<tr>
-				<td>Address:</td>
-				<td>ACB Street, Jeddah, SA.</td>
+				<td>{{'order_address' | translate}}</td>
+				<td>{{items.address}}</td>
 			</tr>
 		</table>		
 	</div>
@@ -68,8 +68,8 @@
 
 
 <div class="btn-box" style="text-align: center;">
-	<button class="btn-nazik black sm" (click)="VendorAccept()">Confirm</button>	 &nbsp;
-	<button class="btn-nazik sm" (click)="VendorReject()">Reject</button>	
+	<button class="btn-nazik black sm" (click)="VendorAccept()">{{'confirm_order'| translate}}</button>	 &nbsp;
+	<button class="btn-nazik sm" (click)="VendorReject()">{{'reject_order' | translate}}</button>	
 </div>
 
 

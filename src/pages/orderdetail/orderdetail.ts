@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController} f
 import { OrderService } from '../../services/orders';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 /**
  * Generated class for the OrderdetailPage page.
@@ -19,50 +21,12 @@ import { AlertView } from '../../uicomponents/alert';
 })
 export class OrderdetailPage {
 
-  public items = {
-    name : "user_name",
-    phone : 1234567,
-    order_amount: 300,
-    shipment_charges : 200,
-    type : "product",
-    date : 1452850218,
-    status : "pending",
-    address : "abc street",
-    details : [
-            {
-                name : "product name",
-                name_ar : "اسم المنتج",
-                price : 200,
-                quantity : 1,
-                promotion : "promotion",
-                delivery_date : 1452850218,
-                specifications : "color|red size|large"
-            },
-            {
-                name : "product name",
-                name_ar : "اسم المنتج",
-                price : 100,
-                quantity : 2,
-                promotion : "promotion2",
-                delivery_date : 1452850218,
-                specifications : "color|blu size|small"
-            }
-    ]
-  }
-  public orderItems = {
-    id : 1,
-    name : "product name",
-    name_ar : "اسم المنتج",
-    price : 200,
-    quantity : 1,
-    promotion : "promotion",
-    delivery_date : 1452850218,
-    specifications : "color|red size|large"
-  }
+  public items = {}
+  public orderItems = {}
 
   public orderid: any
   public errorMessage: any=""
-  constructor(private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public orderservice: OrderService, public popup: AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public orderservice: OrderService, public popup: AlertView) {
   
     this.orderid = this.navParams.get('id')
   }

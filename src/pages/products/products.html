@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
     </button> 	  
-	<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Products</ion-title>
+	<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png">{{'products_page' | translate}}</ion-title>
      <ion-buttons right>
       <!-- <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"></ion-icon></button> -->
     </ion-buttons>	 
@@ -21,27 +21,27 @@
 
 <ion-content>
 <div class="outer-box">
-	<p class="zeroQuotes" *ngIf="errormsg">No Products Found</p>
+	<p class="zeroQuotes" *ngIf="errormsg">{{'products_page_error_msg' | translate}}</p>
 	<!-- Product box -->
 	<div class="col-xs-12 promotion-box-outer">
 		<div class="col-xs-12 promotion-box" *ngFor="let x of items">
-			<table class="table table-promotion ltr">
+			<table class="table table-promotion {{util.dir}}">
 				<tr>
-					<td>Promotion Name (In English)</td>
+					<td>{{'products_name_en' | translate}}</td>
 					<td>{{x.name}}</td>
 				</tr>
 				<tr>
-					<td>Promotion Name (In Arabic)</td>
+					<td>{{'products_name_ar' | translate}}</td>
 					<td>{{x.name_ar}}</td>
 				</tr>
 			</table>
 			<div class="col-xs-12 no-p">
-				<div class="product-box ltr">
+				<div class="product-box {{util.dir}}">
 					<img src="{{x.image}}" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer/>
 				</div>
 				<div class="two-btn-box ltr">
-					<button class="btn-nazik black sm1" (click)="editProduct(x.id)">Edit</button>
-					<button class="btn-nazik sm" (click)="deleteProduct(x.id)">Delete</button>
+					<button class="btn-nazik black sm1" (click)="editProduct(x.id)">{{'products_edit' | translate}}</button>
+					<button class="btn-nazik sm" (click)="deleteProduct(x.id)">{{'products_delete' | translate}}</button>
 				</div>
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 <ion-footer>
   <ion-toolbar>
     <div class="col-xs-12 btn-box fixed" style="text-align: center;">
-		<button class="btn-nazik" (click)="goToAddproducts()">Add</button>	
+		<button class="btn-nazik" (click)="goToAddproducts()">{{'products_add' | translate}}</button>	
 	</div>
   </ion-toolbar>
 </ion-footer>

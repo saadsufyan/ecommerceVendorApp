@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
     </button> 	  
-	<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> My Payments</ion-title>
+	<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'my_payment_page' | translate}}</ion-title>
     <!-- <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>	 -->
@@ -19,25 +19,25 @@
 </ion-header>
 
 <ion-content>
-		<p class="zeroQuotes" *ngIf="errormsg">No Orders found</p>
+		<p class="zeroQuotes" *ngIf="errormsg">{{'my_payment_error_msg' | translate}}</p>
 <!-- Payment box -->
 <div class="col-xs-12 promotion-box-outer" *ngFor="let x of payments">
 	<div class="col-xs-12 promotion-box">
-		<table class="table table-details ltr">
+		<table class="table table-details {{util.dir}}">
 			<tr>
-				<td>Vendor:</td>
+				<td>{{'my_payment_vendor_name_en'}}</td>
 				<td>{{name}}</td>
 			</tr>
 			<tr>
-				<td>Arabic Name:</td>
+				<td>{{'my_payment_vendor_ar' | translate}}</td>
 				<td>{{name_ar}}</td>
 			</tr>
 			<tr>
-				<td>Amount:</td>
+				<td>{{'my_payment_vendor_amount' | translate}}</td>
 				<td>{{x.amount}} SAR</td>
 			</tr>
 			<tr>
-				<td>Date:</td>
+				<td>{{'my_payment_date' | translate}}</td>
 				<td>{{x.created_at}}</td>
 			</tr>			
 		</table>		

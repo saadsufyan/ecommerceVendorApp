@@ -6,6 +6,8 @@ import { NetworkService } from '../../services/network';
 import { SharedService } from '../../services/sharedService';
 import { AlertView } from '../../uicomponents/alert';
 import { Tab2Page } from '../tab2/tab2';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 
 /**
@@ -69,7 +71,7 @@ export class Tab1Page {
   public categoryButton : boolean = true
   public producttype
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
   
     this.productId= this.navParams.get('id')
     console.log("new id " + this.productId)

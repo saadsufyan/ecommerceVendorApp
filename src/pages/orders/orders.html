@@ -58,7 +58,7 @@
 <!-- Order box -->
 <div class="col-xs-12 promotion-box-outer" *ngFor="let x of items">
 	<div class="col-xs-12 promotion-box">
-		<table class="table table-promotion ltr">
+		<table class="table table-promotion {{util.dir}}">
 			<tr>
 				<td>{{'order_name' | translate}}</td>
 				<td>{{x.name}}</td>

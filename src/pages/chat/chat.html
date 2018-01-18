@@ -56,8 +56,8 @@
 <ion-footer>
   <ion-toolbar>
 		<div class="col-xs-12 btn-box fixed1" style="text-align: center;">
-			<input type="" name="" class="type-box ltr" placeholder="Type a message here..." [(ngModel)]="send" name="send">
-			<button ion-button class="btn btn-send ltr">
+			<input type="" name="" class="type-box {{util.dir}}" placeholder="{{'chat_placeholder' | translate}}" [(ngModel)]="send" name="send">
+			<button ion-button class="btn btn-send {{util.dir}}">
 				<img [src]="showImage ? 'assets/imgs/plane-icon.png' : 'assets/imgs/plane_gif.gif'" (click)="sendMessages()"> 
 			</button>
 			 

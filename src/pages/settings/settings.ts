@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController,App , Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController,App , Platform} from 'ionic-angular';
 import { SettingsService } from '../../services/settings';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
@@ -23,9 +23,10 @@ export class SettingsPage {
   public password : string
   public terms: any = {}
   public errorMessage : any = ""
-  public Language
+  public Language : any
 
   constructor(public translate : TranslateService,public util: UtilProvider,public platform:Platform, public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public settingservice : SettingsService, public popup : AlertView,public app : App) {}
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
@@ -33,11 +34,22 @@ export class SettingsPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+    this.getPreferedLanguage()
   }
 
   goBack(){
     this.navCtrl.pop()
   }
+
+  getPreferedLanguage(){
+    if(this.popup.getLanguage() == "ar"){
+      this.Language = true
+    }
+    else{
+      this.Language = false
+    }
+  }
+
   setLanguage(value){
     console.log(value)
     if(value == true){
@@ -61,14 +73,7 @@ export class SettingsPage {
     }
 
   }  
-  getPreferedLanguage(){
-    if(this.popup.getLanguage() == "ar"){
-      this.Language = true
-    }
-    else{
-      this.Language = false
-    }
-  }
+
   getTermsAndConditions(){
     this.settingservice.onGetTermsAndConditions().subscribe(res=>{
       console.log(res)

@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { MessagesService } from '../../services/messages';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 /**
  * Generated class for the ChatPage page.
@@ -30,7 +31,7 @@ export class ChatPage {
   public sendArray = []
   public showImage : boolean = true
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
   
     this.userid = this.navParams.get('id')
     console.log(this.userid)
