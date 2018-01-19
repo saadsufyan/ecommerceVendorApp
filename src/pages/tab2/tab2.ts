@@ -5,8 +5,14 @@ import { ProductsService } from '../../services/products';
 import { NetworkService } from '../../services/network';
 import { SharedService } from '../../services/sharedService';
 import { AlertView } from '../../uicomponents/alert';
+import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider';
 import $ from "jquery";
-import { Input } from '@angular/core/src/metadata/directives';
+
+
+
+
+
+
 
 /**
  * Generated class for the Tab2Page page.
@@ -115,7 +121,8 @@ export class Tab2Page {
   }
 
   goBack(){
-    this.app.navPop()
+    // this.app.navPop()
+    this.navCtrl.parent.select(0)
   }
 
   ngAfterViewInit(){
@@ -208,52 +215,66 @@ export class Tab2Page {
    this.data.specifications = specifications
 
   if(this.productid == null){
-    this.popup.showLoader()
+    
     console.log("add product: ")
-    this.productservice.OnAddProduct(this.data).subscribe(res=>{
+    
+    if(this.data.specifications.length > 0){
+      console.log(this.data)
+      this.popup.showLoader()
+      this.productservice.OnAddProduct(this.data).subscribe(res=>{
       
-      if(res.status){
-        console.log(res)
-
+        if(res.status){
+          console.log(res)
+  
+          this.popup.hideLoader()
+  
+          this.stock_data = res.response 
+          this.sharedservice.sendStockData(this.stock_data)
+          console.log(this.stock_data)
+  
+           this.navCtrl.parent.select(2, {animation: 'left'});
+          
+        }
+      },    
+      err => {
+        console.log(err)
         this.popup.hideLoader()
+        this.errorMessage = JSON.parse(err._body)
+        this.errorMessage = this.errorMessage.error.message[0]
+        this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+      })
+    }else{
+      this.popup.showToast('Please provide some specifications',1500,'bottom',false,"")
+    }
 
-        this.stock_data = res.response 
-        this.sharedservice.sendStockData(this.stock_data)
-        console.log(this.stock_data)
-
-         this.navCtrl.parent.select(2, {animation: 'left'});
-        
-      }
-    },    
-    err => {
-      console.log(err)
-      this.popup.hideLoader()
-      this.errorMessage = JSON.parse(err._body)
-      this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
-    })
   }
   else if (this.productid != null){
-    this.popup.showLoader()
+    
     console.log("update product")
-    this.productservice.onUpdateProductDetails(this.productid,this.data).subscribe(res=>{
+    if(this.data.length > 0){
+      this.popup.showLoader()
+      this.productservice.onUpdateProductDetails(this.productid,this.data).subscribe(res=>{
       
-      if(res.status){
-        console.log(res)
+        if(res.status){
+          console.log(res)
+          this.popup.hideLoader()
+          this.stock_data = res.response 
+          console.log(this.stock_data)
+          this.sharedservice.sendStockData(this.stock_data)
+          this.navCtrl.parent.select(2, {animation: 'left'});
+        }
+      },    
+      err => {
+        console.log(err)
         this.popup.hideLoader()
-        this.stock_data = res.response 
-        console.log(this.stock_data)
-        this.sharedservice.sendStockData(this.stock_data)
-        this.navCtrl.parent.select(2, {animation: 'left'});
-      }
-    },    
-    err => {
-      console.log(err)
-      this.popup.hideLoader()
-      this.errorMessage = JSON.parse(err._body)
-      this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
-    })
+        this.errorMessage = JSON.parse(err._body)
+        this.errorMessage = this.errorMessage.error.message[0]
+        this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
+      })
+    }else{
+      this.popup.showToast('Please provide some specifications',1500,'bottom',false,"")
+    }
+
   }
 
 
@@ -346,8 +367,9 @@ if(value=='undefined'){
 
 
   removeSpec(){
-    this.specBox.pop()
-    console.log(this.specBox)
+
+      this.specBox.pop()
+      console.log(this.specBox)
   }
 
   removeValue(id){

@@ -7,7 +7,9 @@ import { SharedService } from '../../services/sharedService';
 import { AlertView } from '../../uicomponents/alert';
 import { Tab2Page } from '../tab2/tab2';
 import { UtilProvider } from '../../providers/util/util';
-import { TranslateService } from 'ng2-translate';
+// import { TranslateService } from 'ng2-translate';
+
+import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider'
 
 
 /**
@@ -51,6 +53,7 @@ export class Tab1Page {
   public subcategoryid
   public specificsubcategory
   public parent_cat : any
+  public parent_cat_name : any
 
   public categoryList : any  = []
   public subcategoryList : any = []
@@ -70,14 +73,30 @@ export class Tab1Page {
   public product_details : any 
   public categoryButton : boolean = true
   public producttype
+  valueStrings  = []
+  tempArry = ['tab1_page','products_name_en', 'products_name_placeholder_en' , 'products_name_ar', 'products_name_placeholder_ar', 'promotion_description_en', 'promotion_description_en_placeholder' , 'promotion_description_ar', 'promotion_description_ar_placeholder', 'product_category', 'product_subcategory' , 'undo' , 'select_category', 'product_type', 'product_type_product','product_type_service', 'thumbnail_image', 'choose_file', 'product_image', 'choose_file', 'product_price_in_local', 'product_price_in_local_placeholder', 'show_calender', 'show_time', 'save']
 
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
-  
-    this.productId= this.navParams.get('id')
+
+  constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
+  // console.log(translate)
+    this.productId = this.navParams.get('id')
     console.log("new id " + this.productId)
     // this.productId = this.sharedservice.fetchProductId()
     // // console.log(this.productId)
     // this.sharedservice.sendProductId(this.productId)
+
+    //  console.log(this.sharedservice.translate)
+    
+    for(var item in this.tempArry){
+      this.translateprovider.getTranslation(this.tempArry[item]).subscribe((value)=>{
+        let title = this.tempArry[item]
+        this.valueStrings.push({
+           title : value
+        })
+      })
+    }
+    console.log(this.valueStrings)
+
   }
 
   ionViewDidLoad() {
@@ -107,6 +126,8 @@ export class Tab1Page {
     this.productservice.onGetAllParentCategory().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.categoryList = res.response : console.log("no category found")
+      
+
 
     },err => {
       console.log("masla ha ")
@@ -122,7 +143,6 @@ export class Tab1Page {
   getSubCategory(){
     console.log(this.categoryObj)
 
-    console.log("Category Name: " + this.categoryObj.name)
 
     this.tempArray.push(this.categoryObj.name)
 
@@ -236,8 +256,16 @@ export class Tab1Page {
       this.specifications = res.response.specifications
 
       console.log(this.parent_cat)
+      for(let i = 0; i < this.categoryList.length; i++){
+        if(this.parent_cat == this.categoryList[i].id){
+          this.parent_cat_name = this.categoryList[i].name
+          console.log(this.parent_cat_name)
+        }
+      }
 
       console.log(this.images.length)
+
+
     },err => {
       console.log("masla ha ")
       console.log(err);

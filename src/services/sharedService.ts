@@ -1,7 +1,7 @@
 import { Injectable , Component} from "@angular/core";
 import { Observable } from "rxjs/Rx";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
+import { TranslateService } from 'ng2-translate';
 
 
 let temp = {}
@@ -11,7 +11,7 @@ let productId = null
 @Injectable()
 export class SharedService {
 
-    SharedService(){}
+    constructor(public translate : TranslateService){}
     // public temp = {}
 
     send(data) {

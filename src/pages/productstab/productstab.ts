@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Tab1Page } from '../tab1/tab1';
 import { Tab2Page } from '../tab2/tab2';
 import { Tab3Page } from '../tab3/tab3';
-import { UtilProvider } from '../../providers/util/util';
-import { TranslateService } from 'ng2-translate';
+
 
 
 /**
@@ -28,7 +27,7 @@ export class ProductstabPage {
   public id
 
 
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.tab1Root
     this.navParams = navParams;
     console.log(this.navParams)

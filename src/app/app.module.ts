@@ -39,6 +39,7 @@ import { Http,HttpModule, RequestOptions } from '@angular/http';
 import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
 
 import { UtilProvider } from '../providers/util/util';
+import { TranslateproviderProvider } from '../providers/translateprovider/translateprovider';
 
 export function createTranslateLoader(http: Http) {  
     return new TranslateStaticLoader(http, 'assets/i18n', '.json');
@@ -122,7 +123,8 @@ export function createTranslateLoader(http: Http) {
     Geolocation,
     UtilProvider,
     {provide: Http, useClass: Http, deps: [NativeHttpFallbackD, RequestOptions]},
-    UtilProvider
+    UtilProvider,
+    TranslateproviderProvider
   ]
 })
 export class AppModule {}

@@ -5,7 +5,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
     </button> 		
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png">Basic</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png">{{valueStrings[0].title}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>    
@@ -17,32 +17,32 @@
 <ion-content>
 <div class="container form-box">
 	<div class="col-xs-12">
-		    <form class="form-signup" dir="ltr">
+		    <form class="form-signup" dir="{{util.dir}}">
 		      <div class="form-group">
-		      	<label class="dark">Product Name (In English)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="Promotion Name" required="" [(ngModel)]="name" name="name" required>
+		      	<label class="dark">{{valueStrings[1].title}}</label>
+		        <input type="email" class="text-box form-control dark" placeholder="{{valueStrings[2].title}}" required="" [(ngModel)]="name" name="name" required>
 		      </div>
 		      <div class="form-group">	      	
-		      	<label class="dark">Product Name (In Arabic)</label>
-		        <input type="text" class="text-box form-control dark" placeholder="Promotin Name in Arabic" required="" [(ngModel)]="name_ar" name="name_ar" required>
+		      	<label class="dark">{{valueStrings[3].title}}</label>
+		        <input type="text" class="text-box form-control dark" placeholder="{{valueStrings[4].title}}" required="" [(ngModel)]="name_ar" name="name_ar" required>
 		      </div>
 		      <div class="form-group">
-		      	<label class="dark">Product Description (In English)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description" name="description" required>
+		      	<label class="dark">{{valueStrings[5].title}}</label>
+		        <input type="email" class="text-box form-control dark" placeholder="{{valueStrings[6].title}}" required="" [(ngModel)]="description" name="description" required>
 		      </div>
 		      <div class="form-group">	      	
-		      	<label class="dark">Product Description (In Arabic)</label>
-		        <input type="text" class="text-box form-control dark" placeholder="Zara" required="" [(ngModel)]="description_ar" name="description_ar" required>
+		      	<label class="dark">{{valueStrings[7].title}}</label>
+		        <input type="text" class="text-box form-control dark" placeholder="{{valueStrings[8].title}}" required="" [(ngModel)]="description_ar" name="description_ar" required>
 		      </div>
 		      <div class="form-group">	      	
-		      	<label class="dark">Category</label>
+		      	<label class="dark">{{valueStrings[9].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="categoryid" [(ngModel)]="categoryObj" (change)="getSubCategory()">
-		        	<option *ngFor="let x of categoryList;let i = index" [selected]="parent_cat" [ngValue]="x">{{x.name}}</option>
+		        	<option *ngFor="let x of categoryList;let i = index" [ngValue]="x">{{x.name}}</option>
 						</select>
 		      </div>
 		      <div class="form-group">	      	
-		      	<label class="dark">Sub-Category</label>
+		      	<label class="dark">{{valueStrings[10].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="subcategoryid" [(ngModel)]="subcategoryObj" (change)="onSubCategoryChange()">
 		        	<option *ngFor="let x of subcategoryList;let i = index" [ngValue]="x">{{x.name}}</option>
@@ -51,29 +51,29 @@
 					
 					<div class="col-xs-12 text-center">
 						<br>
-						<button  class="btn-nazik-undo" (click)="onClickUndo()">Undo</button>
-						<button id="Cat_button" class="btn-nazik-remove-value" (click)="onChangeGetSubCategory()">Select Category</button>
+						<button  class="btn-nazik-undo" (click)="onClickUndo()">{{valueStrings[11].title}}</button>
+						<button id="Cat_button" class="btn-nazik-remove-value" (click)="onChangeGetSubCategory()">{{valueStrings[12].title}}</button>
 						<br><br>
 					</div>
 
 					<div class="form-group">	      	
-		      	<label class="dark">Type</label>
+		      	<label class="dark">{{valueStrings[13].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="productType" [(ngModel)]="producttype">
-							<option value="product" [selected]="Product">Product</option>
-							<option vlaue="services">Services</option>
+							<option value="product" [selected]="Product">{{valueStrings[14].title}}</option>
+							<option vlaue="services">{{valueStrings[15].title}}</option>
 		        </select>
 					</div>
 
 		      <div class="form-group product_image">
 							<div class="col-xs-6">
-		      	<label class="dark">Thumbnail Image</label> <br>
+		      	<label class="dark">{{valueStrings[16].title}}</label> <br>
 		        <span id="fileselector">
 		          <label class="" for="upload-file-selector">
 									<!-- <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail"> -->
 									<input class="fileInput" type="file" name="file1" (change)="onChange1($event)">
 									
-									<span class="color-red"><b>Choose File</b></span>
+									<span class="color-red"><b>{{valueStrings[17].title}}</b></span>
 		          </label>
 						</span>
 		      	</div>
@@ -90,13 +90,13 @@
 
 		      <div class="form-group product_image">
 							<div class="col-xs-6">
-		      	<label class="dark">Product Image</label> <br>
+		      	<label class="dark">{{valueStrings[18].title}}</label> <br>
 		        <span id="fileselector">
 		          <label class="" for="upload-file-selector">
 									<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
 									<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 									<!-- <img src="images/icon_upload.png"> -->
-									<span class="color-red"><b>Choose File</b></span>
+									<span class="color-red"><b>{{valueStrings[19].title}}</b></span>
 		          </label>
 						</span>
 							</div>
@@ -110,19 +110,19 @@
 							</div>
 		      </div>
 		      <div class="form-group">
-		      	<label class="dark">Price In Local Currency (SAR)</label>
-		        <input type="email" class="text-box form-control dark" placeholder="25" required="" [(ngModel)]="price" name="price">
+		      	<label class="dark">{{valueStrings[20].title}}</label>
+		        <input type="email" class="text-box form-control dark" placeholder="{{valueStrings[21].title}}" required="" [(ngModel)]="price" name="price">
 		      </div>
 		      <div class="checkbox ltr">
-			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_calender" name="show_calender">Show Calender</label> &nbsp;&nbsp;
-			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_time" name="show_time">Show Time</label>
+			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_calender" name="show_calender">{{valueStrings[22].title}}</label> &nbsp;&nbsp;
+			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_time" name="show_time">{{valueStrings[23].title}}</label>
 			  </div>
 			  
 
 
 		      <br>
 	          <div class="col-xs-12" style="text-align: center;">
-							<button class="btn-nazik" (click)="addProduct()">Save</button>	
+							<button class="btn-nazik" (click)="addProduct()">{{valueStrings[24].title}}</button>	
 							<!-- <button class="btn-nazik" (click)="goToSpecifications()">Save</button>	 -->
 
 	          </div>

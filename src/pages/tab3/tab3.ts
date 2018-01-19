@@ -6,6 +6,8 @@ import { SharedService } from '../../services/sharedService';
 import { StockService } from '../../services/stock';
 import { AlertView } from '../../uicomponents/alert';
 import { HomePage } from '../home/home';
+import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider';
+import { UtilProvider } from '../../providers/util/util';
 
 /**
  * Generated class for the Tab3Page page.
@@ -29,7 +31,10 @@ export class Tab3Page {
   public quantity
   public errorMessage : any = ""
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App,public stockservice : StockService, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
+  valueStrings  = []
+  tempArry = ['tab3_page', 'Stock_specification_value_en', 'Stock_specification_value_ar' , 'tab3_page', 'save']
+
+  constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App,public stockservice : StockService, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     this.val = this.navParams.get('data')
     console.log(this.val)
@@ -37,7 +42,16 @@ export class Tab3Page {
     this.stockData = this.sharedservice.fetchStockData()
     console.log(this.stockData)
     this.specifications = this.stockData.specs
-    
+  
+    for(var item in this.tempArry){
+      this.translateprovider.getTranslation(this.tempArry[item]).subscribe((value)=>{
+        let title = this.tempArry[item]
+        this.valueStrings.push({
+           title : value
+        })
+      })
+    }
+    console.log(this.valueStrings)    
   }
 
   ionViewDidLoad() {
