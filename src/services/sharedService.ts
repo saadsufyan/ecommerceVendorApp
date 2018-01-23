@@ -7,7 +7,7 @@ import { TranslateService } from 'ng2-translate';
 let temp = {}
 let temp1 = []
 let temp2 = {}
-let productId = null
+let productId
 @Injectable()
 export class SharedService {
 

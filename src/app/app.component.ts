@@ -18,6 +18,8 @@ import { LanguagePage } from '../pages/language/language';
 
 import { Keyboard } from '@ionic-native/keyboard';
 import { TranslateService } from 'ng2-translate';
+import { UtilProvider } from '../providers/util/util';
+import { TranslateproviderProvider } from '../providers/translateprovider/translateprovider';
 @Component({
   templateUrl: 'app.html',
   providers: [Keyboard]
@@ -36,41 +38,40 @@ export class MyApp {
   public menuOpen = "left"
   public isRtl : any
 
-  constructor(public translate : TranslateService, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard : Keyboard) {
+  constructor(public translate : TranslateService, public util: UtilProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard : Keyboard) {
     this.initializeApp();
-
-
-
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage , img: 'assets/imgs/home_icon@2x-2.png' },
-      { title: 'Store Information', component: StoreinformationPage, img: 'assets/imgs/icon_1.png' },
-      { title: 'Products', component: ProductsPage, img: 'assets/imgs/icon_4.png' },
-      { title: 'Promotions', component: PromotionsPage, img: 'assets/imgs/icon_6.png' },
-      { title: 'Orders', component: OrdersPage, img: 'assets/imgs/icon_3.png'  },
-      { title: 'Top Products', component: TopproductsPage, img: 'assets/imgs/icon_9.png'},
-      { title: 'My Payments', component: MypaymentsPage, img: 'assets/imgs/payment_icon@2x-2.png'},
-      { title: 'Messages', component: MessagesPage, img: 'assets/imgs/icon_2.png' },
-      { title: 'Settings', component: SettingsPage, img: 'assets/imgs/icon_5.png' }
+      { title: 'menu_home_page', component: HomePage , img: 'assets/imgs/home_icon@2x-2.png' },
+      { title: 'menu_store_page', component: StoreinformationPage, img: 'assets/imgs/icon_1.png' },
+      { title: 'menu_product_page', component: ProductsPage, img: 'assets/imgs/icon_4.png' },
+      { title: 'menu_promotion_page', component: PromotionsPage, img: 'assets/imgs/icon_6.png' },
+      { title: 'menu_order_page', component: OrdersPage, img: 'assets/imgs/icon_3.png'  },
+      { title: 'menu_top_products_page', component: TopproductsPage, img: 'assets/imgs/icon_9.png'},
+      { title: 'menu_my_payment_page', component: MypaymentsPage, img: 'assets/imgs/payment_icon@2x-2.png'},
+      { title: 'menu_messages_page', component: MessagesPage, img: 'assets/imgs/icon_2.png' },
+      { title: 'menu_settings_page', component: SettingsPage, img: 'assets/imgs/icon_5.png' }
     ];
 
     this.ActivePage = this.pages[0];
+
+    
   }
 
   initializeApp() {
+    
     this.platform.ready().then(() => {
       // this.translate.use('ar')
+      
       let lang  = localStorage.getItem('lang')
       if(lang == "ar"){
         this.translate.use('ar')
         this.platform.setDir('rtl',true)
-        this.menuOpen = "left"
       }else{
         this.translate.use('en')
         this.platform.setDir('ltr',true)
         localStorage.setItem('lang','en')
-        this.menuOpen = "right"
         }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -90,6 +91,11 @@ export class MyApp {
     });
   }
 
+  public getTranslation(keyword){
+    console.log(keyword)
+    return this.translate.get(keyword)
+  }
+  
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

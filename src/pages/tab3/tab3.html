@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
     </button> 		
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'tab3_page' | translate}}</ion-title>
+    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{valueStrings[0].title}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>    
@@ -24,16 +24,16 @@
 	<div class="col-xs-12 promotion-box">
 		<table class="table table-promotion {{util.dir}}">
 			<tr>
-				<td>{{'Stock_specification_value_en' | translate}}</td>
+				<td>{{valueStrings[1].title}}</td>
 				<td>{{x.spec_en}}</td>
 			</tr>
 			<tr>
-				<td>{{'Stock_specification_value_ar' | translate}}</td>
+				<td>{{valueStrings[2].title}}</td>
 				<td>{{x.spec_ar}}</td>
 			</tr>
 			<tr>
-				<td>{{'tab3_page' | translate}}</td>
-				<td><input class="stock" id="{{x.id}}}" name="quantity-{{x.id}}" [(ngModel)]="x.stock" placeholder="{{x.stock}}"></td>
+				<td>{{valueStrings[3].title}}</td>
+				<td><input class="stock" type="number" id="{{x.id}}}" name="quantity-{{x.id}}" [(ngModel)]="x.stock" placeholder="{{x.stock}}"></td>
 			</tr>
 		</table>		
 	</div>
@@ -42,7 +42,7 @@
 
 
 <div class="btn-box-stock" style="text-align: center;">
-	<button class="btn-nazik-stock" (click)="onStock()">{{'save' | translate}}</button>	
+	<button class="btn-nazik-stock" (click)="onStock()">{{valueStrings[4].title}}</button>	
 </div>
 
 </ion-content>

@@ -6,8 +6,8 @@ import { SharedService } from '../../services/sharedService';
 import { StockService } from '../../services/stock';
 import { AlertView } from '../../uicomponents/alert';
 import { HomePage } from '../home/home';
-import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider';
 import { UtilProvider } from '../../providers/util/util';
+import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider';
 
 /**
  * Generated class for the Tab3Page page.

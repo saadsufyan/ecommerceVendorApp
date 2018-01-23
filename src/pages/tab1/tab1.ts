@@ -117,11 +117,6 @@ export class Tab1Page {
   this.app.navPop()
   }  
 
-  goToSpecifications(){
-    
-    this.sharedservice.sendSpecifications(this.specifications)
-    this.navCtrl.parent.select(1)
-  }
   getAllCategory(){
     this.productservice.onGetAllParentCategory().subscribe(res=>{
       console.log(res)
@@ -255,6 +250,8 @@ export class Tab1Page {
       this.show_time = res.response.show_time
       this.specifications = res.response.specifications
 
+      console.log(this.specifications)
+
       console.log(this.parent_cat)
       for(let i = 0; i < this.categoryList.length; i++){
         if(this.parent_cat == this.categoryList[i].id){
@@ -279,6 +276,7 @@ export class Tab1Page {
   }
 
   addProduct(){
+    console.log(this.specifications)
     let data = {
       name: this.name,
       name_ar : this.name_ar,
@@ -298,8 +296,10 @@ export class Tab1Page {
     if(this.name != null && this.name_ar != null && this.description != null && this.description_ar != null && this.tempCatId !=null && this.price !=null){
       if(this.productId != null && this.product_details != null){
         console.log("product Update ")
-        this.sharedservice.send(data)
+        console.log(this.specifications)
+        this.sharedservice.sendProductId(this.productId)
         this.sharedservice.sendSpecifications(this.specifications)
+        this.sharedservice.send(data)
         this.navCtrl.parent.select(1)
       }
       else{

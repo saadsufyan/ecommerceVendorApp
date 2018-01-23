@@ -5,12 +5,9 @@ import { ProductsService } from '../../services/products';
 import { NetworkService } from '../../services/network';
 import { SharedService } from '../../services/sharedService';
 import { AlertView } from '../../uicomponents/alert';
+import { UtilProvider } from '../../providers/util/util';
 import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider';
 import $ from "jquery";
-
-
-
-
 
 
 
@@ -89,18 +86,30 @@ export class Tab2Page {
   public productid :any
   public stock_data : any
   public tempValue_en : any = []
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
+
+  valueStrings  = []
+  tempArry = ['tab2_page','specification_name_en', 'english', 'specification_name_en_placeholder' , 'specification_name_ar', 'arabic', 'specification_name_ar_placeholder', 'specification_value_en', 'english','specification_value_en_placeholder' , 'specification_value_ar', 'arabic','specification_value_ar_placeholder', 'add_value', 'remove_value' , 'specification_add' , 'specification_remove', 'proceed_to_stock']
+
+  constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     this.data = this.sharedservice.fetchData()
     console.log("Form Data: ")
     console.log(this.data)    
 
+    // this.specs = this.navParams.get('datatab1')
     this.specs = this.sharedservice.fetchSpecifications()
     console.log("Spec data: "+this.specs)
 
 
-
+    for(var item in this.tempArry){
+      this.translateprovider.getTranslation(this.tempArry[item]).subscribe((value)=>{
+        let title = this.tempArry[item]
+        this.valueStrings.push({
+           title : value
+        })
+      })
+    }
+    console.log(this.valueStrings)
 
 
 
@@ -122,6 +131,8 @@ export class Tab2Page {
 
   goBack(){
     // this.app.navPop()
+    this.sharedservice.sendSpecifications(null)
+    this.sharedservice.sendProductId(null)
     this.navCtrl.parent.select(0)
   }
 
@@ -130,6 +141,7 @@ export class Tab2Page {
   }
 
   try(){
+    console.log(this.specs)
     for(var i = 0 ; i<this.specs.length;i++){
       console.log(this.specs)
       console.log(this.specs[i])
@@ -138,6 +150,7 @@ export class Tab2Page {
 
     this.productid = this.sharedservice.fetchProductId()
     console.log(this.specs)
+    console.log(this.productid)
     if(this.productid == null){
       this.specbutton = true
     }
@@ -169,9 +182,6 @@ export class Tab2Page {
       };  
 
 
-
-
-      
       var spec_name_en = "spec_name_"+spec_num+"_en";
 
       var spec_name_ar = "spec_name_"+spec_num+"_ar";
@@ -210,7 +220,8 @@ export class Tab2Page {
 
     let my_data = this.data;
 
-  //  this.data.specifications 
+  console.log("complete data")
+  console.log(this.data)
    console.log(this.data.specifications)
    this.data.specifications = specifications
 
@@ -251,7 +262,8 @@ export class Tab2Page {
   else if (this.productid != null){
     
     console.log("update product")
-    if(this.data.length > 0){
+    console.log(this.data)
+    if(this.data.specifications.length > 0){
       this.popup.showLoader()
       this.productservice.onUpdateProductDetails(this.productid,this.data).subscribe(res=>{
       
@@ -283,10 +295,10 @@ export class Tab2Page {
 
   addValue(spec_num,value,value_ar,is_fixed){
 
-if(value=='undefined'){
-  value = '';
-}
-
+    if(value=='undefined'){
+      value = '';
+    }
+  
   
     value_ar = ''||value_ar;
 
@@ -295,8 +307,9 @@ if(value=='undefined'){
     $('#addvalue_spec_'+spec_num).append(get_value_html(spec_num,value,value_ar,is_fixed));
 
     function get_value_html(spec_num,value,value_ar,is_fixed){
-
+      console.log(is_fixed)
       if(is_fixed == true){
+
         var class_fixed = "class='fixed'";
         var disable = 'disabled';
       }
@@ -368,8 +381,12 @@ if(value=='undefined'){
 
   removeSpec(){
 
-      this.specBox.pop()
-      console.log(this.specBox)
+
+
+      if(this.specBox.length > this.specs.length){
+        this.specBox.pop()
+        console.log(this.specBox)
+      }
   }
 
   removeValue(id){
@@ -408,7 +425,8 @@ console.log(is_fixed);
     }    
   }
 
-  addSpec(spec_id){
+  addSpec(spec_id){ 
+    console.log(spec_id)
 
     this.specbox = true
 
@@ -422,47 +440,65 @@ console.log(is_fixed);
     }
     this.specBox.push(temp)
  if(this.specs.length > 0){
-
-
-
-
-
     setTimeout(set_params, 1000, id,this.specs,this.addValue);
    
 }    
 
     function set_params(id, spec,addValue) {
+      console.log(spec)
+      console.log(id)
+      if(spec.length > spec_id){
+        var spec_input_en = '#spec_name_'+id+'_en'
+        var spec_input_ar = '#spec_name_'+id+'_ar'
+  
+        $(spec_input_en).prop('disabled', true);
+        $(spec_input_ar).prop('disabled', true);
+  
+        var value_input_en = '#spec_'+id+'_value_1_en'
+        $(value_input_en).prop('disabled', true);
+        var value_input_ar = '#spec_'+id+'_value_1_ar'
+        $(value_input_ar).prop('disabled', true);
+      }else{
+        var spec_input_en = '#spec_name_'+id+'_en'
+        var spec_input_ar = '#spec_name_'+id+'_ar'
+  
+        $(spec_input_en).prop('disabled', false);
+        $(spec_input_ar).prop('disabled', false);
+  
+        var value_input_en = '#spec_'+id+'_value_1_en'
+        $(value_input_en).prop('disabled', false);
+        var value_input_ar = '#spec_'+id+'_value_1_ar'
+        $(value_input_ar).prop('disabled', false);
+      }
 
 
-      var spec_input_en = '#spec_name_'+id+'_en'
-      var spec_input_ar = '#spec_name_'+id+'_ar'
-
-      $(spec_input_en).prop('disabled', true);
-      $(spec_input_ar).prop('disabled', true);
-
-      var value_input_en = '#spec_'+id+'_value_1_en'
-      $(value_input_en).prop('disabled', true);
-      var value_input_ar = '#spec_'+id+'_value_1_ar'
-      $(value_input_ar).prop('disabled', true);
       
-      spec = spec[(id-1)];
+
+      if(((id-1)in spec) ){
+
+        spec = spec[(id-1)];
+
       var values = spec.values;
       var values_ar = spec.values_ar;
 
-      $('#spec_name_'+id+'_en').val(spec.key);
-      $('#spec_name_'+id+'_ar').val(spec.key_ar);
-
-      $('#spec_'+id+'_value_1_en').val(values[0]);
-      $('#spec_'+id+'_value_1_ar').val(values_ar[0]);
-
-
-
-        for(var val_index=1 ; val_index<values.length ; val_index++){
-
-          addValue(id,values[val_index],values_ar[val_index],true);
+        $('#spec_name_'+id+'_en').val(spec.key);
+        $('#spec_name_'+id+'_ar').val(spec.key_ar);
   
-        console.log(('#spec_'+id+'_value_'+(val_index+1)+'_en'))
-      }
+        $('#spec_'+id+'_value_1_en').val(values[0]);
+        $('#spec_'+id+'_value_1_ar').val(values_ar[0]);
+  
+  
+  
+          for(var val_index=1 ; val_index<values.length ; val_index++){
+  
+            addValue(id,values[val_index],values_ar[val_index],true);
+    
+          console.log(('#spec_'+id+'_value_'+(val_index+1)+'_en'))
+        }
+
+    }
+      
+
   }
   
   }
