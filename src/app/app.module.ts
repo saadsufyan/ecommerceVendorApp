@@ -40,6 +40,12 @@ import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connec
 
 import { UtilProvider } from '../providers/util/util';
 import { TranslateproviderProvider } from '../providers/translateprovider/translateprovider';
+import { ConnectivityServiceProvider } from '../providers/connectivity-service/connectivity-service';
+import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
+
+import { LocationSelectPage } from '../pages/location-select/location-select';
+import { Network } from '@ionic-native/network';
+
 
 export function createTranslateLoader(http: Http) {  
     return new TranslateStaticLoader(http, 'assets/i18n', '.json');
@@ -56,6 +62,7 @@ export function createTranslateLoader(http: Http) {
     FirstPage,
     LoginPage,
     StoreinformationPage,
+    LocationSelectPage,
     ProductsPage,
     PromotionsPage,
     OrdersPage,
@@ -96,6 +103,7 @@ export function createTranslateLoader(http: Http) {
     FirstPage,
     LoginPage,
     StoreinformationPage,
+    LocationSelectPage,
     ProductsPage,
     PromotionsPage,
     OrdersPage,
@@ -120,11 +128,16 @@ export function createTranslateLoader(http: Http) {
     NetworkService,
     SharedService,
     PhotoViewer,
+    ConnectivityServiceProvider,
+    GoogleMapsProvider,
+    Network,
     Geolocation,
     UtilProvider,
     {provide: Http, useClass: Http, deps: [NativeHttpFallbackD, RequestOptions]},
     UtilProvider,
-    TranslateproviderProvider
+    TranslateproviderProvider,
+    ConnectivityServiceProvider,
+    GoogleMapsProvider
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component,ViewChild, ElementRef   } from '@angular/core';
-import { Nav ,IonicPage, NavController, NavParams, ViewController, AlertController, Loading, LoadingController } from 'ionic-angular';
+import { Nav ,IonicPage, NavController, NavParams, ViewController, AlertController, Loading, LoadingController, ModalController } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { StoreInformationService } from '../../services/storeinformation';
 import { LoginPage } from '../login/login';
@@ -9,7 +9,7 @@ import { AlertView } from '../../uicomponents/alert';
 import { Geolocation } from '@ionic-native/geolocation';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
-
+import { LocationSelectPage } from '../location-select/location-select';
 /**
  * Generated class for the StoreinformationPage page.
  *
@@ -57,7 +57,7 @@ export class StoreinformationPage {
   public long :any
 
   public errorMessage: any = ""
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView, public modalCtrl: ModalController) {
   
     // this.getCities()
   }
@@ -66,7 +66,7 @@ export class StoreinformationPage {
     console.log('ionViewDidLoad StoreinformationPage');
     this.getVendorData()
     this.getCountries()
-    this.loadMap()
+
     // this.getCities()
   }
   ionViewWillEnter(){
@@ -82,8 +82,13 @@ export class StoreinformationPage {
   }
 
   getCountry(){
-    console.log("country: " + this.countryname)
-    this.getCities()
+    console.log("Country name: ")
+    console.log(this.countryname)
+    if(this.countryname != "opt"){
+      console.log("im here")
+      this.getCities()
+    }
+    
   }
   getCountries(){
     this.storeinfoservice.onGetCountries().subscribe(res=>{
@@ -134,7 +139,7 @@ export class StoreinformationPage {
       this.offdays = res.response.weekends
       this.lat = res.response.lat,
       this.long = res.response.long,
-      this.logo = res.response.logo
+      this.logo = res.response.image
 
     }, err=>{
 
@@ -277,24 +282,6 @@ onChange(event) {
 
 }
 
-loadMap(){
- 
-  this.geolocation.getCurrentPosition().then((position) => {
-
-
-    this.loc = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-    this.lat = position.coords.latitude
-    this.long = position.coords.longitude
-    console.log("lat "  + position.coords.latitude)
-    console.log("long "  + position.coords.longitude)
-
-
-  }, (err) => {
-    console.log(err);
-  });
-
-}
 
 
 onUserLogout(){
@@ -328,6 +315,22 @@ showLoading(){
   this.loading.present();
 }
 
+
+launchLocationPage(){
+ 
+  let modal = this.modalCtrl.create(LocationSelectPage);
+
+  modal.onDidDismiss((location) => {
+      console.log(location);
+      this.lat = location.lat
+      this.long = location.lng 
+
+      console.log(this.lat + " --- "  + this.long)
+  });
+
+  modal.present();   
+
+}
 
 
 }

@@ -38,6 +38,7 @@
 		      	<label class="dark">{{valueStrings[9].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="categoryid" [(ngModel)]="categoryObj" (change)="getSubCategory()">
+							<option value="nocat">Select Category</option>
 		        	<option *ngFor="let x of categoryList;let i = index" [ngValue]="x">{{x.name}}</option>
 						</select>
 		      </div>
@@ -45,21 +46,23 @@
 		      	<label class="dark">{{valueStrings[10].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="subcategoryid" [(ngModel)]="subcategoryObj" (change)="onSubCategoryChange()">
+							<option value="nosubcat">Select Sub Category</option>
 		        	<option *ngFor="let x of subcategoryList;let i = index" [ngValue]="x">{{x.name}}</option>
 		        </select>
 					</div>
 					
-					<div class="col-xs-12 text-center">
+					<!-- <div class="col-xs-12 text-center">
 						<br>
 						<button  class="btn-nazik-undo" (click)="onClickUndo()">{{valueStrings[11].title}}</button>
 						<button id="Cat_button" class="btn-nazik-remove-value" (click)="onChangeGetSubCategory()">{{valueStrings[12].title}}</button>
 						<br><br>
-					</div>
+					</div> -->
 
 					<div class="form-group">	      	
 		      	<label class="dark">{{valueStrings[13].title}}</label>
 		      	<br>
-		        <select class="dropdown dark" name="productType" [(ngModel)]="producttype">
+		        <select class="dropdown dark" name="productType" [(ngModel)]="producttype" (change)="getProductType()">
+							<option value="noproduct">Select Product</option>
 							<option value="product" [selected]="Product">{{valueStrings[14].title}}</option>
 							<option vlaue="services">{{valueStrings[15].title}}</option>
 		        </select>
@@ -111,9 +114,9 @@
 		      </div>
 		      <div class="form-group">
 		      	<label class="dark">{{valueStrings[20].title}}</label>
-		        <input type="email" class="text-box form-control dark" placeholder="{{valueStrings[21].title}}" required="" [(ngModel)]="price" name="price">
+		        <input type="number" class="text-box form-control dark" required [(ngModel)]="price" name="price">
 		      </div>
-		      <div class="checkbox ltr">
+		      <div class="checkbox ltr" *ngIf="serviceDiv">
 			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_calender" name="show_calender">{{valueStrings[22].title}}</label> &nbsp;&nbsp;
 			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_time" name="show_time">{{valueStrings[23].title}}</label>
 			  </div>

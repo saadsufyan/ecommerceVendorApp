@@ -47,12 +47,13 @@
 			      	<label class="dark">{{'promotion_product' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" [(ngModel)]="product_id" name="product_id" (change)="selectedProduct()">
-			        	<option *ngFor="let x of allproducts;let i = index" [ngValue]="x">{{x.name}}</option>
+								<option value="opt">Select Product</option>
+								<option *ngFor="let x of allproducts;let i = index" [ngValue]="x">{{x.name}}</option>
 			        </select>
 			      </div>
 			      <div class="form-group">
 			      	<label class="dark">{{'promotion_discount' | translate}}</label>
-			        <input type="number" class="text-box form-control dark" placeholder="{{'promotion_discount_placeholder' | translate}}" required="" [(ngModel)]="discount" name="discount">
+			        <input type="number" class="text-box form-control dark"  required [(ngModel)]="discount" name="discount">
 			      </div>
 						<div class="form-group" style="height: 60px !important;">
 							<div class="col-xs-6 no-p">

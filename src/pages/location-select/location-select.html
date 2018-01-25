@@ -1,0 +1,43 @@
+<ion-header>
+
+    <ion-navbar class="black-header">
+      <!-- <button ion-button menuToggle>
+        <ion-icon name="menu" style="color: white"></ion-icon>
+      </button>         -->
+      <ion-title class="header-name" style="padding: 0px 0px 0px 0px !important"><img src="assets/imgs/icon_logo@2x.png"> {{'map' | translate}}</ion-title>
+       <ion-buttons right>
+         <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button> 
+  
+    </ion-buttons>     
+    </ion-navbar>
+  
+  </ion-header>
+ 
+
+
+<ion-content>
+ 
+  <ion-toolbar color="red">
+      <ion-buttons left>
+          <button ion-button (click)="close()">Cancel</button>
+      </ion-buttons>
+      <ion-buttons right>
+          <button [disabled]="saveDisabled" ion-button (click)="save()">Save</button>
+      </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+      <ion-searchbar [(ngModel)]="query" (ionInput)="searchPlace()"></ion-searchbar>
+  </ion-toolbar>
+  <ion-list>
+      <ion-item *ngFor="let place of places" (touchstart)="selectPlace(place)">{{place.description}}</ion-item>
+  </ion-list>
+
+    <div #pleaseConnect id="please-connect">
+        <p>Please connect to the Internet...</p>
+    </div>
+ 
+    <div #map id="map">
+        <ion-spinner></ion-spinner>
+    </div>
+ 
+</ion-content>

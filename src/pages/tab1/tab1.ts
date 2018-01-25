@@ -73,6 +73,7 @@ export class Tab1Page {
   public product_details : any 
   public categoryButton : boolean = true
   public producttype
+  public serviceDiv : boolean = false
   valueStrings  = []
   tempArry = ['tab1_page','products_name_en', 'products_name_placeholder_en' , 'products_name_ar', 'products_name_placeholder_ar', 'promotion_description_en', 'promotion_description_en_placeholder' , 'promotion_description_ar', 'promotion_description_ar_placeholder', 'product_category', 'product_subcategory' , 'undo' , 'select_category', 'product_type', 'product_type_product','product_type_service', 'thumbnail_image', 'choose_file', 'product_image', 'choose_file', 'product_price_in_local', 'product_price_in_local_placeholder', 'show_calender', 'show_time', 'save']
 
@@ -229,6 +230,22 @@ export class Tab1Page {
     })
   }
 
+
+  getProductType(){
+    console.log(this.producttype)
+    if(this.producttype == 'Service'){
+      console.log("im here")
+      this.serviceDiv == true ? this.serviceDiv = false : this.serviceDiv = true
+      // this.serviceDiv = true
+    }
+    else if(this.producttype == 'product'){
+      this.serviceDiv = false
+    }
+    else if(this.producttype == 'noproduct'){
+      this.serviceDiv = false
+    }
+  }
+
   getProductDetails(){
     console.log("mil gai id: "  + this.productId)
 
@@ -324,7 +341,7 @@ export class Tab1Page {
     let file = event.srcElement.files[0];
 
     var formdata = new FormData();
-
+      alert(formdata)
       formdata.append('avatar', file);
       this.productservice.uploadPicture(formdata).subscribe(res => {
       console.log(res)
@@ -345,6 +362,7 @@ export class Tab1Page {
       }
     },
     err => {
+      alert(err)
       console.log(err)
       this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
@@ -383,6 +401,7 @@ export class Tab1Page {
       }
     },
     err => {
+      alert(err)
       console.log(err)
       this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)

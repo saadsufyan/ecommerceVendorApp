@@ -77,13 +77,14 @@
 			      	<label class="dark">{{'select_country' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" name="countryname" [(ngModel)]="countryname" (change)="getCountry()">
+								<option value="opt">Select Country</option>
 			        	<option *ngFor="let x of countrylist;let i = index" value="{{x}}">{{x}}</option>
 			        </select>
 			      </div>
 			      <div class="form-group">	      	
 			      	<label class="dark" style="text-decoration: underline;" (click)="presentPrompt()">{{'select_city' | translate}}</label>
 			      </div>
-			      <div class="form-group" (click)="openMap()">	      	
+			      <div class="form-group" (click)="launchLocationPage()">	      	
 			      	<label class="dark" style="text-decoration: underline;">{{'click_on_map' | translate}}</label>&nbsp; <img src="assets/imgs/map.png">
 						</div>
 						
@@ -91,7 +92,7 @@
 							<div class="col-xs-6 no-p">
 									<label class="dark">{{'store_logo' |  translate}}</label> <br>
 									<span id="fileselector">
-										<label class="" for="upload-file-selector">
+										<label class="" for="upload-file-selector choosefile-button">
 												<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
 												<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 												
@@ -109,8 +110,12 @@
 			      	<label class="dark">{{'select_off_day' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" name="offdays" [(ngModel)]="offdays">
-			        	<option>{{'select_off_day_friday' | translate}}</option>
-			        	<option>{{'select_off_day_saturday' | translate}}</option>
+								<option value="a">{{'select_off_day' | translate}}</option>
+			        	<option value="monday">{{'select_off_day_monday' | translate}}</option>
+								<option value="tuesday">{{'select_off_day_tuesday' | translate}}</option>
+								<option value="wednesday">{{'select_off_day_wednesday' | translate}}</option>
+								<option value="thursday">{{'select_off_day_thursday' | translate}}</option>
+								<option value="friday">{{'select_off_day_friday' | translate}}</option>
 			        </select>
 			      </div>
 
