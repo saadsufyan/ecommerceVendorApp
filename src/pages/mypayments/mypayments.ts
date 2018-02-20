@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { PaymentService } from '../../services/payment';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the MypaymentsPage page.
@@ -27,15 +28,25 @@ export class MypaymentsPage {
   public name_ar: any
   public errormsg : any = true
   public payments
+  public checklang : boolean = false
+  public loginError
 
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public paymentservice: PaymentService, public popup: AlertView) {
+  constructor(public alertCtrl: AlertController,public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public paymentservice: PaymentService, public popup: AlertView) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MypaymentsPage');
     this.MyPayment()
-  }
 
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+      this.loginError = "لقد تم تسجيل الخروج"   
+    }else{
+      this.checklang = false
+      this.loginError = "You have been logged out"
+      }    
+  }
   MyPayment(){
     this.paymentservice.onGetMyPayments().subscribe(res=>{
       console.log(res)
@@ -86,7 +97,20 @@ export class MypaymentsPage {
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      // this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      if(this.errorMessage == "Unauthorized Request"){
+        let alert = this.alertCtrl.create({
+          title: 'Login Error',
+          message: this.loginError,
+          buttons: ['Dismiss']
+        });
+        alert.present();         
+        localStorage.setItem('user' , null)
+        localStorage.setItem('isLoggedIn', "false")
+        this.navCtrl.push(LoginPage)
+      } else{
+        this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      }
 })
   }
 }

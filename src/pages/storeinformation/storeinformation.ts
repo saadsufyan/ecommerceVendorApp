@@ -1,5 +1,5 @@
 import { Component,ViewChild, ElementRef   } from '@angular/core';
-import { Nav ,IonicPage, NavController, NavParams, ViewController, AlertController, Loading, LoadingController, ModalController } from 'ionic-angular';
+import { Nav ,IonicPage, NavController, NavParams, ViewController, AlertController, Loading, LoadingController, ModalController, normalizeURL } from 'ionic-angular';
 import { MapPage } from '../map/map';
 import { StoreInformationService } from '../../services/storeinformation';
 import { LoginPage } from '../login/login';
@@ -10,6 +10,11 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
 import { LocationSelectPage } from '../location-select/location-select';
+import { HomePage } from '../home/home';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+// import { Camera, CameraOptions } from '@ionic-native/camera';
+
+// import { HTTP } from '@ionic-native/http';
 /**
  * Generated class for the StoreinformationPage page.
  *
@@ -31,9 +36,15 @@ export class StoreinformationPage {
   map: any;
   loc : any
 
+  public ios_Client_key : string = 'Z29tYWxsLWFwcC1pb3M6NWFlZTMyZjItYTgyOS00Y2I2LWE5MzgtOGQxZmYwYjJhMTg4DQo=';
+  public android_client_key : string = 'Z29tYWxsLWFwcC1hbmRyb2lkOjY2ZmU3MzBmLWQ2M2UtNDI2OS04ZmJhLTkwMGYxMDY4ZDdmOQ==';
+
+
   loading : Loading
 
   currentLocation : any
+  private imageSrc: string;
+  public imagePath
 
   public countrylist = []
 
@@ -41,7 +52,8 @@ export class StoreinformationPage {
 
   public vendorData = {}
 
-  public imageFile 
+  public imageURI:any;
+  public imageFileName:any;
   public logo
 
   public vendorname: any 
@@ -57,7 +69,16 @@ export class StoreinformationPage {
   public long :any
 
   public errorMessage: any = ""
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView, public modalCtrl: ModalController) {
+  public checklang : boolean = false
+
+  public prompt_cityname
+  public prompt_confirm
+  public prompt_cancel
+  public prompt_logout
+  public prompt_logut_message
+  public loginError
+  public cityError
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView, public modalCtrl: ModalController,) {
   
     // this.getCities()
   }
@@ -71,6 +92,27 @@ export class StoreinformationPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+
+    if(this.popup.getLanguage() == "ar"){
+      this.checklang = true
+      this.prompt_cityname = "اختر المدينة التي يمكنك التوصيل لها (خدمته) "
+      this.prompt_confirm = "تؤكد"
+      this.prompt_logout = "الخروج"
+      this.prompt_logut_message = "هل أنت متأكد أنك تريد تسجيل الخروج ؟"
+      this.prompt_cancel = "إلغاء"   
+      this.loginError = "لقد تم تسجيل الخروج"   
+      this.cityError = "لم يتم تحديد أي بلد"
+    }
+    else{
+      this.checklang = false
+      this.prompt_cityname = "Select City"
+      this.prompt_confirm = "Confirm"
+      this.prompt_logout = "Logout"
+      this.prompt_logut_message = "Are you sure you want to logout ?"
+      this.prompt_cancel = "Cancel" 
+      this.loginError = "You have been logged out"  
+      this.cityError = "No country selected"   
+    }      
   }
   goBack(){
     this.navCtrl.pop()
@@ -102,7 +144,7 @@ export class StoreinformationPage {
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")      
+      // this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")      
     })
   }
 
@@ -148,6 +190,22 @@ export class StoreinformationPage {
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
+      console.log(this.errorMessage)
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      if(this.errorMessage == "Unauthorized Request"){
+        let alert = this.alertCtrl.create({
+          title: 'Login Error',
+          message: this.loginError,
+          buttons: ['Dismiss']
+        });
+        alert.present();  
+        localStorage.setItem('user' , null)
+        localStorage.setItem('isLoggedIn', "false")
+      
+        this.navCtrl.push(LoginPage)
+      } else{
+        
+      }
     })
     
   }
@@ -195,9 +253,16 @@ export class StoreinformationPage {
 presentPrompt() {
   // this.getCities()
   console.log("in prompt")
-  let alert = this.alertCtrl.create();
-  
-  alert.setTitle('Select City');
+  if(this.countryname != null){
+    this.cityError = null
+  }
+
+  let alert = this.alertCtrl.create({
+    title: this.prompt_cityname,
+    message: this.cityError
+  });  
+
+
 
     for (let i = 0; i< this.citylist.length; i++ ){
 
@@ -210,7 +275,7 @@ presentPrompt() {
     )
     };
     alert.addButton({
-      text: 'Confirm',
+      text: this.prompt_confirm,
       role: 'accept',
       handler: data => {
         console.log(data);
@@ -237,34 +302,29 @@ presentPrompt() {
   alert.present();
 }  
 
+
+
 onChange(event) {
-  this.popup.showLoader()
-
-  this.imageFile = event.srcElement.files[0];
-
-  // this.imageFile = this.imageFile.split('.').pop();
-
-  console.log(this.imageFile)
   
-  let file = event.srcElement.files[0];
+  var image = event.srcElement.files[0];
 
   var formdata = new FormData();
-  console.log(file.type.substring(0,5))
 
-  if(file.type.substring(0,5) == "image"){
-    //image
-    formdata.append('avatar', file);
+    formdata.append('avatar',  image);       
+
+
+    this.popup.showLoader()
+    
     this.storeinfoservice.uploadPicture(formdata).subscribe(res => {
     console.log(res)
-    if(res.status > 0){
+    if(res.status){
       this.popup.hideLoader()
-      this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
+      
       let user = JSON.parse(localStorage.getItem('user'))
-        
-      //this.pictures.file = res.response.file
       this.logo = res.response.avatar
 
       console.log(this.logo)
+      this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
 
       localStorage.setItem('user' , JSON.stringify(user))
       console.log(JSON.parse(localStorage.getItem('user'))) 
@@ -278,34 +338,52 @@ onChange(event) {
     this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
   })
 
-  }
+  
 
 }
+onUserLogout() {
 
+    let alert = this.alertCtrl.create({
+      title: this.prompt_logout,
+      message: this.prompt_logut_message,
+      buttons: [
+        {
+          text: this.prompt_cancel,
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: this.prompt_confirm,
+          handler: () => {
+            console.log('Confirm clicked');
+            
+            this.popup.showLoader()
 
-
-onUserLogout(){
-  //this.popup.showLoader()
-  this.showLoading()
-  this.loginservice.onUserLogout().subscribe((res) => {
+            this.loginservice.onUserLogout().subscribe((res) => {
             
     
-    console.log(res)
-    //this.popup.hideLoader()
-    if(res.status){
-      localStorage.setItem('isLoggedIn', null)
-      //localStorage.setItem('user' , null)
-
-      this.navCtrl.push(LoginPage,{animation: 'left'})
-    }
-  },
-  err => {
-    console.log("logged out")
-    //this.popup.hideLoader()
-    //this.popup.showToast(err.data.error.message[0] , 1500 , 'bottom' , false , "")
-  })  
-
-}
+              console.log(res)
+              this.popup.hideLoader()
+              if(res.status){
+                localStorage.setItem('isLoggedIn', null)
+                //localStorage.setItem('user' , null)
+          
+                this.navCtrl.push(LoginPage,{animation: 'left'})
+              }
+            },
+            err => {
+              console.log("logged out")
+              this.popup.hideLoader()
+              this.popup.showToast(err.data.error.message[0] , 1500 , 'bottom' , false , "")
+            })              
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 
 showLoading(){
   this.loading = this.loadingCtrl.create({
@@ -322,8 +400,11 @@ launchLocationPage(){
 
   modal.onDidDismiss((location) => {
       console.log(location);
-      this.lat = location.lat
-      this.long = location.lng 
+      if(location !=null){
+        this.lat = location.lat
+        this.long = location.lng 
+      }
+
 
       console.log(this.lat + " --- "  + this.long)
   });

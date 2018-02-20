@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, App} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, App, normalizeURL} from 'ionic-angular';
 import { ProductsPage } from '../products/products';
 import { ProductsService } from '../../services/products';
 import { NetworkService } from '../../services/network';
@@ -10,7 +10,8 @@ import { UtilProvider } from '../../providers/util/util';
 // import { TranslateService } from 'ng2-translate';
 
 import { TranslateproviderProvider } from '../../providers/translateprovider/translateprovider'
-
+import $ from "jquery";
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the Tab1Page page.
@@ -76,9 +77,9 @@ export class Tab1Page {
   public serviceDiv : boolean = false
   valueStrings  = []
   tempArry = ['tab1_page','products_name_en', 'products_name_placeholder_en' , 'products_name_ar', 'products_name_placeholder_ar', 'promotion_description_en', 'promotion_description_en_placeholder' , 'promotion_description_ar', 'promotion_description_ar_placeholder', 'product_category', 'product_subcategory' , 'undo' , 'select_category', 'product_type', 'product_type_product','product_type_service', 'thumbnail_image', 'choose_file', 'product_image', 'choose_file', 'product_price_in_local', 'product_price_in_local_placeholder', 'show_calender', 'show_time', 'save']
+  public checklang : boolean = false
 
-
-  constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public popup: AlertView) {
+  constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public productservice: ProductsService, public sharedservice: SharedService, public alertCtrl: AlertController,public popup: AlertView) {
   // console.log(translate)
     this.productId = this.navParams.get('id')
     console.log("new id " + this.productId)
@@ -112,6 +113,13 @@ export class Tab1Page {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }        
   }
   goBack(){
     // this.navCtrl.pop()
@@ -287,7 +295,19 @@ export class Tab1Page {
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      // this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      if(this.errorMessage == "Unauthorized Request"){
+        let alert = this.alertCtrl.create({
+          title: 'Login Error',
+          buttons: ['Dismiss']
+        });
+        alert.present();  
+        localStorage.setItem('user' , null)
+        localStorage.setItem('isLoggedIn', "false")
+        this.navCtrl.push(LoginPage)
+      } else{
+        this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      }
     })
     
   }
@@ -310,7 +330,15 @@ export class Tab1Page {
     }
     console.log(data)
 
-    if(this.name != null && this.name_ar != null && this.description != null && this.description_ar != null && this.tempCatId !=null && this.price !=null){
+  
+    if(this.name_ar != null){
+      var a = this.name_ar.indexOf(' ') >= 0;
+      console.log(a)
+    }
+
+
+
+    if(this.name != null && this.name_ar != null && this.description != null && this.description_ar != null && this.tempCatId !=null && this.price !=null && a != true){
       if(this.productId != null && this.product_details != null){
         console.log("product Update ")
         console.log(this.specifications)
@@ -324,6 +352,8 @@ export class Tab1Page {
         this.sharedservice.send(data)
         this.navCtrl.parent.select(1)
       }
+    }else if(a==true){
+      this.popup.showToast('Spaces not allowed in Arabic name', 2000 , 'bottom' ,false , "")
     }else{
       this.popup.showToast('please fill all required fields ', 2000 , 'bottom' ,false , "")
     }
@@ -341,11 +371,11 @@ export class Tab1Page {
     let file = event.srcElement.files[0];
 
     var formdata = new FormData();
-      alert(formdata)
+
       formdata.append('avatar', file);
       this.productservice.uploadPicture(formdata).subscribe(res => {
       console.log(res)
-      if(res.status > 0){
+      if(res.status){
         this.popup.hideLoader()
         this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
         let user = JSON.parse(localStorage.getItem('user'))
@@ -362,7 +392,7 @@ export class Tab1Page {
       }
     },
     err => {
-      alert(err)
+
       console.log(err)
       this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
@@ -380,14 +410,18 @@ export class Tab1Page {
 
     console.log(this.imageFile)
     
+
     let file = event.srcElement.files[0];
 
+
     var formdata = new FormData();
+
+
 
       formdata.append('avatar', file);
       this.productservice.uploadPicture(formdata).subscribe(res => {
       console.log(res)
-      if(res.status > 0){
+      if(res.status){
         this.popup.hideLoader()
         this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
         let user = JSON.parse(localStorage.getItem('user'))
@@ -401,7 +435,7 @@ export class Tab1Page {
       }
     },
     err => {
-      alert(err)
+
       console.log(err)
       this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)

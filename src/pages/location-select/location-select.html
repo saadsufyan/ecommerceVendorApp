@@ -4,7 +4,7 @@
       <!-- <button ion-button menuToggle>
         <ion-icon name="menu" style="color: white"></ion-icon>
       </button>         -->
-      <ion-title class="header-name" style="padding: 0px 0px 0px 0px !important"><img src="assets/imgs/icon_logo@2x.png"> {{'map' | translate}}</ion-title>
+      <ion-title class="header-name" [ngClass]="(checklang) ? 'title-page-ar ': 'title-page-en '"  style="padding: 0px 0px 0px 0px !important"><img src="assets/imgs/icon_logo@2x.png"> {{'map' | translate}}</ion-title>
        <ion-buttons right>
          <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button> 
   
@@ -19,10 +19,10 @@
  
   <ion-toolbar color="red">
       <ion-buttons left>
-          <button ion-button (click)="close()">Cancel</button>
+          <button ion-button (click)="close()">{{'cancel' | translate}}</button>
       </ion-buttons>
       <ion-buttons right>
-          <button [disabled]="saveDisabled" ion-button (click)="save()">Save</button>
+          <button [disabled]="saveDisabled" ion-button (click)="save()">{{'save' | translate}}</button>
       </ion-buttons>
   </ion-toolbar>
   <ion-toolbar>

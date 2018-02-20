@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { ProductstabPage } from '../productstab/productstab';
 import { ProductsService } from '../../services/products';
 import { NetworkService } from '../../services/network';
@@ -8,6 +8,7 @@ import { SharedService } from '../../services/sharedService';
 import { Tab1Page } from '../tab1/tab1';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -29,10 +30,12 @@ export class ProductsPage {
 
   public errorMessage
   public errormsg : any = true
+  public checklang : boolean = false
+  public loginError
   
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView, public sharedservice: SharedService) {
+  constructor(public alertCtrl:AlertController, public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView, public sharedservice: SharedService) {
   
-    this.getAllProducts()
+    
   }
 
   ionViewDidLoad() {
@@ -41,6 +44,17 @@ export class ProductsPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+
+    this.getAllProducts()
+
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+      this.loginError = "لقد تم تسجيل الخروج"   
+    }else{
+      this.checklang = false
+      this.loginError = "You have been logged out"
+      }        
   }  
   goBack(){
     this.navCtrl.pop()
@@ -73,7 +87,20 @@ export class ProductsPage {
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      // this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      if(this.errorMessage == "Unauthorized Request"){
+        let alert = this.alertCtrl.create({
+          title: 'Login Error',
+          message: this.loginError,
+          buttons: ['Dismiss']
+        });
+        alert.present(); 
+        localStorage.setItem('user' , null)
+        localStorage.setItem('isLoggedIn', "false")
+        this.navCtrl.push(LoginPage)
+      } else{
+        this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      }
     })
   }
 
@@ -82,7 +109,7 @@ export class ProductsPage {
     this.productservice.onDeleteProduct(id).subscribe(res=>{
       console.log(res)
       this.popup.hideLoader()
-      location.reload();
+      this.navCtrl.push(ProductsPage,{animation: 'left'})
       
     },err => {
       console.log("masla ha ")

@@ -33,7 +33,7 @@ export class Tab3Page {
 
   valueStrings  = []
   tempArry = ['tab3_page', 'Stock_specification_value_en', 'Stock_specification_value_ar' , 'tab3_page', 'save']
-
+  public checklang : boolean = false
   constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App,public stockservice : StockService, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     this.val = this.navParams.get('data')
@@ -59,6 +59,12 @@ export class Tab3Page {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }        
   }
   goBack(){
     this.app.navPop()

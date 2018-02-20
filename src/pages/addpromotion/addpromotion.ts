@@ -40,6 +40,7 @@ export class AddpromotionPage {
   public errorMessage : any = ""
   public allproducts : any
   public selected_product_id
+  public checklang : boolean = false
 
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
   
@@ -58,6 +59,12 @@ export class AddpromotionPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }    
   }
   goBack(){
     this.navCtrl.pop()
@@ -200,7 +207,7 @@ export class AddpromotionPage {
       formdata.append('avatar', file);
       this.promotionservice.uploadPicture(formdata).subscribe(res => {
       console.log(res)
-      if(res.status > 0){
+      if(res.status){
         this.popup.hideLoader()
         this.popup.showToast('picture uploaded successfully' , 1500 , 'bottom' , false , "")
         let user = JSON.parse(localStorage.getItem('user'))

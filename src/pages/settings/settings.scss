@@ -41,7 +41,8 @@ page-settings {
 
 .alert-ios .alert-head {
 
-    background: url(../assets/imgs/bg.jpg);
+    // background: url(../assets/imgs/bg.jpg);
+    background: black;
 }
 
 .alert-ios .alert-button:last-child {
@@ -57,7 +58,7 @@ page-settings {
 
 .alert-md .alert-head {
     padding: 10px 24px 20px;
-    background: url(../assets/imgs/bg.jpg);
+    background: black;
 }
 
 .alert-md .alert-input:focus {
@@ -65,12 +66,6 @@ page-settings {
     border-bottom: 2px solid #222;
 }
 
-.alert-md .alert-button {
-
-    color: #f4f4f4;
-    background-color: #e13838;
-    padding: 5px 40px 5px 40px;
-}
 
 .alert-md .alert-button-group {
 

@@ -54,6 +54,7 @@ export class LoginPage {
         console.log(res)
         localStorage.setItem('user' , JSON.stringify(res.response))
         localStorage.setItem('isLoggedIn', "true")
+        console.log(localStorage)
         this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
         }
       }, err => {

@@ -24,7 +24,7 @@ import { Tab1Page } from '../pages/tab1/tab1';
 // import { Tab3Page } from '../pages/tab3/tab3';
 import { ProductstabPage } from '../pages/productstab/productstab'
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
-import { IonicImageViewerModule } from 'ionic-img-viewer';
+// import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MapPage } from '../pages/map/map';
 
@@ -32,11 +32,10 @@ import { SharedService } from '../services/sharedService';
 import { NetworkService } from '../services/network';
 import { AlertView } from '../uicomponents/alert';
 
-import { PhotoViewer } from '@ionic-native/photo-viewer';
+// import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Http,HttpModule, RequestOptions } from '@angular/http';
-import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
+
 
 import { UtilProvider } from '../providers/util/util';
 import { TranslateproviderProvider } from '../providers/translateprovider/translateprovider';
@@ -45,6 +44,14 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 
 import { LocationSelectPage } from '../pages/location-select/location-select';
 import { Network } from '@ionic-native/network';
+
+
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+// import { File } from '@ionic-native/file';
+// import { Camera } from '@ionic-native/camera';
+
+
+import { HttpModule, Http } from '@angular/http';
 
 
 export function createTranslateLoader(http: Http) {  
@@ -86,8 +93,7 @@ export function createTranslateLoader(http: Http) {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    NativeHttpModuleD,
-    IonicImageViewerModule,
+    // IonicImageViewerModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
@@ -127,17 +133,16 @@ export function createTranslateLoader(http: Http) {
     SplashScreen,
     NetworkService,
     SharedService,
-    PhotoViewer,
+    // PhotoViewer,
     ConnectivityServiceProvider,
     GoogleMapsProvider,
     Network,
     Geolocation,
     UtilProvider,
-    {provide: Http, useClass: Http, deps: [NativeHttpFallbackD, RequestOptions]},
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     UtilProvider,
-    TranslateproviderProvider,
-    ConnectivityServiceProvider,
-    GoogleMapsProvider
+    TranslateproviderProvider
+
   ]
 })
 export class AppModule {}

@@ -24,6 +24,11 @@ export class SettingsPage {
   public terms: any = {}
   public errorMessage : any = ""
   public Language : any
+  public updatedPassword
+  public savePassword
+  public typePlaceholder
+  public checklang : boolean = false
+
 
   constructor(public translate : TranslateService,public util: UtilProvider,public platform:Platform, public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController, public settingservice : SettingsService, public popup : AlertView,public app : App) {}
 
@@ -35,6 +40,13 @@ export class SettingsPage {
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
     this.getPreferedLanguage()
+
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }        
   }
 
   goBack(){
@@ -92,20 +104,31 @@ export class SettingsPage {
 
 
   presentPrompt() {
+    if(this.popup.getLanguage() == "ar"){
+      this.updatedPassword = "تحديث الرقم السري"
+      this.savePassword = "حفظ"
+      this.typePlaceholder = "نوع"
+    }
+    else{
+      this.updatedPassword = "Update Password"
+      this.savePassword = "save"
+      this.typePlaceholder = "Type"
+    }
 
-  let alert = this.alertCtrl.create({
-    title: 'Update Password',
+  let alert = this.alertCtrl.create({  
+
+    title: this.updatedPassword,
     inputs: [
       {
         name: 'new_password',
-        placeholder: 'Type Here',
+        placeholder: this.typePlaceholder,
         type: 'password',
 
       }
     ],
     buttons: [
       {
-        text: 'Save',
+        text: this.savePassword,
         role: 'cancel',
         handler: data => {
 

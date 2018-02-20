@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { TranslateService } from 'ng2-translate';
+// import { NavController, ViewController, MenuController } from 'ionic-angular';
+
 import 'rxjs/add/operator/map';
+import { LoginPage } from '../../pages/login/login';
 
 /*
   Generated class for the UtilProvider provider.
@@ -31,5 +34,13 @@ export class UtilProvider {
   public getTranslation(keyword){
     return this.translate.get(keyword)
   }
+
+  // checkLoggedin(errormsg){
+  //   if(errormsg == "Unauthorized Request"){
+  //     localStorage.setItem('user' , null)
+  //     localStorage.setItem('isLoggedIn', "false")
+  //     this.navCtrl.push(LoginPage)
+  //   }
+  // }
 
 }

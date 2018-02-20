@@ -25,6 +25,10 @@ page-storeinformation {
     width: 100%;
 }
 
+.alert-md .alert-checkbox-icon {
+    right : 13px
+}
+
 .alert-ios [aria-checked=true] .alert-checkbox-icon {
     border-color: black;
     background-color: black;
@@ -35,6 +39,22 @@ page-storeinformation {
     background-color: black;
 }
 
+.alert-ios .alert-button {
+    color: white;
+    background-color: black;
+}
+
+.alert-ios .alert-message, .alert-ios .alert-input-group {
+    text-align: center;
+    font-size: 17px;
+    color: inherit;
+    padding: 15px 16px 21px;
+}
+
+.alert-ios .alert-message:empty {
+    padding: 0 0 2px;
+}
+
 // .button-md{
 //     background-color: #dd1f30 !important;
 // }
@@ -42,4 +62,21 @@ page-storeinformation {
 .choosefile-button {
     background-color: lavenderblush;
     border: transparent;
+}
+
+.alert-md .alert-message {
+    max-height: 240px;
+    font-size: 15px;
+    text-align: center !important;
+}
+
+.alert-md .alert-message, .alert-md .alert-input-group {
+    color: rgba(0, 0, 0, 0.5);
+    padding: 10px 24px 10px;
+}
+
+.alert-md .alert-button {
+    color: #f4f4f4;
+    background-color: #e13838;
+    padding: 5px 24px 5px 30px;
 }

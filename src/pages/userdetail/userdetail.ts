@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { MessagesService } from '../../services/messages';
 import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 /**
  * Generated class for the UserdetailPage page.
  *
@@ -19,16 +21,10 @@ import { AlertView } from '../../uicomponents/alert';
 export class UserdetailPage {
 
   public errorMessage: any = ""
-  public contactDetails : any = {
-    name: "user1",
-    email: "user1@hotmail.com",
-    phone: 12345667,
-    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec.",
-    image_1: "<image_url>",
-    image_2: "<image_url>"
-  }
+  public contactDetails : any = {}
   public userid: any
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
+  public checklang : boolean = false
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
   
     this.userid = this.navParams.get('id')
     
@@ -39,6 +35,13 @@ export class UserdetailPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }        
   }
   goBack(){
     this.navCtrl.pop()

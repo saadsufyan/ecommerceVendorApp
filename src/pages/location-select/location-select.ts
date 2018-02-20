@@ -2,6 +2,8 @@ import {  Component, ElementRef, ViewChild, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams,  Platform, ViewController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMapsProvider } from '../../providers/google-maps/google-maps';
+import { UtilProvider } from '../../providers/util/util';
+import { TranslateService } from 'ng2-translate';
 
 /**
  * Generated class for the LocationSelectPage page.
@@ -32,7 +34,7 @@ export class LocationSelectPage {
   saveDisabled: boolean;
   location: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public zone: NgZone, public maps: GoogleMapsProvider, public platform: Platform, public geolocation: Geolocation, public viewCtrl: ViewController) {
+  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public zone: NgZone, public maps: GoogleMapsProvider, public platform: Platform, public geolocation: Geolocation, public viewCtrl: ViewController) {
     this.searchDisabled = true;
     this.saveDisabled = true;
   }
@@ -49,6 +51,10 @@ export class LocationSelectPage {
 
   });
 
+  }
+
+  goBack(){
+      this.navCtrl.pop()
   }
   selectPlace(place){
  

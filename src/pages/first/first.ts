@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Platform} from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
+import { AlertView } from '../../uicomponents/alert';
+
 
 
 
@@ -17,10 +19,12 @@ import { TranslateService } from 'ng2-translate';
 @Component({
   selector: 'page-first',
   templateUrl: 'first.html',
+  providers: [AlertView]
 })
 export class FirstPage {
+  public checklang : boolean = false
 
-  constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menu: MenuController, public platform:Platform, public translate : TranslateService,public util: UtilProvider, public popup : AlertView) {
     this.menu.swipeEnable(false);
   }
 
@@ -28,7 +32,32 @@ export class FirstPage {
     console.log('ionViewDidLoad FirstPage');
   }
 
+  ionViewWillEnter(){
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }
+  }  
+
   goToLogin(){
     this.navCtrl.push(LoginPage, {animation: 'left'})
   }
+  onClickEnglish(){
+    this.translate.use('en')
+    this.popup.setLanguage('en')
+    this.platform.setDir('ltr' ,true)
+    this.util.dir = 'ltr'
+    this.navCtrl.push(FirstPage, {animation: 'left'})
+}
+onClickArabic(){
+    this.translate.use('ar')
+    this.popup.setLanguage('ar')
+    this.platform.setDir('rtl' ,true)
+    this.util.dir = 'rtl'
+    this.navCtrl.push(FirstPage, {animation: 'left'})
+
+}
+
 }

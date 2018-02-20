@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color: white"></ion-icon>
     </button>     
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'store_information' | translate}}</ion-title>
+    <ion-title class="header-name" [ngClass]="(checklang) ? 'title-page-ar ': 'title-page-en '" ><img src="assets/imgs/icon_logo@2x.png"> {{'store_information' | translate}}</ion-title>
      <ion-buttons right>
       <button ion-button icon-only (click)="onUserLogout()"><ion-icon class= "back-icon" ios="ios-log-out" md="ios-log-out"></ion-icon></button>
     </ion-buttons> 
@@ -93,10 +93,10 @@
 									<label class="dark">{{'store_logo' |  translate}}</label> <br>
 									<span id="fileselector">
 										<label class="" for="upload-file-selector choosefile-button">
-												<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
+												<input class="fileInput" type="file" name="file" ng-model-instant="" (change)="onChange($event)">
 												<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 												
-												<span class="color-red"><b>{{'choose-file' | translate}}</b></span>
+												<span class="color-red"><b>{{'choose_file' | translate}}</b></span>
 										</label>
 									</span>							 
 							</div>
@@ -104,6 +104,12 @@
 										<img class="product_left_image" src="{{logo}}" value="logo" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer>						 
 							</div>
 						</div>
+
+<!-- 
+						<ion-item>
+							<button ion-button (click)="uploadFile()">Upload</button>
+						</ion-item> -->
+						
 
 
 			      <div class="form-group">	      	

@@ -14,12 +14,22 @@ import { TranslateService } from 'ng2-translate';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  checklang: boolean = false
 
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public viewCtrl: ViewController, public menu: MenuController) {
     this.menu.swipeEnable(true);
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+    
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }
+
+    
   }
   goToStoreInfo(){
 

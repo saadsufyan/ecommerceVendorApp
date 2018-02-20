@@ -1,6 +1,6 @@
 import { Injectable , Component} from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
+// import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
 import { Observable } from "rxjs/Rx";
 // import { HTTP } from '@ionic-native/http';
 
@@ -29,10 +29,14 @@ export class NetworkService{
         return this.http.delete(url, this.getHeaders()).map(res => res.json());
     }
     doPostPictures(url,postdata) : any {
+        console.log(url)
+        console.log(postdata)
+
         return this.http.post(url, postdata, this.getMultiPartHeaders()).map(res =>  res.json())
     }
 
     getMultiPartHeaders() : any {
+
         let user = JSON.parse(localStorage.getItem('user')) 
         var token = user.access_token
          var header = {

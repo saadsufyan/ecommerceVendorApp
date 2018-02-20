@@ -10,7 +10,7 @@
      <button ion-button menuToggle>
       <ion-icon name="menu" style="color:white"></ion-icon>
     </button>     
-    <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> Abd al Alim</ion-title>
+    <ion-title class="header-name" [ngClass]="(checklang) ? 'title-page-ar ': 'title-page-en '" ><img src="assets/imgs/icon_logo@2x.png"> Abd al Alim</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="goBack()"><ion-icon class= "back-icon" ios="ios-arrow-back" md="ios-arrow-back"  ></ion-icon></button>
     </ion-buttons>    
@@ -45,6 +45,7 @@
 	</div>
 
 </div>
+
 
 
 

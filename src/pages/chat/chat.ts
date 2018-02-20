@@ -30,6 +30,7 @@ export class ChatPage {
   public temp
   public sendArray = []
   public showImage : boolean = true
+  public checklang: boolean = false
 
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
   
@@ -44,6 +45,12 @@ export class ChatPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }
   }
   goBack(){
     this.navCtrl.pop()

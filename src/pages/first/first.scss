@@ -21,3 +21,15 @@ page-first {
 .button-md {
      background-color: none !important; 
 }
+
+.language.selected{
+    opacity: 1 !important;
+}
+.language {
+    opacity: 1;
+}
+
+.top-title.ltr {
+    padding: 10px 20px;
+    text-align: right;
+}

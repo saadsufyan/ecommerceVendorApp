@@ -89,9 +89,10 @@ export class Tab2Page {
 
   valueStrings  = []
   tempArry = ['tab2_page','specification_name_en', 'english', 'specification_name_en_placeholder' , 'specification_name_ar', 'arabic', 'specification_name_ar_placeholder', 'specification_value_en', 'english','specification_value_en_placeholder' , 'specification_value_ar', 'arabic','specification_value_ar_placeholder', 'add_value', 'remove_value' , 'specification_add' , 'specification_remove', 'proceed_to_stock']
-
+  public checklang : boolean = false
   constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
+    console.log('ionViewDidLoad Tab2Page');
     this.data = this.sharedservice.fetchData()
     console.log("Form Data: ")
     console.log(this.data)    
@@ -116,7 +117,9 @@ export class Tab2Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Tab2Page');
+
+    console.log("im in ViewDidLoad")
+
 
     // $(function(){try()});
     this.try()
@@ -124,14 +127,39 @@ export class Tab2Page {
 
   }
   ionViewWillEnter(){
+    console.log("im in ViewWillEnter")
     this.viewCtrl.showBackButton(false);
+
+    this.data = this.sharedservice.fetchData()
+    console.log("Form Data: ")
+    console.log(this.data)    
+
+    // this.specs = this.navParams.get('datatab1')
+    this.specs = this.sharedservice.fetchSpecifications()
+    console.log("Spec data: "+this.specs)
+    
+
+    this.productid = this.sharedservice.fetchProductId()
+    console.log(this.specs)
+    console.log(this.productid)
+    if(this.productid == null){
+      this.specbutton = true
+    }
+
     // this.try()
+
+    let lang  = localStorage.getItem('lang')
+    if(lang == "ar"){
+      this.checklang = true
+    }else{
+      this.checklang = false
+      }        
 
   }
 
   goBack(){
     // this.app.navPop()
-    this.sharedservice.sendSpecifications(null)
+    this.sharedservice.sendSpecifications([])
     this.sharedservice.sendProductId(null)
     this.navCtrl.parent.select(0)
   }
@@ -148,12 +176,7 @@ export class Tab2Page {
           this.addSpec(i); 
     }
 
-    this.productid = this.sharedservice.fetchProductId()
-    console.log(this.specs)
-    console.log(this.productid)
-    if(this.productid == null){
-      this.specbutton = true
-    }
+
 
 
   }
@@ -231,6 +254,7 @@ export class Tab2Page {
     
     if(this.data.specifications.length > 0){
       console.log(this.data)
+      console.log(this.data.specifications.length)
       this.popup.showLoader()
       this.productservice.OnAddProduct(this.data).subscribe(res=>{
       

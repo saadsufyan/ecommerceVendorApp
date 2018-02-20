@@ -72,3 +72,9 @@ page-chat {
     outline: none !important;
     outline-offset: -2px;
 }
+
+.btn-send.rtl {
+    float: left;
+    margin-left: 8px;
+    transform: scale(-1) rotate(450deg);
+}

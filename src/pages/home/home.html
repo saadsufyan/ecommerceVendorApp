@@ -1,10 +1,10 @@
-<ion-header >
+<ion-header>
   <ion-navbar class="black-header"> 
     <button ion-button menuToggle start>
 	   <ion-icon name="menu" style="color: white"></ion-icon> 
 	</button>   
-	 
-	<ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'home' | translate}}</ion-title>
+	<ion-title class="header-name" [ngClass]="(checklang) ? 'title-page-ar ': 'title-page-en '" ><img src="assets/imgs/icon_logo@2x.png"> {{'home' | translate}}</ion-title>  
+	<!-- <ion-title class="header-name"><img src="assets/imgs/icon_logo@2x.png"> {{'home' | translate}}</ion-title>   -->
   </ion-navbar>
 </ion-header>
 
