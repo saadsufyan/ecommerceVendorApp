@@ -67,12 +67,16 @@
 
 
 
-<div class="btn-box" style="text-align: center;">
+<div class="btn-box" style="text-align: center;" *ngIf="statusCheck">
 	<button class="btn-nazik black sm" (click)="VendorAccept()">{{'confirm_order'| translate}}</button>	 &nbsp;
 	<button class="btn-nazik sm" (click)="VendorReject()">{{'reject_order' | translate}}</button>	
 </div>
 
+<div class="btn-box" style="text-align: center;" *ngIf="dispatchDiv">
+	<button class="btn-nazik sm" (click)="VendorDispatch()">{{'dispatch_order'| translate}}</button>
+</div>
 
+ 
 
 
 <!--  Modal -->

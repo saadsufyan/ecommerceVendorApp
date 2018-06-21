@@ -6,8 +6,8 @@ import { NetworkService } from './network'
 @Injectable()
 @Component({})
 export class PromotionsService{
-    // private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/vendor"
-    private basicUrl = "http://nazikgcc.com/app/gomallbackend/public/index.php/vendor";
+    private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/vendor"
+    // private basicUrl = "http://nazikgcc.com/app/gomallbackend/public/index.php/vendor";
     
     constructor (public network : NetworkService) {}
  
@@ -42,8 +42,9 @@ export class PromotionsService{
         return this.network.doPostPictures(url,data)
     }
 
-    onGetAllProducts() : Observable<any> {
-        let url = this.basicUrl  + "/products";
+    onGetAllProducts(language) : Observable<any> {
+        let url = this.basicUrl  + "/products/list?lang=" + language;
+        console.log(url)
         return this.network.doGet(url)
     }
 

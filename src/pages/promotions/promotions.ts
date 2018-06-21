@@ -7,6 +7,7 @@ import { AlertView } from '../../uicomponents/alert';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
 import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 
 /**
@@ -61,11 +62,11 @@ export class PromotionsPage {
   } 
 
   getPromotions(){
-
+    this.popup.showLoader()
     this.promotionservice.onGetPromotions().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.PromoArray = res.response : this.popup.showToast('No Promotions found', 1500, 'bottom', false, "")
-    
+      this.popup.hideLoader()
       if(res.status && res.response.length > 0 ){
         this.errormsg = false
         console.log(this.errormsg)
@@ -73,7 +74,7 @@ export class PromotionsPage {
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
@@ -96,12 +97,15 @@ export class PromotionsPage {
 
   deletePromotion(id){
 
+    this.popup.showLoader()
     this.promotionservice.onDeletePromotion(id).subscribe(res=>{
       console.log(res)
+      this.popup.hideLoader()
+      this.navCtrl.push(HomePage)
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]

@@ -41,15 +41,10 @@ export class AddpromotionPage {
   public allproducts : any
   public selected_product_id
   public checklang : boolean = false
+  public lang : any
 
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public promotionservice: PromotionsService, public popup: AlertView) {
-  
-    this.promotionId = this.navParams.get('id')
-    if(this.promotionId != null){
-      this.getPromotion()
-    }else{
-      this.getAllProducts()
-    }
+
   }
 
   ionViewDidLoad() {
@@ -59,12 +54,20 @@ export class AddpromotionPage {
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
-    let lang  = localStorage.getItem('lang')
-    if(lang == "ar"){
+    this.lang  = localStorage.getItem('lang')
+    if(this.lang == "ar"){
       this.checklang = true
     }else{
       this.checklang = false
       }    
+
+        
+    this.promotionId = this.navParams.get('id')
+    if(this.promotionId != null){
+      this.getPromotion()
+    }else{
+      this.getAllProducts()
+    }
   }
   goBack(){
     this.navCtrl.pop()
@@ -81,7 +84,7 @@ export class AddpromotionPage {
   }
 
   getAllProducts(){
-    this.promotionservice.onGetAllProducts().subscribe(res=>{
+    this.promotionservice.onGetAllProducts(this.lang).subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.allproducts = res.response : console.log("no products found")
          

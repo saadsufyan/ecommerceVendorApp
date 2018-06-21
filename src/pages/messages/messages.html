@@ -52,7 +52,7 @@
               </div>
             </td>
             <td>{{x.name}}</td>
-            <td (click)="goToChat(x.id)">
+            <td (click)="goToChat(x.id,x.name)">
               <img src="assets/imgs/chat.png">
             </td>
             <!-- <td>
@@ -74,7 +74,7 @@
       <div class="col-xs-12 promotion-box">
         <table class="table table-messages user {{util.dir}}">
           <!-- <p class="msg-error" *ngIf="errormsg">No User Contacted Found</p> -->
-          <tr (click)="goToUserDetail()" *ngFor="let x of contacts">
+          <tr (click)="goToUserDetail(x.id)" *ngFor="let x of contacts">
             <td>
               <div class="msg-pic">
                 <img src="assets/imgs/pic.png" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer/>

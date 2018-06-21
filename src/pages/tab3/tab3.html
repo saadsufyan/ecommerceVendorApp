@@ -40,6 +40,17 @@
 </div>
 <!-- Stock box  -->
 
+<div class="col-xs-12 promotion-box-outer" *ngIf="stockFilter">
+  <div class="col-xs-12 promotion-box">
+      <table class="table table-promotion {{util.dir}}">
+			<tr>
+          <td>{{valueStrings[3].title}}</td>
+          <td><input class="stock" type="number" name="stock" [(ngModel)]="totalstock" placeholder="{{totalstock}}" id="price_id" (keyup)="checkNumber('price_id')"></td>
+        </tr>    
+      </table>
+  </div>
+</div>
+
 
 <div class="btn-box-stock" style="text-align: center;">
 	<button class="btn-nazik-stock" (click)="onStock()">{{valueStrings[4].title}}</button>	

@@ -22,7 +22,8 @@ export class GoogleMapsProvider {
   mapLoaded: any;
   mapLoadedObserver: any;
   currentMarker: any;
-  apiKey: string = "AIzaSyDiJ0oGy0xy6mcrh0c318mtujMTn_ENrSc";
+  // apiKey: string = "AIzaSyDiJ0oGy0xy6mcrh0c318mtujMTn_ENrSc";
+  apiKey: string = "AIzaSyCPwqEg7d_VyCHTt5qkEU2c-mIEaXYON18"
 
   constructor(public connectivityService: ConnectivityServiceProvider, public geolocation: Geolocation) {
     console.log('Hello GoogleMapsProvider Provider');

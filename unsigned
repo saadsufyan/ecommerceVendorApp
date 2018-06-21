@@ -1,0 +1,285 @@
+******************************************************
+ Dependency warning - for the CLI to run correctly,      
+ it is highly recommended to install/upgrade the following:     
+
+ Install ios-sim to deploy iOS applications.`npm install -g ios-sim` (may require sudo)
+
+******************************************************
+
+> ionic-hello-world@0.0.0 ionic:build /Users/Ubaid/Desktop/saad ionic projects/nazikupdated
+> ionic-app-scripts build "—release" "—" "apk"
+
+[2m[12:13:18][22m[36m  ionic-app-scripts 1.3.12 [39m
+[2m[12:13:18][22m  build dev started [2m...[22m 
+[2m[12:13:19][22m  clean started [2m...[22m 
+[2m[12:13:19][22m  clean finished [2min 6 ms[22m 
+[2m[12:13:19][22m  copy started [2m...[22m 
+[2m[12:13:19][22m  transpile started [2m...[22m 
+[2m[12:13:22][22m  transpile finished [2min 3.80 s[22m 
+[2m[12:13:22][22m  preprocess started [2m...[22m 
+[2m[12:13:22][22m  deeplinks started [2m...[22m 
+[2m[12:13:23][22m  deeplinks finished [2min 173 ms[22m 
+[2m[12:13:23][22m  preprocess finished [2min 173 ms[22m 
+[2m[12:13:23][22m  webpack started [2m...[22m 
+[2m[12:13:24][22m  copy finished [2min 4.99 s[22m 
+[2m[12:13:35][22m  webpack finished [2min 12.59 s[22m 
+[2m[12:13:35][22m  sass started [2m...[22m 
+[2m[12:13:37][22m  sass finished [2min 1.81 s[22m 
+[2m[12:13:37][22m  postprocess started [2m...[22m 
+[2m[12:13:37][22m  postprocess finished [2min 50 ms[22m 
+[2m[12:13:37][22m  lint started [2m...[22m 
+[2m[12:13:37][22m  build dev finished [2min 18.50 s[22m 
+            'Component' is declared but never used. 
+
+[2m       L1:  [22mimport { Injectable , [41mC[49m[41mo[49m[41mm[49m[41mp[49m[41mo[49m[41mn[49m[41me[49m[41mn[49m[41mt[49m} from "@angular/core";
+[2m       L2:  [22mimport { Http, Response, Headers, RequestOptions } from "@angular/http";
+
+            'Response' is declared but never used. 
+
+[2m       L1:  [22mimport { Injectable , Component} from "@angular/core";
+[2m       L2:  [22mimport { Http, [41mR[49m[41me[49m[41ms[49m[41mp[49m[41mo[49m[41mn[49m[41ms[49m[41me[49m, Headers, RequestOptions } from "@angular/http";
+[2m       L3:  [22m// import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
+
+            All imports are unused. 
+
+[2m       L3:  [22m// import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
+[2m       L4:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Observable } from "rxjs/Rx";
+[2m       L5:  [22m// import { HTTP } from '@ionic-native/http';
+
+            'Component' is declared but never used. 
+
+[2m       L1:  [22mimport { Injectable , [41mC[49m[41mo[49m[41mm[49m[41mp[49m[41mo[49m[41mn[49m[41me[49m[41mn[49m[41mt[49m} from "@angular/core";
+[2m       L2:  [22mimport { AlertController  , LoadingController , ToastController , NavController} from 'ionic-angular';
+
+            All imports are unused. 
+
+[2m       L6:  [22mimport 'rxjs/add/operator/map';
+[2m       L7:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { LoginPage } from '../../pages/login/login';
+
+            'Connection' is declared but never used. 
+
+[2m      L14:  [22mdeclare var [41mC[49m[41mo[49m[41mn[49m[41mn[49m[41me[49m[41mc[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m;
+
+            All imports are unused. 
+
+[2m       L4:  [22mimport { Platform } from 'ionic-angular';
+[2m       L5:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Observable } from 'rxjs/Observable';
+
+            All imports are unused. 
+
+[2m       L2:  [22mimport { Injectable } from '@angular/core';
+[2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Platform } from 'ionic-angular';
+[2m       L4:  [22mimport { ConnectivityServiceProvider } from '../connectivity-service/connectivity-service';
+
+            'mapLoaded' is declared but never used. 
+
+[2m      L46:  [22m    let [41mm[49m[41ma[49m[41mp[49m[41mL[49m[41mo[49m[41ma[49m[41md[49m[41me[49m[41md[49m = this.maps.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement).then(() 
+
+            'google' is declared but never used. 
+
+[2m      L25:  [22mdeclare var [41mg[49m[41mo[49m[41mo[49m[41mg[49m[41ml[49m[41me[49m; 
+
+            'imageSrc' is declared but never used. 
+
+[2m      L45:  [22mcurrentLocation : any
+[2m      L46:  [22mprivate [41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m[41mS[49m[41mr[49m[41mc[49m: string;
+[2m      L47:  [22mpublic imagePath
+
+            'normalizeURL' is declared but never used. 
+
+[2m       L1:  [22mimport { Component,ViewChild, ElementRef   } from '@angular/core';
+[2m       L2:  [22mntroller, AlertController, Loading, LoadingController, ModalController, [41mn[49m[41mo[49m[41mr[49m[41mm[49m[41ma[49m[41ml[49m[41mi[49m[41mz[49m[41me[49m[41mU[49m[41mR[49m[41mL[49m } from 'ionic-angular';
+[2m       L3:  [22mimport { MapPage } from '../map/map';
+
+            All imports are unused. 
+
+[2m      L12:  [22mimport { LocationSelectPage } from '../location-select/location-select';
+[2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { HomePage } from '../home/home';
+[2m      L14:  [22m// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+
+            'Component' is declared but never used. 
+
+[2m       L1:  [22mimport { Injectable , [41mC[49m[41mo[49m[41mm[49m[41mp[49m[41mo[49m[41mn[49m[41me[49m[41mn[49m[41mt[49m} from "@angular/core";
+[2m       L2:  [22mimport { Observable } from "rxjs/Rx";
+
+            All imports are unused. 
+
+[2m       L1:  [22mimport { Injectable , Component} from "@angular/core";
+[2m       L2:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Observable } from "rxjs/Rx";
+[2m       L3:  [22mimport { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+            All imports are unused. 
+
+[2m       L2:  [22mimport { Observable } from "rxjs/Rx";
+[2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { BehaviorSubject } from 'rxjs/BehaviorSubject';
+[2m       L4:  [22mimport { TranslateService } from 'ng2-translate';
+
+            Duplicate variable: 'class_fixed' 
+
+[2m     L340:  [22melse{
+[2m     L341:  [22m  var [41mc[49m[41ml[49m[41ma[49m[41ms[49m[41ms[49m[41m_[49m[41mf[49m[41mi[49m[41mx[49m[41me[49m[41md[49m = "";
+[2m     L342:  [22m  var disable = '';
+
+            Duplicate variable: 'disable' 
+
+[2m     L341:  [22m  var class_fixed = "";
+[2m     L342:  [22m  var [41md[49m[41mi[49m[41ms[49m[41ma[49m[41mb[49m[41ml[49m[41me[49m = '';
+
+            Duplicate variable: 'spec_input_en' 
+
+[2m     L485:  [22m}else{
+[2m     L486:  [22m  var [41ms[49m[41mp[49m[41me[49m[41mc[49m[41m_[49m[41mi[49m[41mn[49m[41mp[49m[41mu[49m[41mt[49m[41m_[49m[41me[49m[41mn[49m = '#spec_name_'+id+'_en'
+[2m     L487:  [22m  var spec_input_ar = '#spec_name_'+id+'_ar'
+
+            Duplicate variable: 'spec_input_ar' 
+
+[2m     L486:  [22m      var spec_input_en = '#spec_name_'+id+'_en'
+[2m     L487:  [22m      var [41ms[49m[41mp[49m[41me[49m[41mc[49m[41m_[49m[41mi[49m[41mn[49m[41mp[49m[41mu[49m[41mt[49m[41m_[49m[41ma[49m[41mr[49m = '#spec_name_'+id+'_ar'
+
+            Duplicate variable: 'value_input_en' 
+
+[2m     L492:  [22m       var [41mv[49m[41ma[49m[41ml[49m[41mu[49m[41me[49m[41m_[49m[41mi[49m[41mn[49m[41mp[49m[41mu[49m[41mt[49m[41m_[49m[41me[49m[41mn[49m = '#spec_'+id+'_value_1_en'
+[2m     L493:  [22m       $(value_input_en).prop('disabled', false);
+
+            Duplicate variable: 'value_input_ar' 
+
+[2m     L493:  [22m$(value_input_en).prop('disabled', false);
+[2m     L494:  [22mvar [41mv[49m[41ma[49m[41ml[49m[41mu[49m[41me[49m[41m_[49m[41mi[49m[41mn[49m[41mp[49m[41mu[49m[41mt[49m[41m_[49m[41ma[49m[41mr[49m = '#spec_'+id+'_value_1_ar'
+[2m     L495:  [22m$(value_input_ar).prop('disabled', false);
+
+            'title' is declared but never used. 
+
+[2m     L106:  [22mthis.translateprovider.getTranslation(this.tempArry[item]).subscribe((value)=>{
+[2m     L107:  [22m  let [41mt[49m[41mi[49m[41mt[49m[41ml[49m[41me[49m = this.tempArry[item]
+[2m     L108:  [22m  this.valueStrings.push({
+
+            'my_data' is declared but never used. 
+
+[2m     L244:  [22m    let [41mm[49m[41my[49m[41m_[49m[41md[49m[41ma[49m[41mt[49m[41ma[49m = this.data;
+
+            'spec' is declared but never used. 
+
+[2m     L329:  [22m// alert(spec_num)
+[2m     L330:  [22mvar [41ms[49m[41mp[49m[41me[49m[41mc[49m = document.getElementById('addvalue_spec_'+spec_num)
+[2m     L331:  [22m$('#addvalue_spec_'+spec_num).append(get_value_html(spec_num,value,value_ar,is_fixed));
+
+            'spec_index' is declared but never used. 
+
+[2m     L457:  [22m    var [41ms[49m[41mp[49m[41me[49m[41mc[49m[41m_[49m[41mi[49m[41mn[49m[41md[49m[41me[49m[41mx[49m : any = this.specs.length; 
+
+            All imports are unused. 
+
+[2m       L2:  [22mimport { IonicPage, NavController, NavParams, ViewController, App } from 'ionic-angular';
+[2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ProductsPage } from '../products/products';
+[2m       L4:  [22mimport { ProductsService } from '../../services/products';
+
+            'title' is declared but never used. 
+
+[2m      L93:  [22mthis.translateprovider.getTranslation(this.tempArry[item]).subscribe((value)=>{
+[2m      L94:  [22m  let [41mt[49m[41mi[49m[41mt[49m[41ml[49m[41me[49m = this.tempArry[item]
+[2m      L95:  [22m  this.valueStrings.push({
+
+            'ViewChild' is declared but never used. 
+
+[2m       L1:  [22mimport { Component, [41mV[49m[41mi[49m[41me[49m[41mw[49m[41mC[49m[41mh[49m[41mi[49m[41ml[49m[41md[49m } from '@angular/core';
+[2m       L2:  [22mimport { IonicPage, NavController, NavParams, ViewController, AlertController, App, normalizeURL} from 'ionic-angular';
+
+            'normalizeURL' is declared but never used. 
+
+[2m       L1:  [22mimport { Component, ViewChild } from '@angular/core';
+[2m       L2:  [22mnicPage, NavController, NavParams, ViewController, AlertController, App, [41mn[49m[41mo[49m[41mr[49m[41mm[49m[41ma[49m[41ml[49m[41mi[49m[41mz[49m[41me[49m[41mU[49m[41mR[49m[41mL[49m} from 'ionic-angular';
+[2m       L3:  [22mimport { ProductsPage } from '../products/products';
+
+            All imports are unused. 
+
+[2m       L2:  [22mimport { IonicPage, NavController, NavParams, ViewController, AlertController, App, normalizeURL} from 'ionic-angular';
+[2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ProductsPage } from '../products/products';
+[2m       L4:  [22mimport { ProductsService } from '../../services/products';
+
+            All imports are unused. 
+
+[2m       L7:  [22mimport { AlertView } from '../../uicomponents/alert';
+[2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Tab2Page } from '../tab2/tab2';
+[2m       L9:  [22mimport { UtilProvider } from '../../providers/util/util';
+
+            'title' is declared but never used. 
+
+[2m      L47:  [22mthis.translateprovider.getTranslation(this.tempArry[item]).subscribe((value)=>{
+[2m      L48:  [22m  let [41mt[49m[41mi[49m[41mt[49m[41ml[49m[41me[49m = this.tempArry[item]
+[2m      L49:  [22m  this.valueStrings.push({
+
+            All imports are unused. 
+
+[2m       L2:  [22mimport { IonicPage, NavController, NavParams,ViewController, App } from 'ionic-angular';
+[2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ProductsPage } from '../products/products';import { ProductsService } from '../../services/products
+[2m       L4:  [22mimport { NetworkService } from '../../services/network';
+
+            All imports are unused. 
+
+[2m       L2:  [22mimport { IonicPage, NavController, NavParams } from 'ionic-angular';
+[2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Tab1Page } from '../tab1/tab1';
+[2m       L4:  [22mimport { Tab2Page } from '../tab2/tab2';
+
+            All imports are unused. 
+
+[2m       L3:  [22mimport { Tab1Page } from '../tab1/tab1';
+[2m       L4:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Tab2Page } from '../tab2/tab2';
+[2m       L5:  [22mimport { Tab3Page } from '../tab3/tab3';
+
+            All imports are unused. 
+
+[2m       L4:  [22mimport { Tab2Page } from '../tab2/tab2';
+[2m       L5:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Tab3Page } from '../tab3/tab3';
+
+            All imports are unused. 
+
+[2m       L7:  [22mimport { SharedService } from '../../services/sharedService';
+[2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Tab1Page } from '../tab1/tab1';
+[2m       L9:  [22mimport { UtilProvider } from '../../providers/util/util';
+
+            All imports are unused. 
+
+[2m       L1:  [22mimport { Injectable , Component} from "@angular/core";
+[2m       L2:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Observable } from "rxjs/Rx";
+[2m       L3:  [22mimport { NetworkService } from './network'
+
+            'transition' is declared but never used. 
+
+[2m       L1:  [22mimport { Component, [41mt[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mi[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m } from '@angular/core';
+[2m       L2:  [22mimport { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+
+            All imports are unused. 
+
+[2m       L1:  [22mimport { Injectable , Component} from "@angular/core";
+[2m       L2:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Observable } from "rxjs/Rx";
+[2m       L3:  [22mimport { NetworkService } from './network'
+
+            All imports are unused. 
+
+[2m       L6:  [22mimport { HomePage } from '../pages/home/home';
+[2m       L7:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { LoginPage } from '../pages/login/login';
+[2m       L8:  [22mimport { StoreinformationPage } from '../pages/storeinformation/storeinformation';
+
+            All imports are unused. 
+
+[2m      L16:  [22mimport { FirstPage } from '../pages/first/first';
+[2m      L17:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { LanguagePage } from '../pages/language/language';
+
+            All imports are unused. 
+
+[2m      L21:  [22mimport { UtilProvider } from '../providers/util/util';
+[2m      L22:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { TranslateproviderProvider } from '../providers/translateprovider/translateprovider';
+[2m      L23:  [22m@Component({
+
+            All imports are unused. 
+
+[2m      L21:  [22mimport { MypaymentsPage } from '../pages/mypayments/mypayments';
+[2m      L22:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { Tab1Page } from '../pages/tab1/tab1';
+[2m      L23:  [22m// import { Tab2Page } from '../pages/tab2/tab2';
+
+            All imports are unused. 
+
+[2m      L32:  [22mimport { NetworkService } from '../services/network';
+[2m      L33:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { AlertView } from '../uicomponents/alert';
+
+[2m[12:14:40][22m  lint finished [2min 62.91 s[22m 

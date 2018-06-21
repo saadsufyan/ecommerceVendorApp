@@ -47,7 +47,7 @@
 			      	<label class="dark">{{'promotion_product' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" [(ngModel)]="product_id" name="product_id" (change)="selectedProduct()">
-								<option value="opt">Select Product</option>
+								<option value="opt">{{'select_promo_product' | translate}}</option>
 								<option *ngFor="let x of allproducts;let i = index" [ngValue]="x">{{x.name}}</option>
 			        </select>
 			      </div>

@@ -7,8 +7,8 @@ import { NetworkService } from './network'
 @Component({})
 
 export class ProductsService{
-    // private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/vendor";
-    private basicUrl = "http://nazikgcc.com/app/gomallbackend/public/index.php/vendor";
+    private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/vendor";
+    // private basicUrl = "http://nazikgcc.com/app/gomallbackend/public/index.php/vendor";
     constructor (public network : NetworkService) {}
 
     onGetTopProducts() : Observable<any> {
@@ -32,14 +32,14 @@ export class ProductsService{
         let url = this.basicUrl + "/products/" + id
         return this.network.doPost(url, data)
     }
-    onGetAllParentCategory() : Observable<any> {
-        let url = this.basicUrl + "/categories";
+    onGetAllParentCategory(language) : Observable<any> {
+        let url = this.basicUrl + "/categories?lang=" + language;
         console.log(url)
         return this.network.doGet(url)
     }
 
-    onGetSubCategory(cat_id) : Observable<any> {
-        let url = this.basicUrl + "/categories/" + cat_id + "/subcategories";
+    onGetSubCategory(cat_id,language) : Observable<any> {
+        let url = this.basicUrl + "/categories/" + cat_id + "/subcategories?lang=" + language;
         console.log(url)
         return this.network.doGet(url)
     }

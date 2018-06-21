@@ -1,5 +1,6 @@
 import { Injectable , Component} from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Nav, Platform, NavController, AlertController } from 'ionic-angular';
 // import { NativeHttpFallbackD, NativeHttpModuleD } from 'ionic-native-http-connection-backend';
 import { Observable } from "rxjs/Rx";
 // import { HTTP } from '@ionic-native/http';
@@ -12,9 +13,20 @@ export class NetworkService{
     
     public ios_Client_key : string = 'Z29tYWxsLWFwcC1pb3M6NWFlZTMyZjItYTgyOS00Y2I2LWE5MzgtOGQxZmYwYjJhMTg4DQo=';
     public android_client_key : string = 'Z29tYWxsLWFwcC1hbmRyb2lkOjY2ZmU3MzBmLWQ2M2UtNDI2OS04ZmJhLTkwMGYxMDY4ZDdmOQ==';
+    public device : any
+    public authorizationkey : any
 
-    constructor(public http : Http){
-
+    constructor(public http : Http, public platform : Platform){
+        if(this.platform.is('ios')){
+            this.device = 'ios'
+            this.authorizationkey = this.ios_Client_key
+        }else if (this.platform.is('android')){
+            this.device = 'android'
+            this.authorizationkey = this.android_client_key
+        }else{
+            this.device = 'android'
+            this.authorizationkey = this.android_client_key
+        }
     }
     doPost(url,postdata) : any {
         return this.http.post(url,postdata, this.getHeaders()).map(res => res.json());
@@ -69,9 +81,12 @@ export class NetworkService{
     getClientHeaders() : any {
         var header = {
             'Content-Type': 'application/json',
-            'Authorization': 'Basic' + ' ' + this.android_client_key,
-            'client-id': ' gomall-app-android'
+            'client-id': 'gomall-app-'+this.device,
+            'Authorization': 'Basic ' + this.authorizationkey
         };
+
+        console.log(header)
+
         let headers = new Headers(header);
         let options = new RequestOptions({headers:headers});
         return options;
@@ -82,6 +97,7 @@ export class NetworkService{
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         };
+        console.log(header)
         let headers = new Headers(header);
         let options = new RequestOptions({headers:headers});
         return options;

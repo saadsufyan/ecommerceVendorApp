@@ -90,6 +90,10 @@ export class Tab2Page {
   valueStrings  = []
   tempArry = ['tab2_page','specification_name_en', 'english', 'specification_name_en_placeholder' , 'specification_name_ar', 'arabic', 'specification_name_ar_placeholder', 'specification_value_en', 'english','specification_value_en_placeholder' , 'specification_value_ar', 'arabic','specification_value_ar_placeholder', 'add_value', 'remove_value' , 'specification_add' , 'specification_remove', 'proceed_to_stock']
   public checklang : boolean = false
+
+  public parameter_val_en : any = "parameter value in English"
+  public parameter_val_ar : any = "Parameter value in Arabic"
+
   constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
     console.log('ionViewDidLoad Tab2Page');
@@ -251,8 +255,9 @@ export class Tab2Page {
   if(this.productid == null){
     
     console.log("add product: ")
+    // console.log("remove this if statement for add product")
     
-    if(this.data.specifications.length > 0){
+
       console.log(this.data)
       console.log(this.data.specifications.length)
       this.popup.showLoader()
@@ -278,16 +283,14 @@ export class Tab2Page {
         this.errorMessage = this.errorMessage.error.message[0]
         this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
       })
-    }else{
-      this.popup.showToast('Please provide some specifications',1500,'bottom',false,"")
-    }
+
 
   }
   else if (this.productid != null){
     
     console.log("update product")
     console.log(this.data)
-    if(this.data.specifications.length > 0){
+
       this.popup.showLoader()
       this.productservice.onUpdateProductDetails(this.productid,this.data).subscribe(res=>{
       
@@ -307,9 +310,6 @@ export class Tab2Page {
         this.errorMessage = this.errorMessage.error.message[0]
         this.popup.showToast(this.errorMessage,1500,'bottom',false,"")
       })
-    }else{
-      this.popup.showToast('Please provide some specifications',1500,'bottom',false,"")
-    }
 
   }
 
@@ -318,6 +318,8 @@ export class Tab2Page {
 
 
   addValue(spec_num,value,value_ar,is_fixed){
+
+
 
     if(value=='undefined'){
       value = '';
@@ -342,14 +344,31 @@ export class Tab2Page {
         var disable = '';
       }
     
+
+
+      let lang  = localStorage.getItem('lang')
+      console.log(lang)
+  
+      if(lang == "ar"){
+        console.log("its arabic")
+        var parameter_val_en = "الاختيار في اللغة الإنجليزية"
+        var parameter_val_ar =  "الاختيار باللغة العربية"
+  
+      }else{
+        console.log("its English")
+        var parameter_val_en = "value in English"
+        var parameter_val_ar =  "value in Arabic"
+        }
+  
+
       var spec_value = $( ".spec_"+spec_num+"_value").length + 1;      
       
       return `<tr `+class_fixed+`>
-      <td>Specifications Value <br>(In English)</td>
+      <td>`+parameter_val_en+`</td>
       <td><input `+disable+` value=`+value+` class="spec_`+spec_num+`_value" id="spec_`+spec_num+`_value_`+spec_value+`_en" name="spec_`+spec_num+`_value_`+spec_value+`_en"  placeholder="specification value"></td>
     </tr>
     <tr>
-      <td>Specifications Value <br>(In Arabic)</td>
+      <td>`+parameter_val_ar+`</td>
       <td><input  `+disable+` value=`+value_ar+` id="spec_`+spec_num+`_value_`+spec_value+`_ar" (keyup)="validation_val_ar(`+spec_num+`,`+spec_value+`)" name="spec_`+spec_num+`_value_`+spec_value+`_ar"  placeholder="قيمة المواصفات"></td>
     </tr>`;
     }

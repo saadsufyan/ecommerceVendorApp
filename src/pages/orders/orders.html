@@ -31,7 +31,7 @@
 	        <select class="dropdown dark" [(ngModel)]="filterValue" name="filterValue"> 
 						<option value="opt">Select Type</option>
 	        	<option value="pending">Pending</option>
-	        	<option value="electronics">Electronics</option>
+	        	<option value="electronics">Confirmed</option>
 	    	</select>
 	    </div>	    
 	</div>
@@ -68,7 +68,7 @@
 			<tr>
 				<td>{{'order_date' | translate}}</td>
 				<td>{{x.date}}</td>
-				<td (click)="goToDetails(x.id)"><img src="assets/imgs/next.png"></td>
+				<td class="order-arrow {{util.dir}}" (click)="goToDetails(x.id)"><img src="assets/imgs/next.png"></td>
 			</tr>
 			<tr>
 				<td>{{'order_status' | translate}}</td>

@@ -64,6 +64,7 @@ export class StoreinformationPage {
   public in_city_shipment_charges: any
   public out_city_shipment_charges: any 
   public countryname: any
+  public selectedcountry : any
   public offdays: any
   public lat : any
   public long :any
@@ -78,6 +79,8 @@ export class StoreinformationPage {
   public prompt_logut_message
   public loginError
   public cityError
+  public lang
+  public preselectedcountries
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public loadingCtrl:LoadingController,public geolocation: Geolocation, public loginservice : LoginService,public alertCtrl: AlertController, public storeinfoservice: StoreInformationService, public popup: AlertView, public modalCtrl: ModalController,) {
   
     // this.getCities()
@@ -85,8 +88,14 @@ export class StoreinformationPage {
 
   ionViewDidLoad() { 
     console.log('ionViewDidLoad StoreinformationPage');
+
+    this.lang  = localStorage.getItem('lang')
+    console.log(this.lang)
+
     this.getVendorData()
     this.getCountries()
+    this.getSelectedCountries()
+
 
     // this.getCities()
   }
@@ -133,7 +142,8 @@ export class StoreinformationPage {
     
   }
   getCountries(){
-    this.storeinfoservice.onGetCountries().subscribe(res=>{
+
+    this.storeinfoservice.onGetCountries(this.lang).subscribe(res=>{
       console.log(res)
       res.status && res.response.length ? this.countrylist = res.response : console.log("countries not found")
 
@@ -151,7 +161,7 @@ export class StoreinformationPage {
   getCities(){
 
     console.log(this.countryname)
-    this.storeinfoservice.onGetCities(this.countryname).subscribe(res=>{
+    this.storeinfoservice.onGetCities(this.countryname,this.lang).subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.citylist = res.response : this.popup.showToast('No cities found', 1500, 'bottom', false, "")
       console.log(this.citylist)
@@ -163,8 +173,24 @@ export class StoreinformationPage {
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
       this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
-})
+    })
   }
+  getSelectedCountries(){
+    this.storeinfoservice.onGetSelectedCountries(this.lang).subscribe(res=>{
+      console.log(res)
+
+      this.preselectedcountries = res.response.countries
+      console.log(this.preselectedcountries)
+    },  err => {
+        console.log("masla ha ")
+        console.log(err);
+        this.errorMessage = JSON.parse(err._body)
+        console.log(this.errorMessage)
+        this.errorMessage = this.errorMessage.error.message[0]
+        this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+      })
+  }
+
 
   getVendorData(){
     this.storeinfoservice.onGetVendor().subscribe(res=>{
@@ -178,6 +204,7 @@ export class StoreinformationPage {
       this.phone = res.response.phone
       this.in_city_shipment_charges = res.response.in_city_shipment_charges
       this.out_city_shipment_charges = res.response.out_city_shipment_charges
+      this.countryname = res.response.country
       this.offdays = res.response.weekends
       this.lat = res.response.lat,
       this.long = res.response.long,
@@ -210,40 +237,56 @@ export class StoreinformationPage {
     
   }
 
+
   updateVendor(){
-    this.popup.showLoader()
+    
 
     if(this.vendorname != null && this.vendorname_ar != null && this.description != null && this.description_ar != null && this.phone != null && this.in_city_shipment_charges != null && this.out_city_shipment_charges != null){
-      let data = {
+      console.log("lat")
+      console.log (this.lat)
+      console.log("long")
+      console.log(this.long)
+      if(this.lat == 0 || this.long == 0){
+        console.log("Lat" + this.lat)
+        console.log("long" + this.long)
+        this.popup.showToast("Please select location first",1500, 'bottom', false, "")
 
-        name: this.vendorname,
-        name_ar: this.vendorname_ar,
-        description: this.description,
-        description_ar: this.description_ar,
-        phone: this.phone,
-        in_city_shipment_charges: this.in_city_shipment_charges,
-        out_city_shipment_charges: this.out_city_shipment_charges,
-        country: this.countryname,
-        weekends: this.offdays,
-        lat: this.lat,
-        long: this.long,
-        logo: this.logo
+      }else{
+        this.popup.showLoader()
+        console.log("im here")
+        let data = {
+
+          name: this.vendorname,
+          name_ar: this.vendorname_ar,
+          description: this.description,
+          description_ar: this.description_ar,
+          phone: this.phone,
+          in_city_shipment_charges: this.in_city_shipment_charges,
+          out_city_shipment_charges: this.out_city_shipment_charges,
+          country: this.countryname,
+          weekends: this.offdays,
+          lat: this.lat,
+          long: this.long,
+          logo: this.logo
+        } 
+
+        console.log(data)
+        this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
+          console.log(res)
+          this.popup.hideLoader()
+          this.navCtrl.pop()
+        },  err => {
+          console.log("masla ha ")
+          console.log(err);
+          this.popup.hideLoader()
+          this.errorMessage = JSON.parse(err._body)
+          console.log(this.errorMessage)
+          this.errorMessage = this.errorMessage.error.message[0]
+          this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+        })               
       }
 
-      console.log(data)
-      this.storeinfoservice.onUpdateVendor(data).subscribe(res=>{
-        console.log(res)
-        this.popup.hideLoader()
-        this.navCtrl.pop()
-      },  err => {
-        console.log("masla ha ")
-        console.log(err);
-        this.popup.hideLoader()
-        this.errorMessage = JSON.parse(err._body)
-        console.log(this.errorMessage)
-        this.errorMessage = this.errorMessage.error.message[0]
-        this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
-      })
+
     }
     else{
       this.popup.showToast("Please Fill all required fields",1500, 'bottom', false, "")
@@ -283,6 +326,7 @@ presentPrompt() {
           cities : data
         }
         console.log(selectedCities)
+        console.log(this.countryname)
         this.storeinfoservice.onUpdateCities(this.countryname,selectedCities).subscribe(res=>{
           console.log(res)
         },err => {
@@ -301,6 +345,8 @@ presentPrompt() {
 
   alert.present();
 }  
+
+
 
 
 

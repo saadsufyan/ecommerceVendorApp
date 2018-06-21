@@ -26,12 +26,14 @@ export class UserdetailPage {
   public checklang : boolean = false
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
   
-    this.userid = this.navParams.get('id')
     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserdetailPage');
+    this.userid = this.navParams.get('id')
+    console.log(this.userid)
+    this.getContactDetails()
   }
   ionViewWillEnter(){
     this.viewCtrl.showBackButton(false);
@@ -47,14 +49,16 @@ export class UserdetailPage {
     this.navCtrl.pop()
   } 
   getContactDetails(){
+    this.popup.showLoader()
     this.messageservice.onGetContactDetails(this.userid).subscribe(res=>{
       console.log(res)
-      res.status && res.response > 0 ? this.contactDetails = res.response : console.log("data not found")
+      this.popup.hideLoader()
+      res.status ? this.contactDetails = res.response : console.log("data not found")
 
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]

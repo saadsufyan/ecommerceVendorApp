@@ -31,15 +31,18 @@ export class ChatPage {
   public sendArray = []
   public showImage : boolean = true
   public checklang: boolean = false
+  public name
 
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public messageservice: MessagesService, public popup : AlertView) {
   
-    this.userid = this.navParams.get('id')
-    console.log(this.userid)
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChatPage');
+    this.userid = this.navParams.get('id')
+    console.log(this.userid)
+    this.name = this.navParams.get('name')
     this.RecieveMessages()
 
   }
@@ -57,16 +60,17 @@ export class ChatPage {
   }  
 
   RecieveMessages(){
-
+    this.popup.showLoader()
     this.messageservice.onGetChatMessage(this.userid).subscribe(res=>{
       console.log(res)
+      this.popup.hideLoader()
 
       res.status && res.response.length > 0 ? this.receviemsgs = res.response : console.log("no messages recevies")
 
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]

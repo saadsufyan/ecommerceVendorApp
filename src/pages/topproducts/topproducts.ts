@@ -45,10 +45,11 @@ export class TopproductsPage {
   }
 
   getTopProducts(){
-
+    this.popup.showLoader()
     this.productservice.onGetTopProducts().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No products found', 1500, 'bottom', false, "")
+      this.popup.hideLoader()
       if(res.status && res.response.length > 0 ){
         this.errormsg = false
         console.log(this.errormsg)
@@ -56,7 +57,7 @@ export class TopproductsPage {
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]

@@ -23,6 +23,7 @@ import { Tab1Page } from '../pages/tab1/tab1';
 // import { Tab2Page } from '../pages/tab2/tab2';
 // import { Tab3Page } from '../pages/tab3/tab3';
 import { ProductstabPage } from '../pages/productstab/productstab'
+import { TermsPage } from '../pages/terms/terms';
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate/ng2-translate';
 // import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -44,6 +45,7 @@ import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 
 import { LocationSelectPage } from '../pages/location-select/location-select';
 import { Network } from '@ionic-native/network';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
@@ -82,7 +84,8 @@ export function createTranslateLoader(http: Http) {
     ChatPage,
     TopproductsPage,
     MypaymentsPage,
-    MapPage
+    MapPage,
+    TermsPage
     // PhotoViewer
     // Tab1Page,
     // Tab2Page,
@@ -122,7 +125,8 @@ export function createTranslateLoader(http: Http) {
     ChatPage,
     TopproductsPage,
     MypaymentsPage,
-    MapPage
+    MapPage,
+    TermsPage
     // PhotoViewer
     // Tab1Page,
     // Tab2Page,

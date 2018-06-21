@@ -72,10 +72,36 @@ export class OrdersPage {
     this.getOrdersWithFilters()
   }
   getOrders(){
+
+
+    this.popup.showLoader()
+
     this.orderservice.onGetVendorOrders().subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.items = res.response : this.popup.showToast('No Orders found', 1500, 'bottom', false, "") 
-      
+      this.popup.hideLoader()
+      this.items = this.items.map((value, index) => {
+
+        var datetime = new Date(value.date * 1000)
+        console.log(datetime)
+        console.log(datetime.getMonth() + 1)
+
+        var currentDate = datetime.getDate() + "/"
+        var currentMonth = datetime.getMonth() + 1 + "/"
+        var currentYear = datetime.getFullYear()
+
+        var newdate = currentDate + currentMonth + currentYear
+  
+        // var newdate = datetime.getDate()  + "/" + 0 + datetime.getMonth() + "/" + datetime.getFullYear()
+        console.log(newdate)
+        var temp = {
+          ...value,
+          date : newdate
+        }
+        console.log(temp)
+        return temp
+      })
+
       if(res.status && res.response.length > 0 ){
         this.errormsg = false
         console.log(this.errormsg)
@@ -84,7 +110,7 @@ export class OrdersPage {
     }, err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
@@ -124,7 +150,13 @@ export class OrdersPage {
       var datetime = new Date(value.date * 1000)
       console.log(datetime)
 
-      var newdate = datetime.getDate()  + "/" + datetime.getMonth() + 1 + "/" + datetime.getFullYear()
+      var currentDate = datetime.getDate() + "/"
+      var currentMonth = datetime.getMonth() + 1 + "/"
+      var currentYear = datetime.getFullYear()
+
+      var newdate = currentDate + currentMonth + currentYear
+
+      // var newdate = datetime.getDate()  + "/" + datetime.getMonth() +  "/" + datetime.getFullYear()
       console.log(newdate)
       var temp = {
         ...value,

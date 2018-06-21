@@ -31,7 +31,14 @@ export class ProductsPage {
   public errorMessage
   public errormsg : any = true
   public checklang : boolean = false
-  public loginError
+  public prompt_logout : any
+  public loginError : any
+  public prompt_cancel : any
+  public deleteProductTitle : any
+  public deleteProductMessage : any
+  public promptYes : any
+  public promptNo : any
+
   
   constructor(public alertCtrl:AlertController, public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public productservice: ProductsService, public popup: AlertView, public sharedservice: SharedService) {
   
@@ -50,10 +57,22 @@ export class ProductsPage {
     let lang  = localStorage.getItem('lang')
     if(lang == "ar"){
       this.checklang = true
-      this.loginError = "لقد تم تسجيل الخروج"   
+      this.prompt_logout = "الخروج"
+      this.prompt_cancel = "إلغاء"   
+      this.loginError = "لقد تم تسجيل الخروج"  
+      this.deleteProductTitle  = "حذف المنتج"
+      this.deleteProductMessage = "هل انت متأكد من حذف هذا المنتج؟"
+      this.promptYes = "نعم فعلا"
+      this.promptNo = "لا" 
     }else{
       this.checklang = false
       this.loginError = "You have been logged out"
+      this.prompt_logout = "Logout"
+      this.prompt_cancel = "Cancel" 
+      this.deleteProductTitle  = "Delete Product"
+      this.deleteProductMessage = "are you sure you want to delete this product?"
+      this.promptYes = "Yes"
+      this.promptNo = "No"
       }        
   }  
   goBack(){
@@ -72,8 +91,10 @@ export class ProductsPage {
   }
 
   getAllProducts(){
+    this.popup.showLoader()
     this.productservice.onGetAllProducts().subscribe(res=>{
       console.log(res)
+      this.popup.hideLoader()
       res.status && res.response.length > 0 ? this.items = res.response : console.log("no products found")
     
       if(res.status && res.response.length > 0 ){
@@ -83,7 +104,7 @@ export class ProductsPage {
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
@@ -104,22 +125,62 @@ export class ProductsPage {
     })
   }
 
-  deleteProduct(id){
-    this.popup.showLoader()
-    this.productservice.onDeleteProduct(id).subscribe(res=>{
-      console.log(res)
-      this.popup.hideLoader()
-      this.navCtrl.push(ProductsPage,{animation: 'left'})
+  // deleteProduct(id){
+  //   this.popup.showLoader()
+  //   this.productservice.onDeleteProduct(id).subscribe(res=>{
+  //     console.log(res)
+  //     this.popup.hideLoader()
+  //     this.navCtrl.push(ProductsPage,{animation: 'left'})
       
-    },err => {
-      console.log("masla ha ")
-      console.log(err);
-      // this.popup.hideLoader()
-      this.errorMessage = JSON.parse(err._body)
-      console.log(this.errorMessage)
-      this.errorMessage = this.errorMessage.error.message[0]
-      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
-    })
-  }
+  //   },err => {
+  //     console.log("masla ha ")
+  //     console.log(err);
+  //     // this.popup.hideLoader()
+  //     this.errorMessage = JSON.parse(err._body)
+  //     console.log(this.errorMessage)
+  //     this.errorMessage = this.errorMessage.error.message[0]
+  //     this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+  //   })
+  // }
+  deleteProduct(id){
+    let alert = this.alertCtrl.create({
+      title: this.deleteProductTitle,
+      message: this.deleteProductMessage,
+      buttons: [
+        {
+          text: this.promptNo,
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: this.promptYes,
+          handler: () => {
+            console.log('Buy clicked');
+            this.popup.showLoader()
+
+            this.productservice.onDeleteProduct(id).subscribe(res=>{
+              console.log(res)
+              this.popup.hideLoader()
+              this.navCtrl.push(ProductsPage,{animation: 'left'})
+              // this.sidemenuprovider.NavigationHandler(this.navCtrl, Products, 'Products', {})
+              
+            },err => {
+              console.log("masla ha ")
+              console.log(err);
+              this.popup.hideLoader()
+              this.errorMessage = JSON.parse(err._body)
+              console.log(this.errorMessage)
+              this.errorMessage = this.errorMessage.error.message[0]
+              this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+            })            
+          }
+        }
+      ]
+    });
+    alert.present();
+  }  
+
 
 }

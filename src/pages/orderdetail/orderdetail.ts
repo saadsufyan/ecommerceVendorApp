@@ -5,6 +5,7 @@ import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the OrderdetailPage page.
@@ -47,6 +48,11 @@ export class OrderdetailPage {
   public orderspecification
   public orderdelivery
   public checklang : boolean = false
+  public status : any
+  public statusCheck : boolean = false
+  public type : any
+  public typeValue : any 
+  public dispatchDiv : boolean = false
 
   constructor(public translate : TranslateService,public util: UtilProvider,private alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public orderservice: OrderService, public popup: AlertView) {
   
@@ -114,18 +120,59 @@ export class OrderdetailPage {
     alert.present();
   }
   getOrderDetials(){
-
+    this.popup.showLoader()
     this.orderservice.onGetOrderDetails(this.orderid).subscribe(res=>{
       console.log(res)
       res.status ? this.items = res.response : console.log("something went wrong")   
-      
+      this.popup.hideLoader()
       // this.getItems(res.response.id)
-      console.log(res.response.items)
+      console.log(res.response.status)
+      this.status = res.response.status
+
+      this.type = res.response.type
+
+      console.log(this.statusCheck)
+      // if(this.status == 'pending'){
+      //   console.log(this.statusCheck)
+      //   this.statusCheck = true
+      //   console.log(this.statusCheck)
+      // } else if(this.status == 'confirmed' || 'rejected') {
+      //   console.log(this.statusCheck)
+      //   this.statusCheck = false
+      //   console.log(this.statusCheck)
+      // } else {
+      //   console.log(this.statusCheck)
+      //   this.statusCheck = true
+      // }
+
+
+      if(this.type == 'product'){
+        
+        if(this.status == 'confirmed') {
+          console.log(this.statusCheck)
+          this.statusCheck = false
+          this.dispatchDiv = true
+          console.log(this.statusCheck)
+        } 
+      } else if(this.type == 'service'){
+          if(this.status == 'pending'){
+            this.statusCheck = true
+            this.dispatchDiv = false
+          } else if (this.status == 'confirmed'){
+            this.statusCheck = false
+            this.dispatchDiv = false
+          }
+      } 
+
+
+
+
+
       
     },err => {
       console.log("masla ha ")
       console.log(err);
-      // this.popup.hideLoader()
+      this.popup.hideLoader()
       this.errorMessage = JSON.parse(err._body)
       console.log(this.errorMessage)
       this.errorMessage = this.errorMessage.error.message[0]
@@ -153,6 +200,12 @@ export class OrderdetailPage {
       this.orderspecification = res.response.specifications
       this.orderdelivery = res.response.delivery_date
 
+      // var currentDate = this.orderdelivery.delivery_date.getDate() + "/"
+      // var currentMonth = this.orderdelivery.delivery_date.getMonth() + 1 + "/"
+      // var currentYear = this.orderdelivery.delivery_date.getFullYear()
+
+      // this.orderdelivery = currentDate + currentMonth + currentYear
+
       this.presentAlert()
 
     },err=>{
@@ -169,10 +222,11 @@ export class OrderdetailPage {
   VendorAccept(){
     let data = {
 
-      status: "confirm"
+      status: "confirmed"
     }
     this.orderservice.OnVendorOrderStatus(this.orderid, data).subscribe(res=>{
       console.log(res)
+      this.navCtrl.push(HomePage)
     },err => {
       console.log("masla ha ")
       console.log(err);
@@ -187,10 +241,11 @@ export class OrderdetailPage {
   VendorReject(){
     let data = {
 
-      status: "reject"
+      status: "rejected"
     }
     this.orderservice.OnVendorOrderStatus(this.orderid, data).subscribe(res=>{
       console.log(res)
+      this.navCtrl.push(HomePage)
     },err => {
       console.log("masla ha ")
       console.log(err);
@@ -202,5 +257,24 @@ export class OrderdetailPage {
     })
   }  
   
+  VendorDispatch(){
+    let data = {
+
+      status: "dispatched"
+    }
+    this.orderservice.OnVendorOrderStatus(this.orderid, data).subscribe(res=>{
+      console.log(res)
+      this.navCtrl.push(HomePage)
+    },err => {
+      console.log("masla ha ")
+      console.log(err);
+      // this.popup.hideLoader()
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
+  }  
+
   
 }

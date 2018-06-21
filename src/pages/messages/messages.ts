@@ -57,12 +57,13 @@ export class MessagesPage {
   }  
 
 
-  goToUserDetail(){
-    this.navCtrl.push(UserdetailPage, {animation: 'left'})
+  goToUserDetail(id){
+    console.log(id)
+    this.navCtrl.push(UserdetailPage, {id:id,animation: 'left'})
   }
 
-  goToChat(id){
-    this.navCtrl.push(ChatPage,{id:id}, {animation: 'left'})
+  goToChat(id,name){
+    this.navCtrl.push(ChatPage,{id:id,name:name}, {animation: 'left'})
     console.log(id)
   }
 

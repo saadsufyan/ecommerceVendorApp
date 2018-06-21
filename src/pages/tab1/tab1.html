@@ -38,16 +38,16 @@
 		      	<label class="dark">{{valueStrings[9].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="categoryid" [(ngModel)]="categoryObj" (change)="getSubCategory()">
-							<option value="nocat">Select Category</option>
-		        	<option *ngFor="let x of categoryList;let i = index" [ngValue]="x">{{x.name}}</option>
+							<option value="nocat">{{valueStrings[10].title}}</option>
+		        	<option *ngFor="let x of categoryList;let i = index" [selected]="parent_cat == x.id" [ngValue]="x">{{x.name}}</option>
 						</select>
 		      </div>
 		      <div class="form-group">	      	
-		      	<label class="dark">{{valueStrings[10].title}}</label>
+		      	<label class="dark">{{valueStrings[11].title}}</label>
 		      	<br>
-		        <select class="dropdown dark" name="subcategoryid" [(ngModel)]="subcategoryObj" (change)="onSubCategoryChange()">
-							<option value="nosubcat">Select Sub Category</option>
-		        	<option *ngFor="let x of subcategoryList;let i = index" [ngValue]="x">{{x.name}}</option>
+		        <select class="dropdown dark"  id="selected_subcats" name="subcategoryid" [(ngModel)]="subcategoryObj" (change)="onSubCategoryChange()">
+							<option value="nosubcat">{{valueStrings[12].title}}</option>
+		        	<option *ngFor="let x of subcategoryList;let i = index" [selected]="sub_cat == x.id" [ngValue]="x">{{x.name}}</option>
 		        </select>
 					</div>
 					
@@ -62,21 +62,21 @@
 		      	<label class="dark">{{valueStrings[13].title}}</label>
 		      	<br>
 		        <select class="dropdown dark" name="productType" [(ngModel)]="producttype" (change)="getProductType()">
-							<option value="noproduct">Select Product</option>
-							<option value="product" [selected]="Product">{{valueStrings[14].title}}</option>
-							<option vlaue="services">{{valueStrings[15].title}}</option>
+							<option value="noproduct">{{valueStrings[14].title}}</option>
+							<option value="product" [selected]="Product">{{valueStrings[15].title}}</option>
+							<option value="service">{{valueStrings[16].title}}</option>
 		        </select>
 					</div>
 
 		      <div class="form-group product_image">
 							<div class="col-xs-6">
-		      	<label class="dark">{{valueStrings[16].title}}</label> <br>
+		      	<label class="dark">{{valueStrings[17].title}}</label> <br>
 		        <span id="fileselector">
 		          <label class="" for="upload-file-selector">
 									<!-- <input id="upload-file-selector" type="file" [(ngModel)]="thumbnail" name="thumbnail"> -->
 									<input class="fileInput" type="file" name="file1" (change)="onChange1($event)">
 									
-									<span class="color-red"><b>{{valueStrings[17].title}}</b></span>
+									<span class="color-red"><b>{{valueStrings[18].title}}</b></span>
 		          </label>
 						</span>
 		      	</div>
@@ -93,39 +93,40 @@
 
 		      <div class="form-group product_image">
 							<div class="col-xs-6">
-		      	<label class="dark">{{valueStrings[18].title}}</label> <br>
+		      	<label class="dark">{{valueStrings[19].title}}</label> <br>
 		        <span id="fileselector">
 		          <label class="" for="upload-file-selector">
 									<input class="fileInput" type="file" name="file1" (change)="onChange($event)">
 									<!-- <input class="fileInput" type="file" name="file1" (change)="onChange($event)"> -->
 									<!-- <img src="images/icon_upload.png"> -->
-									<span class="color-red"><b>{{valueStrings[19].title}}</b></span>
+									<span class="color-red"><b>{{valueStrings[20].title}}</b></span>
 		          </label>
 						</span>
 							</div>
 
 							<div class="col-xs-6">
 								<ion-slides class="image-slider" loop="true" slidesPerView="4">
-									<ion-slide *ngFor="let image of images">
-										<img class="product_left_image" src="{{image}}" onError="this.src='assets/imgs/default-placeholder.png'" imageViewer>							 
+									<ion-slide *ngFor="let image of images;let i = index">
+										<img class="product_left_image" src="{{image}}" onError="this.src='assets/imgs/default-placeholder.png'" (click)="deleteImage(i)" imageViewer>							 
 									 </ion-slide>
 							 	</ion-slides>
 							</div>
 		      </div>
 		      <div class="form-group">
-		      	<label class="dark">{{valueStrings[20].title}}</label>
-		        <input type="number" class="text-box form-control dark" required [(ngModel)]="price" name="price">
-		      </div>
+		      	<label class="dark">{{valueStrings[21].title}}</label>
+		        <input type="text"  placeholder="{{valueStrings[22].title}}" class="text-box form-control dark" required [(ngModel)]="price" name="price" id="price_id" (keyup)="checkNumber('price_id')">
+						<!-- <ion-input type="number" placeholder="{{valueStrings[25].title}}"></ion-input> -->
+					</div>
 		      <div class="checkbox ltr" *ngIf="serviceDiv">
-			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_calender" name="show_calender">{{valueStrings[22].title}}</label> &nbsp;&nbsp;
-			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_time" name="show_time">{{valueStrings[23].title}}</label>
+			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_calender" name="show_calender">{{valueStrings[23].title}}</label> &nbsp;&nbsp;
+			  	<label class="dark"><input type="checkbox" value="true" [(ngModel)]="show_time" name="show_time">{{valueStrings[24].title}}</label>
 			  </div>
 			  
 
 
 		      <br>
 	          <div class="col-xs-12" style="text-align: center;">
-							<button class="btn-nazik" (click)="addProduct()">{{valueStrings[24].title}}</button>	
+							<button class="btn-nazik" (click)="addProduct()">{{valueStrings[26].title}}</button>	
 							<!-- <button class="btn-nazik" (click)="goToSpecifications()">Save</button>	 -->
 
 	          </div>

@@ -6,6 +6,7 @@ import { NetworkService } from '../../services/network';
 import { AlertView } from '../../uicomponents/alert';
 import { UtilProvider } from '../../providers/util/util';
 import { TranslateService } from 'ng2-translate';
+import { TermsPage } from '../terms/terms';
 
 
 /**
@@ -24,6 +25,7 @@ import { TranslateService } from 'ng2-translate';
 export class LoginPage {
 
   public errorMessage : any = "";
+  public gcmtoken : any 
 
   constructor(public translate : TranslateService,public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private menu: MenuController, public service : LoginService, public popup : AlertView) {
     this.menu.swipeEnable(false);
@@ -40,6 +42,27 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
   }
 
+  onNotification(){
+    this.gcmtoken = localStorage.getItem('gcmtoken')
+    // alert(this.gcmtoken)
+    console.log(this.gcmtoken)
+    let data = {
+      "gcm_token": this.gcmtoken
+    }
+    console.log(data)
+    this.service.onGCMtoken(data).subscribe(res=>{
+      console.log(res)
+    }, err => {
+      // alert(err)
+      console.log(err);
+      this.errorMessage = JSON.parse(err._body)
+      console.log(this.errorMessage)
+      this.errorMessage = this.errorMessage.error.message[0]
+      console.log(this.errorMessage)
+      this.popup.showToast(this.errorMessage , 2000 , 'bottom' ,false , "")
+    })
+  }
+
   onUserLogin(username,password){
     if(username != undefined && password != undefined){
       this.popup.showLoader()
@@ -52,10 +75,19 @@ export class LoginPage {
       this.popup.hideLoader()
       if(res.status){
         console.log(res)
+        console.log(res.response.terms_accepted)
         localStorage.setItem('user' , JSON.stringify(res.response))
-        localStorage.setItem('isLoggedIn', "true")
         console.log(localStorage)
-        this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
+        
+        if(res.response.terms_accepted == true){
+          localStorage.setItem('isLoggedIn', "true")
+          this.onNotification()
+          this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
+        }
+        else if(res.response.terms_accepted == false){
+          this.navCtrl.push(TermsPage)
+        }
+        // this.navCtrl.setRoot(HomePage , {} , {animation:'left'})
         }
       }, err => {
                 // alert(err)
@@ -68,7 +100,13 @@ export class LoginPage {
       })
     }else {
       // alert("something went wrong")
-      this.popup.showToast('Invalid information' , 2000 , 'bottom' ,false , "")
+      let lang  = localStorage.getItem('lang')
+      if(lang == "ar"){
+        this.popup.showToast('معلومات غير صالحة' , 2000 , 'bottom' ,false , "")
+      }else{
+        this.popup.showToast('Invalid information' , 2000 , 'bottom' ,false , "")
+        }  
+      
     }
 }  
 

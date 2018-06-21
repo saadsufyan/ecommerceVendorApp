@@ -72,13 +72,18 @@
 			      <div class="form-group">	      	
 			      	<label class="dark">{{'out_shipment_charges' | translate}}</label>
 			        <input type="text" class="text-box form-control dark" placeholder="{{'out_shipment_charges_placeholder' | translate}}" required="" [(ngModel)]="out_city_shipment_charges" name="out_city_shipment_charges">
-			      </div>
+						</div>
+			      <div class="form-group">	      	
+			      	<label class="dark">{{'preselected_country' | translate}}</label>
+			        <input disabled type="text" class="text-box form-control dark" placeholder="{{'none' | translate}}" [(ngModel)]="preselectedcountries" name="preselectedcountries">
+			      </div>						
 			      <div class="form-group">	      	
 			      	<label class="dark">{{'select_country' | translate}}</label>
 			      	<br>
 			        <select class="dropdown dark" name="countryname" [(ngModel)]="countryname" (change)="getCountry()">
-								<option value="opt">Select Country</option>
-			        	<option *ngFor="let x of countrylist;let i = index" value="{{x}}">{{x}}</option>
+								<option value="opt">{{'select_country_placeholder' | translate}}</option>
+								<option *ngFor="let x of countrylist;let i = index" value="{{x}}">{{x}}</option>
+								<!-- <option *ngFor="let x of countrylist;let i = index" [selected]="selectedcountry" [ngValue]="x">{{x}}</option> -->
 			        </select>
 			      </div>
 			      <div class="form-group">	      	
@@ -122,6 +127,8 @@
 								<option value="wednesday">{{'select_off_day_wednesday' | translate}}</option>
 								<option value="thursday">{{'select_off_day_thursday' | translate}}</option>
 								<option value="friday">{{'select_off_day_friday' | translate}}</option>
+								<option value="friday">{{'select_off_day_saturday' | translate}}</option>
+								<option value="friday">{{'select_off_day_sunday' | translate}}</option>
 			        </select>
 			      </div>
 
