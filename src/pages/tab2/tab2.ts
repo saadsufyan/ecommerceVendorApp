@@ -91,8 +91,8 @@ export class Tab2Page {
   tempArry = ['tab2_page','specification_name_en', 'english', 'specification_name_en_placeholder' , 'specification_name_ar', 'arabic', 'specification_name_ar_placeholder', 'specification_value_en', 'english','specification_value_en_placeholder' , 'specification_value_ar', 'arabic','specification_value_ar_placeholder', 'add_value', 'remove_value' , 'specification_add' , 'specification_remove', 'proceed_to_stock']
   public checklang : boolean = false
 
-  public parameter_val_en : any = "parameter value in English"
-  public parameter_val_ar : any = "Parameter value in Arabic"
+  public parameter_val_en : any = "Specification value in English"
+  public parameter_val_ar : any = "Specification value in Arabic"
 
   constructor(public translateprovider : TranslateproviderProvider, public util: UtilProvider,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public app: App, public sharedservice: SharedService, public productservice: ProductsService, public popup: AlertView) {
   
@@ -351,13 +351,13 @@ export class Tab2Page {
   
       if(lang == "ar"){
         console.log("its arabic")
-        var parameter_val_en = "الاختيار في اللغة الإنجليزية"
-        var parameter_val_ar =  "الاختيار باللغة العربية"
+        var parameter_val_en = "اسم القيمة بالإنجليزية (Large, Black,..)"
+        var parameter_val_ar =  "اسم القيمة بالعربية ( كبير ، اسود،..)"
   
       }else{
         console.log("its English")
-        var parameter_val_en = "value in English"
-        var parameter_val_ar =  "value in Arabic"
+        var parameter_val_en = "Specification value in English"
+        var parameter_val_ar =  "Specification value in Arabic"
         }
   
 

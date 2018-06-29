@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -41,8 +41,15 @@ export class MyApp {
 
   public menuOpen = "left"
   public isRtl: any
+  public exit : any
+  public exittext : any
+  public canceltext : any
+  public networktext : any
+  public networkmsg : any
+  public networkok : any
+  public alert  : any
 
-  constructor(public translate: TranslateService, public util: UtilProvider, public push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard: Keyboard) {
+  constructor(public translate: TranslateService, public util: UtilProvider, public push: Push, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public keyboard: Keyboard, public alertCtrl :AlertController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -72,10 +79,19 @@ export class MyApp {
       if (lang == "ar") {
         this.translate.use('ar')
         this.platform.setDir('rtl', true)
+
+        this.exit = "ىخرج"
+        this.exittext = "هل أنت متأكد أنك تريد الخروج ؟"
+        this.canceltext = "إلغاء"
+
       } else {
         this.translate.use('en')
         this.platform.setDir('ltr', true)
         localStorage.setItem('lang', 'en')
+
+        this.exit = "Exit"
+        this.exittext = "Are you sure you want to exit"
+        this.canceltext = "Cancel"
       }
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -89,6 +105,14 @@ export class MyApp {
         localStorage.setItem('isLoggedIn', "false")
       }
 
+      this.platform.registerBackButtonAction(() => { 
+        // this.nav.canGoBack() ? this.nav.pop({animation : 'right'}) : this.showAlert()
+        if(this.nav.canGoBack()){
+          this.nav.pop({animation : 'right'})
+        }else{
+          this.showAlert()
+        }
+      })
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
@@ -109,6 +133,35 @@ export class MyApp {
   checkActive(page) {
     return page == this.ActivePage;
   }
+
+  showAlert(){
+    // this.getExitAppStrings()
+    this.alert =true;
+    this.alert = this.alertCtrl.create({
+        title: this.exit,
+        message: this.exittext,
+        buttons: [
+          {
+            text: this.canceltext,
+            role: 'cancel',
+            handler: () => {
+              this.alert =false
+              console.log('Cancel pressed')
+            }
+          },
+          {
+            text: this.exit,
+            handler: () => {
+              this.alert = false
+              this.platform.exitApp()
+              console.log('Exit pressed')
+            }
+          }
+        ]
+      });
+      this.alert.present();
+  }
+
 
   initPushNotification() {
     console.log("push func called")

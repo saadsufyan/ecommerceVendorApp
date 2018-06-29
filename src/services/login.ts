@@ -6,8 +6,8 @@ import { NetworkService } from './network'
 @Injectable()
 @Component({})
 export class LoginService{
-    private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/"
-    // private basicUrl = "http://nazikgcc.com/app/gomallbackend/public/index.php/"
+    // private basicUrl = "http://34.214.14.69/gomallbackend/public/index.php/"
+    private basicUrl = "http://nazikgcc.com/app/gomallbackend/public/index.php/"
     constructor (public network : NetworkService) {}
  
     onUserLogin(data) : Observable<any> {

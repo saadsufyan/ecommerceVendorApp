@@ -416,7 +416,8 @@ onUserLogout() {
                 localStorage.setItem('isLoggedIn', null)
                 //localStorage.setItem('user' , null)
           
-                this.navCtrl.push(LoginPage,{animation: 'left'})
+                this.navCtrl.setRoot(LoginPage , {} , {animation:'left'})
+                // this.navCtrl.push(LoginPage,{animation: 'left'})
               }
             },
             err => {

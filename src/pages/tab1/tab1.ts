@@ -36,7 +36,7 @@ export class Tab1Page {
   public name_ar
   public description
   public description_ar
-  public sub_cat
+  public sub_cat : string
   public thumbnail
   public images = []
   public imageArray = []
@@ -142,10 +142,12 @@ export class Tab1Page {
     console.log('ionViewDidLoad Tab1Page');
     $('#Cat_button').attr('disabled','disabled');
     $('#Undo_button').attr('disabled','disabled');
-    this.getAllCategory()
-    if(this.productId != null){
-      this.getProductDetails()
-    }
+
+    // this.getAllCategory()
+    // if(this.productId != null){
+    //   this.getProductDetails()
+    // }
+    
     
   }
   ionViewWillEnter(){
@@ -171,14 +173,25 @@ export class Tab1Page {
       this.promptYes = "Yes"
       this.promptNo = "No"
       }         
+
+      // this.getAllCategory().then(()=>{if(this.productId != null){this.getProductDetails().then(()=>{ console.log('here for sure'); this.getSubCategories()})}}).then(()=>this.getSubCategoryValue());
+
+      this.getAllCategory()
+      if(this.productId != null){
+        this.getProductDetails()
+      }
+
+      ;
+      
   }
   goBack(){
     // this.navCtrl.pop()
   this.app.navPop()
   }  
 
-  getAllCategory(){
-    this.productservice.onGetAllParentCategory(this.lang).subscribe(res=>{
+  getAllCategory= async()=>{
+
+    await this.productservice.onGetAllParentCategory(this.lang).subscribe(res=>{
       console.log(res)
       res.status && res.response.length > 0 ? this.categoryList = res.response : console.log("no category found")
       
@@ -195,7 +208,7 @@ export class Tab1Page {
     })
   }
 
-  getSubCategory(){
+  getSubCategory=async()=>{
     console.log(this.categoryObj)
 
 
@@ -207,7 +220,7 @@ export class Tab1Page {
     this.tempCatId = this.categoryObj.id
     console.log(this.tempCatId)
 
-    this.getSubCategories()
+    await this.getSubCategories()
   }
 
   onSubCategoryChange(){
@@ -226,19 +239,18 @@ export class Tab1Page {
 
   }
 
-  getSubCategories(){
+  getSubCategories = async()=>{
 
 
     if(this.tempCatId != null){
       this.popup.showLoader()
-      this.productservice.onGetSubCategory(this.tempCatId,this.lang).subscribe(res=>{
+     await this.productservice.onGetSubCategory(this.tempCatId,this.lang).subscribe(res=>{
         console.log(res)
         res.status && res.response.subcategories.length > 0 ? this.subcategoryList = res.response.subcategories : this.subcategoryList= [] && console.log("no category found")
         this.popup.hideLoader()
-        this.count = res.response.count
-        console.log("intermediate Count: " + this.count)
-        console.log(this.subcategoryList)
 
+        console.log(this.subcategoryList)
+        console.log('here we are in if statement')
   
   
       },err => {
@@ -252,17 +264,22 @@ export class Tab1Page {
       })
     } else {
       this.popup.showLoader()
-      this.productservice.onGetSubCategory(this.parent_cat,this.lang).subscribe(res=>{
+      console.log(this.parent_cat)
+      await this.productservice.onGetSubCategory(this.parent_cat,this.lang).subscribe(res=>{
         console.log(res)
         res.status && res.response.subcategories.length > 0 ? this.subcategoryList = res.response.subcategories : console.log("no category found")
         this.popup.hideLoader()
 
-        this.count = res.response.count
-        console.log("intermediate Count: " + this.count)
-        console.log(this.subcategoryList)
 
-        this.sub_cat = this.product_details.sub_cat
-        console.log(this.sub_cat)
+
+        console.log(this.subcategoryList)
+        console.log('here we are in else statement')
+        // this.sub_cat = this.product_details.sub_cat
+        // console.log(this.sub_cat)
+        console.log("sub category")
+        // setTimeout(() => this.getSubCategoryValue(), 1000)
+
+
 
       },err => {
         console.log("masla ha ")
@@ -279,21 +296,22 @@ export class Tab1Page {
 
   }
 
-  onChangeGetSubCategory(){
-    console.log(this.subcategoryObj)
-    if(this.count> 0){
-      this.tempCatId = this.subcategoryObj.id
-      console.log("sub cat")
-      console.log(this.tempCatId)
-      console.log("last sub category: " + this.tempCatId)
+
+  // onChangeGetSubCategory(){
+  //   console.log(this.subcategoryObj)
+  //   if(this.count> 0){
+  //     this.tempCatId = this.subcategoryObj.id
+  //     console.log("sub cat")
+  //     console.log(this.tempCatId)
+  //     console.log("last sub category: " + this.tempCatId)
       
-     this.getSubCategories() 
-    }
-    else{
-      $('#Undo_button').removeAttr('disabled');
-      this.popup.showToast('No sub catoegories', 1000, 'bottom', false, "")
-    }    
-  }
+  //    this.getSubCategories() 
+  //   }
+  //   else{
+  //     $('#Undo_button').removeAttr('disabled');
+  //     this.popup.showToast('No sub catoegories', 1000, 'bottom', false, "")
+  //   }    
+  // }
 
   onClickUndo(){
     if(this.count== 0){
@@ -346,10 +364,17 @@ export class Tab1Page {
     }
   }
 
-  getProductDetails(){
+  getSubCategoryValue=async()=>{
+
+        this.sub_cat = await this.product_details.sub_cat
+        // this.sub_cat = "Sweets & Cake"
+        // this.sub_cat = this.sub_cat.toString();
+        console.log(this.sub_cat)
+  }
+  getProductDetails = async()=>{
     console.log("mil gai id: "  + this.productId)
 
-    this.productservice.onGetProductDetails(this.productId).subscribe(res=>{
+    await this.productservice.onGetProductDetails(this.productId).subscribe(res=>{
       console.log(res)
 
       this.product_details = res.response
@@ -359,11 +384,14 @@ export class Tab1Page {
       this.description = res.response.description
       this.description_ar = res.response.description_ar
       this.parent_cat = res.response.parent_cat
-
-
-      this.getSubCategories()
-
       // this.sub_cat = res.response.sub_cat;
+
+      
+      this.getSubCategories()
+      // this.getSubCategories().then(() => {this.getSubCategoryValue})
+      // this.getSubCategoryValue()
+      setTimeout(() => this.getSubCategoryValue(), 2000)
+      
 
       console.log($('#selected_subcats'));
 
@@ -388,7 +416,7 @@ export class Tab1Page {
 
       // console.log(this.specifications)
 
-      // console.log(this.parent_cat)
+      console.log(this.parent_cat)
 
       for(let i = 0; i < this.categoryList.length; i++){
         if(this.parent_cat == this.categoryList[i].id){
@@ -401,8 +429,8 @@ export class Tab1Page {
       //   this.getSubCategories()
       //   console.log("when sub category called")
       // }
-      console.log(this.images.length)
-
+      // console.log(this.images.length)
+      
 
     },err => {
       console.log("masla ha ")

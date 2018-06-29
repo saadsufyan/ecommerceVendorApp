@@ -47,7 +47,8 @@
 		      	<br>
 		        <select class="dropdown dark"  id="selected_subcats" name="subcategoryid" [(ngModel)]="subcategoryObj" (change)="onSubCategoryChange()">
 							<option value="nosubcat">{{valueStrings[12].title}}</option>
-		        	<option *ngFor="let x of subcategoryList;let i = index" [selected]="sub_cat == x.id" [ngValue]="x">{{x.name}}</option>
+							<!-- <option *ngFor="let x of subcategoryList;let i = index" [ngValue]="x">{{x.name}}</option> -->
+							<option *ngFor="let y of subcategoryList" [selected]="sub_cat == y.id"  [ngValue]="y">{{y.name}}</option>
 		        </select>
 					</div>
 					
